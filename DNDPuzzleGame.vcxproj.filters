@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{f2f6aa17-41ff-4d47-b4cd-df2734b46d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering">
+      <UniqueIdentifier>{36b187a4-39de-4061-a4f7-a879af1c4183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering\Core">
+      <UniqueIdentifier>{43fe3d30-5623-4194-a9fd-ad6730834ff2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rendering">
+      <UniqueIdentifier>{2ddc2d5b-f93b-4f41-95fc-c4deeca4e4f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rendering\Core">
+      <UniqueIdentifier>{303a5e6f-e471-405b-935c-6635a1e22a85}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Rendering\Core\Camera.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Core\EBO.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Core\Mesh.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Core\Model.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Core\shader.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Core\ShaderSkybox.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Core\Texture.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Core\VAO.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Core\VBO.h">
+      <Filter>Header Files\Rendering\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Rendering\Core\glad.c">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\Camera.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\EBO.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\Mesh.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\Model.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\shader.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\ShaderSkybox.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\stb.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\Texture.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\VAO.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Core\VBO.cpp">
+      <Filter>Source Files\Rendering\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Rendering\Core\Shaders\asteroid.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\cutout.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\default.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\default.geom">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\default.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\framebuffer.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\framebuffer.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\light.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\light.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\normals.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\normals.geom">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\skybox.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\skybox.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Rendering\Core\Shaders\transparent.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
