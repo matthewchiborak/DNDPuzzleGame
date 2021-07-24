@@ -5,14 +5,21 @@
 
 #include "../Rendering/IRenderer.h"
 
-//Will have to decide if want window created here. Or created higher up and passed in. I think it woudl be cleaner here. Ill sleep on it
-
 class IRendererFactory
 {
 public:
-	IRendererFactory();
+	IRendererFactory(
+		IModelFlyweightFactory* modelFactory,
+		IShaderFlyweightFactory* shaderFactory,
+		ISkyboxFlyweightFactory* skyboxFactory
+	);
 
-	virtual IRenderer* createRenderer(std::string key) const throw();
+	virtual IRenderer* createRenderer(std::string key, ILevelModel* level) throw();
+
+protected:
+	IModelFlyweightFactory* modelFactory;
+	IShaderFlyweightFactory* shaderFactory;
+	ISkyboxFlyweightFactory* skyboxFactory;
 };
 
 #endif

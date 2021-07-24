@@ -2,15 +2,15 @@
 
 #include "../Rendering/BoardRenderer.h"
 
-RendererFactory::RendererFactory()
-	: IRendererFactory()
+RendererFactory::RendererFactory(IModelFlyweightFactory* modelFactory, IShaderFlyweightFactory* shaderFactory, ISkyboxFlyweightFactory* skyboxFactory)
+	: IRendererFactory(modelFactory, shaderFactory, skyboxFactory)
 {
 }
 
-IRenderer* RendererFactory::createRenderer(std::string key) const throw()
+IRenderer* RendererFactory::createRenderer(std::string key, ILevelModel* level) throw()
 {
 	if (key == "Board")
-		return new BoardRenderer();
+		return new BoardRenderer(level, modelFactory, shaderFactory, skyboxFactory);
 
 	throw(key);
 }

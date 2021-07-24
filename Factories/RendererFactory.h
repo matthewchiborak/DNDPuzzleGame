@@ -6,9 +6,13 @@
 class RendererFactory: public IRendererFactory
 {
 public:
-	RendererFactory();
+	RendererFactory(
+		IModelFlyweightFactory* modelFactory,
+		IShaderFlyweightFactory* shaderFactory,
+		ISkyboxFlyweightFactory* skyboxFactory
+	);
 
-	IRenderer* createRenderer(std::string key) const throw();
+	IRenderer* createRenderer(std::string key, ILevelModel* level) throw();
 };
 
 #endif

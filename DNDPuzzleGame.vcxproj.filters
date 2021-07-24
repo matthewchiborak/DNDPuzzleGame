@@ -126,6 +126,27 @@
     <ClInclude Include="Rendering\GameWindow.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="Factories\IModelFlyweightFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\ModelFlyweightFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\IShaderFlyweightFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\ShaderFlyweightFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Skybox.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\ISkyboxFlyweightFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\SkyboxFlyweightFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -214,6 +235,27 @@
     </ClCompile>
     <ClCompile Include="Rendering\GameWindow.cpp">
       <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\IModelFlyweightFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\ModelFlyweightFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\IShaderFlyweightFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\ShaderFlyweightFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Skybox.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\ISkyboxFlyweightFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\SkyboxFlyweightFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

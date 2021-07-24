@@ -4,7 +4,7 @@ ILevelFactory::ILevelFactory()
 {
 }
 
-ILevelModel* ILevelFactory::createLevel(int levelNo) const throw()
+ILevelModel* ILevelFactory::createLevel(int levelNo) throw()
 {
     return nullptr;
 }

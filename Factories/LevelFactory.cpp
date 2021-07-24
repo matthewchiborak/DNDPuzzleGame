@@ -8,7 +8,7 @@ LevelFactory::LevelFactory()
 
 }
 
-ILevelModel* LevelFactory::createLevel(int levelNo) const throw()
+ILevelModel* LevelFactory::createLevel(int levelNo) throw()
 {
 	if(levelNo == 1)
 		return new LevelModel();

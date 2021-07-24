@@ -10,7 +10,7 @@ class ILevelFactory
 public:
 	ILevelFactory();
 
-	virtual ILevelModel* createLevel(int levelNo) const throw();
+	virtual ILevelModel* createLevel(int levelNo) throw();
 };
 
 #endif

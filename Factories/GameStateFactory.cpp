@@ -8,7 +8,7 @@ GameStateFactory::GameStateFactory()
 {
 }
 
-IGameState* GameStateFactory::createState(std::string key, IGameController* controller, ILevelModel* level) const throw()
+IGameState* GameStateFactory::createState(std::string key, IGameController* controller, ILevelModel* level) throw()
 {
 	if (key == "Stop")
 		return new GameStateStop(controller, level);

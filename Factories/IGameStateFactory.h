@@ -13,7 +13,7 @@ class IGameStateFactory
 public:
 	IGameStateFactory();
 
-	virtual IGameState* createState(std::string key, IGameController* controller, ILevelModel* level) const throw();
+	virtual IGameState* createState(std::string key, IGameController* controller, ILevelModel* level) throw();
 };
 
 #endif

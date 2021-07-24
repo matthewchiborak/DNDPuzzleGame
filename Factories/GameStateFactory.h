@@ -8,7 +8,7 @@ class GameStateFactory: public IGameStateFactory
 public:
 	GameStateFactory();
 
-	IGameState* createState(std::string key, IGameController* controller, ILevelModel* level) const throw() override;
+	IGameState* createState(std::string key, IGameController* controller, ILevelModel* level) throw() override;
 };
 
 #endif

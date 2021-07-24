@@ -8,7 +8,7 @@ class LevelFactory: public ILevelFactory
 public:
 	LevelFactory();
 
-	ILevelModel* createLevel(int levelNo) const throw() override;
+	ILevelModel* createLevel(int levelNo) throw() override;
 };
 
 #endif

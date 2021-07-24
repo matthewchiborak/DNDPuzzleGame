@@ -25,7 +25,7 @@ GameController::GameController(IGameWindow* gameWindow, IGameStateFactory* state
 	}
 
 	try {
-		renderer = rendererFactory->createRenderer("Board");
+		renderer = rendererFactory->createRenderer("Board", level);
 	}
 	catch (std::string e) {
 		quit();
