@@ -6,6 +6,7 @@
 class ShaderSkybox : public Shader
 {
 public:
+	ShaderSkybox();
 	ShaderSkybox(const char* vertexFile, const char* fragmentFile);
 };
 

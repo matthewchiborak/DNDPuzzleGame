@@ -145,6 +145,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Controller\GameController.h" />
+    <ClInclude Include="Controller\GameStateMove.h" />
+    <ClInclude Include="Controller\GameStateStop.h" />
+    <ClInclude Include="Controller\IGameController.h" />
+    <ClInclude Include="Controller\IGameState.h" />
+    <ClInclude Include="Factories\GameStateFactory.h" />
+    <ClInclude Include="Factories\IGameStateFactory.h" />
+    <ClInclude Include="Factories\ILevelFactory.h" />
+    <ClInclude Include="Factories\IRendererFactory.h" />
+    <ClInclude Include="Factories\LevelFactory.h" />
+    <ClInclude Include="Factories\RendererFactory.h" />
+    <ClInclude Include="Model\ILevelModel.h" />
+    <ClInclude Include="Model\LevelModel.h" />
+    <ClInclude Include="Rendering\BoardRenderer.h" />
     <ClInclude Include="Rendering\Core\Camera.h" />
     <ClInclude Include="Rendering\Core\EBO.h" />
     <ClInclude Include="Rendering\Core\Mesh.h" />
@@ -154,9 +168,26 @@
     <ClInclude Include="Rendering\Core\Texture.h" />
     <ClInclude Include="Rendering\Core\VAO.h" />
     <ClInclude Include="Rendering\Core\VBO.h" />
+    <ClInclude Include="Rendering\GameWindow.h" />
+    <ClInclude Include="Rendering\IGameWindow.h" />
+    <ClInclude Include="Rendering\IRenderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Controller\GameController.cpp" />
+    <ClCompile Include="Controller\GameStateMove.cpp" />
+    <ClCompile Include="Controller\GameStateStop.cpp" />
+    <ClCompile Include="Controller\IGameController.cpp" />
+    <ClCompile Include="Controller\IGameState.cpp" />
+    <ClCompile Include="Factories\GameStateFactory.cpp" />
+    <ClCompile Include="Factories\IGameStateFactory.cpp" />
+    <ClCompile Include="Factories\ILevelFactory.cpp" />
+    <ClCompile Include="Factories\IRendererFactory.cpp" />
+    <ClCompile Include="Factories\LevelFactory.cpp" />
+    <ClCompile Include="Factories\RendererFactory.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model\ILevelModel.cpp" />
+    <ClCompile Include="Model\LevelModel.cpp" />
+    <ClCompile Include="Rendering\BoardRenderer.cpp" />
     <ClCompile Include="Rendering\Core\Camera.cpp" />
     <ClCompile Include="Rendering\Core\EBO.cpp" />
     <ClCompile Include="Rendering\Core\glad.c" />
@@ -168,6 +199,9 @@
     <ClCompile Include="Rendering\Core\Texture.cpp" />
     <ClCompile Include="Rendering\Core\VAO.cpp" />
     <ClCompile Include="Rendering\Core\VBO.cpp" />
+    <ClCompile Include="Rendering\GameWindow.cpp" />
+    <ClCompile Include="Rendering\IGameWindow.cpp" />
+    <ClCompile Include="Rendering\IRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rendering\Core\Shaders\asteroid.vert" />

@@ -1,5 +1,9 @@
 #include "ShaderSkybox.h"
 
+ShaderSkybox::ShaderSkybox()
+{
+}
+
 ShaderSkybox::ShaderSkybox(const char* vertexFile, const char* fragmentFile)
 {
 	// Read vertexFile and fragmentFile and store the strings

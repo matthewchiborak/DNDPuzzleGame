@@ -11,6 +11,7 @@ class Model
 {
 public:
 	// Loads in a model from a file and stores tha information in 'data', 'JSON', and 'file'
+	Model();
 	Model(const char* file, unsigned int instancing = 1, std::vector<glm::mat4> instanceMatrix = {});
 
 	void Draw
