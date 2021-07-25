@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Factories">
       <UniqueIdentifier>{76e9d765-6ca0-49c6-9816-61c775d9ad16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BoardObjectActions">
+      <UniqueIdentifier>{fcc188b6-a5b8-4cfd-be9e-b8ae7ed5eccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BoardObjectActions">
+      <UniqueIdentifier>{15b28b47-0a89-4592-b7aa-c10a2103ac53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\Core\Camera.h">
@@ -161,6 +167,18 @@
     </ClInclude>
     <ClInclude Include="Rendering\IModel.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\TileBoardObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjectActions\BoardObjectAction.h">
+      <Filter>Header Files\BoardObjectActions</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjectActions\BoardObjectActionNone.h">
+      <Filter>Header Files\BoardObjectActions</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjectActions\BoardObjectActionMove.h">
+      <Filter>Header Files\BoardObjectActions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +304,18 @@
     </ClCompile>
     <ClCompile Include="Rendering\IModel.cpp">
       <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\TileBoardObject.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardObjectActions\BoardObjectAction.cpp">
+      <Filter>Source Files\BoardObjectActions</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardObjectActions\BoardObjectActionNone.cpp">
+      <Filter>Source Files\BoardObjectActions</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardObjectActions\BoardObjectActionMove.cpp">
+      <Filter>Source Files\BoardObjectActions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

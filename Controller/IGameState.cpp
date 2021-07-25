@@ -9,3 +9,7 @@ IGameState::IGameState(IGameController* controller, ILevelModel* model)
 void IGameState::handleUserInput(GLFWwindow* window)
 {
 }
+
+void IGameState::advanceEvents()
+{
+}

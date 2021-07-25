@@ -23,6 +23,7 @@ public:
 	);
 
 	virtual void handleUserInput(GLFWwindow* window);
+	virtual void advanceEvents();
 
 protected:
 	IGameController*	controller;

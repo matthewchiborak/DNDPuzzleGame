@@ -145,6 +145,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoardObjectActions\BoardObjectAction.h" />
+    <ClInclude Include="BoardObjectActions\BoardObjectActionMove.h" />
+    <ClInclude Include="BoardObjectActions\BoardObjectActionNone.h" />
     <ClInclude Include="Controller\GameController.h" />
     <ClInclude Include="Controller\GameStateMove.h" />
     <ClInclude Include="Controller\GameStateStop.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="Model\ILevelModel.h" />
     <ClInclude Include="Model\LevelModel.h" />
     <ClInclude Include="Model\PlayerBoardObject.h" />
+    <ClInclude Include="Model\TileBoardObject.h" />
     <ClInclude Include="Rendering\BoardRenderer.h" />
     <ClInclude Include="Rendering\Core\Camera.h" />
     <ClInclude Include="Rendering\Core\EBO.h" />
@@ -185,6 +189,9 @@
     <ClInclude Include="Rendering\Skybox.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoardObjectActions\BoardObjectAction.cpp" />
+    <ClCompile Include="BoardObjectActions\BoardObjectActionMove.cpp" />
+    <ClCompile Include="BoardObjectActions\BoardObjectActionNone.cpp" />
     <ClCompile Include="Controller\GameController.cpp" />
     <ClCompile Include="Controller\GameStateMove.cpp" />
     <ClCompile Include="Controller\GameStateStop.cpp" />
@@ -207,6 +214,7 @@
     <ClCompile Include="Model\ILevelModel.cpp" />
     <ClCompile Include="Model\LevelModel.cpp" />
     <ClCompile Include="Model\PlayerBoardObject.cpp" />
+    <ClCompile Include="Model\TileBoardObject.cpp" />
     <ClCompile Include="Rendering\BoardRenderer.cpp" />
     <ClCompile Include="Rendering\Core\Camera.cpp" />
     <ClCompile Include="Rendering\Core\EBO.cpp" />

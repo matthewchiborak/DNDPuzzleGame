@@ -12,6 +12,14 @@ ILevelModel::~ILevelModel()
     }
 }
 
+void ILevelModel::playerMove(int x, int y)
+{
+}
+
+void ILevelModel::playerStop()
+{
+}
+
 void ILevelModel::interact()
 {
 }

@@ -1,11 +1,30 @@
 #include "LevelModel.h"
 
+#include "../BoardObjectActions/BoardObjectActionMove.h"
+#include "../BoardObjectActions/BoardObjectActionNone.h"
+
 #include <iostream>
 
 LevelModel::LevelModel()
 	: ILevelModel()
 {
 	currentPlayer = nullptr;
+}
+
+void LevelModel::playerMove(int x, int y)
+{
+	currentPlayer->setCurrentAction(new BoardObjectActionMove(
+		currentPlayer,
+		currentPlayer->getPosX(),
+		currentPlayer->getPosY(),
+		currentPlayer->getPosX() + x,
+		currentPlayer->getPosY() + y
+		));
+}
+
+void LevelModel::playerStop()
+{
+	currentPlayer->setCurrentAction(new BoardObjectActionNone());
 }
 
 void LevelModel::interact()

@@ -7,6 +7,9 @@
 
 #include "../Model/LevelModel.h"
 #include "../Model/PlayerBoardObject.h"
+#include "../Model/TileBoardObject.h"
+
+#include "../BoardObjectActions/BoardObjectActionNone.h"
 
 LevelFactory::LevelFactory()
 	: ILevelFactory()
@@ -35,15 +38,14 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 		{
 			for (int j = 0; j < newLevel->getHeight(); j++)
 			{
-				newLevel->addBoardObject(new BoardObject(i, j, 0, "Tile", "Default"));
-				//newLevel->addBoardObject(new BoardObject(0, 0, 0, "Tile", "Default"));
+				newLevel->addBoardObject(new TileBoardObject(i, j, 0, new BoardObjectActionNone(), "Tile"));
 			}
 		}
 
 		//Players
 		for (int i = 0; i < JSON["Players"].size(); i++)
 		{
-			newLevel->addPlayer(new PlayerBoardObject(JSON["Players"][i]["PosX"], JSON["Players"][i]["PosY"], 0, JSON["Players"][i]["Model"]));
+			newLevel->addPlayer(new PlayerBoardObject(JSON["Players"][i]["PosX"], JSON["Players"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Players"][i]["Model"]));
 		}
 
 		

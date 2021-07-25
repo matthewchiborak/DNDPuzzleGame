@@ -11,6 +11,8 @@ public:
 	ILevelModel();
 	~ILevelModel();
 
+	virtual void playerMove(int x, int y);
+	virtual void playerStop();
 	virtual void interact();
 
 	void addBoardObject(BoardObject* obj);

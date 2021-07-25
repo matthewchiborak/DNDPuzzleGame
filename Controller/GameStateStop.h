@@ -9,6 +9,7 @@ public:
 	GameStateStop(IGameController* controller, ILevelModel* model);
 
 	void handleUserInput(GLFWwindow* window);
+	void advanceEvents();
 };
 
 #endif

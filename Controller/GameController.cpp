@@ -40,6 +40,7 @@ void GameController::start()
 	//while (isGameRunning)
 	while (!gameWindow->shouldWindowClose())
 	{
+		state->advanceEvents();
 		state->handleUserInput(gameWindow->getWindow());
 		gameWindow->draw();
 	}
@@ -59,6 +60,8 @@ void GameController::setState(std::string key)
 {
 	if (key == lastStateKey)
 		return;
+
+	lastStateKey = key;
 
 	IGameState* temp = state;
 	state = stateFactory->createState(key, this, level);
