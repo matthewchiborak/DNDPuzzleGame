@@ -9,6 +9,12 @@ public:
 	LevelModel();
 
 	void interact() override;
+
+	void addPlayer(BoardObject* player);
+
+private:
+	BoardObject* currentPlayer;
+	std::vector<BoardObject*> players; //This will only contain PlayerBoardObjects though.... TODO consider
 };
 
 #endif

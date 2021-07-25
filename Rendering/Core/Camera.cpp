@@ -11,6 +11,26 @@ Camera::Camera(int width, int height, glm::vec3 position)
 	Position = position;
 }
 
+void Camera::setPosition(glm::vec3 newPosition)
+{
+	this->Position = newPosition;
+}
+
+void Camera::setRotation(float newRotX, float newRotY)
+{
+	// Calculates upcoming vertical change in the Orientation
+	glm::vec3 newOrientation = glm::rotate(Orientation, glm::radians(-newRotX), glm::normalize(glm::cross(Orientation, Up)));
+
+	// Decides whether or not the next vertical Orientation is legal or not
+	if (abs(glm::angle(newOrientation, Up) - glm::radians(90.0f)) <= glm::radians(85.0f))
+	{
+		Orientation = newOrientation;
+	}
+
+	// Rotates the Orientation left and right
+	Orientation = glm::rotate(Orientation, glm::radians(-newRotY), Up);
+}
+
 void Camera::updateMatrix(float FOVdeg, float nearPlane, float farPlane)
 {
 	// Initializes matrices since otherwise they will be the null matrix
@@ -63,6 +83,7 @@ void Camera::Inputs(GLFWwindow* window)
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 	{
+		std::cout << Position.x << " " << Position.y << " " << Position.z << "\n";
 		speed = 0.4f;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)

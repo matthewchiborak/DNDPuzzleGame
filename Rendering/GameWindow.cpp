@@ -14,7 +14,7 @@ GameWindow::GameWindow(IRenderer* initialRenderer)
 
 void GameWindow::draw()
 {
-	renderer->draw(window, &camera);
+	renderer->draw(window, &camera, width, height);
 }
 
 void GameWindow::clearMemory()
@@ -40,7 +40,7 @@ void GameWindow::setUp()
 	// So that means we only have the modern functions
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
+	// Create a GLFWwindow object
 	window = glfwCreateWindow(width, height, "DND Puzzle Game", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
@@ -57,12 +57,6 @@ void GameWindow::setUp()
 	// Specify the viewport of OpenGL in the Window
 	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
 	glViewport(0, 0, width, height);
-
-	// Take care of all the light related things
-	lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-	lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
-	lightModel = glm::mat4(1.0f);
-	lightModel = glm::translate(lightModel, lightPos);
 
 	// Enables the Depth Buffer
 	glEnable(GL_DEPTH_TEST);
@@ -83,6 +77,7 @@ void GameWindow::setUp()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Creates camera object
-	camera = Camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
-
+	camera = Camera(width, height, glm::vec3(0.8f, 1.2f, 0.5f));
+	camera.setRotation(50.0f, 0.0f);
+	
 }

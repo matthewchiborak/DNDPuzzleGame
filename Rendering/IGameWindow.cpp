@@ -2,12 +2,14 @@
 
 IGameWindow::IGameWindow(IRenderer* initialRenderer)
 {
-	setRenderer(initialRenderer);
+	this->renderer = initialRenderer;
 }
 
 void IGameWindow::setRenderer(IRenderer* renderer)
 {
+	IRenderer* temp = this->renderer;
 	this->renderer = renderer;
+	delete temp;
 }
 
 GLFWwindow* IGameWindow::getWindow()

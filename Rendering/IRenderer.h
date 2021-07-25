@@ -1,8 +1,6 @@
 #ifndef I_RENDERER_CLASS_H
 #define I_RENDERER_CLASS_H
 
-class GLFWwindow;
-
 #include "../Model/ILevelModel.h"
 
 #include "../Factories/IModelFlyweightFactory.h"
@@ -19,7 +17,7 @@ public:
 		ISkyboxFlyweightFactory*	skyboxFactory
 	);
 
-	virtual void draw(GLFWwindow* window, Camera* camera);
+	virtual void draw(GLFWwindow* window, Camera* camera, unsigned int width, unsigned int height);
 
 protected:
 	ILevelModel*				level;

@@ -8,4 +8,5 @@ GameStateMove::GameStateMove(IGameController* controller, ILevelModel* model)
 
 void GameStateMove::handleUserInput(GLFWwindow* window)
 {
+	
 }

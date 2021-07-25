@@ -21,6 +21,7 @@ public:
 	unsigned int instancing;
 
 	// Initializes the mesh
+	Mesh();
 	Mesh
 	(
 		std::vector <Vertex>& vertices,

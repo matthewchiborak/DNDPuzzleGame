@@ -6,7 +6,7 @@ IModelFlyweightFactory::IModelFlyweightFactory()
 }
 
 
-Model* IModelFlyweightFactory::getFlyweight(std::string key) throw()
+IModel* IModelFlyweightFactory::getFlyweight(std::string key) throw()
 {
 	return nullptr;
 }

@@ -8,6 +8,6 @@ IRenderer::IRenderer(ILevelModel* level, IModelFlyweightFactory* modelFactory, I
 	this->skyboxFactory = skyboxFactory;
 }
 
-void IRenderer::draw(GLFWwindow* window, Camera* camera)
+void IRenderer::draw(GLFWwindow* window, Camera* camera, unsigned int width, unsigned int height)
 {
 }

@@ -1,0 +1,9 @@
+{
+	"Width": 16,
+	"Height": 15,
+	"Players": [{
+		"Model": "Test",
+		"PosX": 0,
+		"PosY": 0
+	}]
+}

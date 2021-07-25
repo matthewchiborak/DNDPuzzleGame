@@ -1,5 +1,9 @@
 #include "Mesh.h"
 
+Mesh::Mesh()
+{
+}
+
 Mesh::Mesh
 (
 	std::vector <Vertex>& vertices,

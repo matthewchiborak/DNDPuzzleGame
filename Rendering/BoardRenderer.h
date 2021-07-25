@@ -13,9 +13,7 @@ public:
 		ISkyboxFlyweightFactory* skyboxFactory
 	);
 
-	void draw(GLFWwindow* window, Camera* camera) override;
-
-	void createSkybox();
+	void draw(GLFWwindow* window, Camera* camera, unsigned int width, unsigned int height) override;
 
 private:
 	double prevTime;
@@ -24,10 +22,17 @@ private:
 	// Keeps track of the amount of frames in timeDiff
 	unsigned int counter;
 
-	//Trying something
+	//The skybox will have to live here until I figure out why the skybox factory isn't working
 	unsigned int skyboxVAO, skyboxVBO, skyboxEBO;
 	unsigned int cubemapTexture;
 	bool skyboxInited = false;
+
+	void createSkybox();
+	void drawFPS(GLFWwindow* window);
+	void clearScreen();
+	void updateCamera(Camera* camera);
+	void drawScene(Camera* camera);
+	void drawSkybox(Camera* camera, unsigned int windowWidth, unsigned int windowHeight);
 };
 
 #endif

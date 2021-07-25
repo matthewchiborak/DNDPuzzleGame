@@ -1,11 +1,14 @@
 #include "ModelFlyweightFactory.h"
 
+#include "../Rendering/Core/Model.h"
+#include "../Rendering/ModelPlane.h"
+
 ModelFlyweightFactory::ModelFlyweightFactory()
 	: IModelFlyweightFactory()
 {
 }
 
-Model* ModelFlyweightFactory::getFlyweight(std::string key) throw()
+IModel* ModelFlyweightFactory::getFlyweight(std::string key) throw()
 {
 	if (flyweights.find(key) == flyweights.end())
 	{
@@ -15,18 +18,24 @@ Model* ModelFlyweightFactory::getFlyweight(std::string key) throw()
 	return flyweights.at(key);
 }
 
-Model* ModelFlyweightFactory::createFlyweight(std::string key) throw()
+IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 {
 	if (key == "Test")
 	{
-		Model* model = new Model("models/bunny/scene.gltf");
-		flyweights.insert(std::pair<std::string, Model*>(key, model));
+		IModel* model = new Model("models/bunny/scene.gltf");
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	if (key == "Tile")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Tile.png");
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}
 	else if (key == "Grass")
 	{
-		Model* model = new Model("models/grass/scene.gltf");
-		flyweights.insert(std::pair<std::string, Model*>(key, model));
+		IModel* model = new Model("models/grass/scene.gltf");
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}
 

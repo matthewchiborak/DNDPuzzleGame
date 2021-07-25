@@ -21,7 +21,7 @@ int main()
 	ILevelFactory* levelFactory = new LevelFactory();
 	IRendererFactory* rendererFactory = new RendererFactory(modelFactory, shaderFactory, skyboxFactory);
 
-	IGameWindow* gameWindow = new GameWindow(rendererFactory->createRenderer("Board", levelFactory->createLevel(1)));
+	IGameWindow* gameWindow = new GameWindow(rendererFactory->createRenderer("Board", levelFactory->createLevel("-1")));
 
 	IGameController * controller = new GameController(gameWindow, gameStateFactory, levelFactory, rendererFactory);
 

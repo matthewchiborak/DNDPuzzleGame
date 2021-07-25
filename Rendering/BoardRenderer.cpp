@@ -1,6 +1,6 @@
 #include "BoardRenderer.h"
 
-#include "Core/Model.h"
+#include "IModel.h"
 #include "Core/ShaderSkybox.h"
 #include "Skybox.h"
 
@@ -45,7 +45,7 @@ BoardRenderer::BoardRenderer(ILevelModel* level, IModelFlyweightFactory* modelFa
 
 }
 
-void BoardRenderer::draw(GLFWwindow* window, Camera* camera)
+void BoardRenderer::draw(GLFWwindow* window, Camera* camera, unsigned int width, unsigned int height)
 {
 	if (!skyboxInited)
 	{
@@ -54,77 +54,12 @@ void BoardRenderer::draw(GLFWwindow* window, Camera* camera)
 		skyboxInited = true;
 	}
 
-	//renderer.draw(); or w/e
-// Updates counter and times
-	crntTime = glfwGetTime();
-	timeDiff = crntTime - prevTime;
-	counter++;
-
-	if (timeDiff >= 1.0 / 30.0)
-	{
-		// Creates new title
-		std::string FPS = std::to_string((int)((1.0 / timeDiff) * counter));
-		std::string newTitle = "DND Puzzle Game - " + FPS + " FPS";
-		glfwSetWindowTitle(window, newTitle.c_str());
-
-		// Resets times and counter
-		prevTime = crntTime;
-		counter = 0;
-
-		// Use this if you have disabled VSync
-		//camera.Inputs(window);
-	}
-
-	// Bind the custom framebuffer
-	//glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-	// Specify the color of the background
-	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-	// Clean the back buffer and depth buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	// Enable depth testing since it's disabled when drawing the framebuffer rectangle
-	//glEnable(GL_DEPTH_TEST);
-
-	// Handles camera inputs
-	//camera.Inputs(window);
-	// Updates and exports the camera matrix to the Vertex Shader
-	camera->updateMatrix(45.0f, 0.1f, 100.0f);
-
-	// Draw a model. Well get form eventually from model. TODO
-	//model.Draw(shaderProgram, camera);
-	modelFactory->getFlyweight("Test")->Draw(*shaderFactory->getFlyweight("Default"), *camera);
-
-	//glDisable(GL_CULL_FACE);
-	modelFactory->getFlyweight("Grass")->Draw(*shaderFactory->getFlyweight("Cutout"), *camera);
-	//glEnable(GL_CULL_FACE);
-
-	///////////////////////////////////////
-	// Since the cubemap will always have a depth of 1.0, we need that equal sign so it doesn't get discarded
-	glDepthFunc(GL_LEQUAL);
-
-	shaderFactory->getFlyweight("Sky")->Activate();
-	glm::mat4 view = glm::mat4(1.0f);
-	glm::mat4 projection = glm::mat4(1.0f);
-	// We make the mat4 into a mat3 and then a mat4 again in order to get rid of the last row and column
-	// The last row and column affect the translation of the skybox (which we don't want to affect)
-	view = glm::mat4(glm::mat3(glm::lookAt(camera->Position, camera->Position + camera->Orientation, camera->Up)));
-	projection = glm::perspective(glm::radians(45.0f), (float)800 / 800, 0.1f, 100.0f);
-	glUniformMatrix4fv(glGetUniformLocation(shaderFactory->getFlyweight("Sky")->ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(glGetUniformLocation(shaderFactory->getFlyweight("Sky")->ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-
-	// Draws the cubemap as the last object so we can save a bit of performance by discarding all fragments
-	// where an object is present (a depth of 1.0f will always fail against any object's depth value)
-	glBindVertexArray(skyboxVAO);
-	//glBindVertexArray(skyboxFactory->getFlyweight("Test")->get_skyboxVAO());
-	glBindVertexArray(1);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-	//glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxFactory->getFlyweight("Test")->get_cubemapTexture());
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
-
-	// Switch back to the normal depth function
-	glDepthFunc(GL_LESS);
-	///////////////////////
+	drawFPS(window);
+	clearScreen();
+	camera->Inputs(window);
+	updateCamera(camera);
+	drawScene(camera);
+	drawSkybox(camera, width, height);
 
 	// Swap the back buffer with the front buffer
 	glfwSwapBuffers(window);
@@ -201,4 +136,90 @@ void BoardRenderer::createSkybox()
 			stbi_image_free(data);
 		}
 	}
+}
+
+void BoardRenderer::drawFPS(GLFWwindow* window)
+{
+	// Updates counter and times
+	crntTime = glfwGetTime();
+	timeDiff = crntTime - prevTime;
+	counter++;
+
+	if (timeDiff >= 1.0 / 30.0)
+	{
+		// Creates new title
+		std::string FPS = std::to_string((int)((1.0 / timeDiff) * counter));
+		std::string newTitle = "DND Puzzle Game - " + FPS + " FPS";
+		glfwSetWindowTitle(window, newTitle.c_str());
+
+		// Resets times and counter
+		prevTime = crntTime;
+		counter = 0;
+	}
+}
+
+void BoardRenderer::clearScreen()
+{
+	// Specify the color of the background
+	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+	// Clean the back buffer and depth buffer
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void BoardRenderer::updateCamera(Camera* camera)
+{
+	// Updates and exports the camera matrix to the Vertex Shader
+	camera->updateMatrix(45.0f, 0.1f, 100.0f);
+}
+
+void BoardRenderer::drawScene(Camera* camera)
+{
+	// Draw the models objects
+	std::vector<BoardObject*>::iterator it = level->getBoardObjects();
+	std::vector<BoardObject*>::iterator end = level->getBoardObjectsEnd();
+
+	while(it != end)
+	{
+		modelFactory->getFlyweight((*it)->getModelKey())->Draw(
+			*shaderFactory->getFlyweight((*it)->getShaderKey()),
+			*camera,
+			glm::vec3((float)(*it)->getPosX() / 10.0f, 0.0f, (float)(*it)->getPosY() / -10.0f),
+			//glm::vec3((float)(*it)->getHeight() / 10.0f, (float)(*it)->getPosX() / 10.0f, (float)(*it)->getPosY() / 10.0f),
+			glm::quat(0.0f, 0.0f, 0.0f, 1.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		);
+		it++;
+	}
+}
+
+void BoardRenderer::drawSkybox(Camera* camera, unsigned int windowWidth, unsigned int windowHeight)
+{
+	///////////////////////////////////////
+// Since the cubemap will always have a depth of 1.0, we need that equal sign so it doesn't get discarded
+	glDepthFunc(GL_LEQUAL);
+
+	shaderFactory->getFlyweight("Sky")->Activate();
+	glm::mat4 view = glm::mat4(1.0f);
+	glm::mat4 projection = glm::mat4(1.0f);
+	// We make the mat4 into a mat3 and then a mat4 again in order to get rid of the last row and column
+	// The last row and column affect the translation of the skybox (which we don't want to affect)
+	view = glm::mat4(glm::mat3(glm::lookAt(camera->Position, camera->Position + camera->Orientation, camera->Up)));
+	projection = glm::perspective(glm::radians(45.0f), (float)windowWidth / windowHeight, 0.1f, 100.0f);
+	glUniformMatrix4fv(glGetUniformLocation(shaderFactory->getFlyweight("Sky")->ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(shaderFactory->getFlyweight("Sky")->ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+	// Draws the cubemap as the last object so we can save a bit of performance by discarding all fragments
+	// where an object is present (a depth of 1.0f will always fail against any object's depth value)
+	glBindVertexArray(skyboxVAO);
+	//glBindVertexArray(skyboxFactory->getFlyweight("Test")->get_skyboxVAO());
+	glBindVertexArray(1);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+	//glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxFactory->getFlyweight("Test")->get_cubemapTexture());
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+
+	// Switch back to the normal depth function
+	glDepthFunc(GL_LESS);
+	///////////////////////
 }

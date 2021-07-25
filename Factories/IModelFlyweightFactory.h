@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-#include "../Rendering/Core/Model.h"
+#include "../Rendering/IModel.h"
 
 
 class IModelFlyweightFactory
@@ -12,10 +12,10 @@ class IModelFlyweightFactory
 public:
 	IModelFlyweightFactory();
 
-	virtual Model* getFlyweight(std::string key) throw();
+	virtual IModel* getFlyweight(std::string key) throw();
 
 protected:
-	std::map<std::string, Model*> flyweights;
+	std::map<std::string, IModel*> flyweights;
 };
 
 #endif

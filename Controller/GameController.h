@@ -14,7 +14,11 @@ public:
 	);
 
 	void start() override;
+	void setState(std::string key) override;
 
+private:
+	std::string lastStateKey;
+	std::string lastRendererKey;
 };
 
 #endif

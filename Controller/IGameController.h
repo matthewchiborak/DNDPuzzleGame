@@ -30,7 +30,7 @@ public:
 
 	virtual void start();
 
-	void setState(std::string key);
+	virtual void setState(std::string key);
 	void quit();
 
 protected:

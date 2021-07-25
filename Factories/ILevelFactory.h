@@ -10,7 +10,8 @@ class ILevelFactory
 public:
 	ILevelFactory();
 
-	virtual ILevelModel* createLevel(int levelNo) throw();
+	virtual ILevelModel* createLevel(std::string key) throw();
+
 };
 
 #endif

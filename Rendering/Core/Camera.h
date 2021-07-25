@@ -35,6 +35,9 @@ public:
 	Camera();
 	Camera(int width, int height, glm::vec3 position);
 
+	void setPosition(glm::vec3 newPosition);
+	void setRotation(float newRotX, float newRotY);
+
 	// Updates the camera matrix to the Vertex Shader
 	void updateMatrix(float FOVdeg, float nearPlane, float farPlane);
 	// Exports the camera matrix to a shader

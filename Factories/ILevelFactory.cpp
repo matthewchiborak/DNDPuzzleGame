@@ -4,7 +4,7 @@ ILevelFactory::ILevelFactory()
 {
 }
 
-ILevelModel* ILevelFactory::createLevel(int levelNo) throw()
+ILevelModel* ILevelFactory::createLevel(std::string key) throw()
 {
     return nullptr;
 }

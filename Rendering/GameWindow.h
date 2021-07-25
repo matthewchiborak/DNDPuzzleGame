@@ -16,22 +16,13 @@ public:
 private:
 	void setUp();
 
-	//Testing
-	/////////////////////
-	const unsigned int width = 800;
-	const unsigned int height = 800;
+	const unsigned int width = 1600;
+	const unsigned int height = 900;
 	// Number of samples per pixel for MSAA
 	unsigned int samples = 8;
 
-	//Keep?
-	glm::vec4 lightColor;
-	glm::vec3 lightPos;
-	glm::mat4 lightModel;
-
 	//Keep
 	Camera camera;
-
-
 
 };
 

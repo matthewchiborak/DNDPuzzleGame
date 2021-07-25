@@ -162,8 +162,10 @@
     <ClInclude Include="Factories\RendererFactory.h" />
     <ClInclude Include="Factories\ShaderFlyweightFactory.h" />
     <ClInclude Include="Factories\SkyboxFlyweightFactory.h" />
+    <ClInclude Include="Model\BoardObject.h" />
     <ClInclude Include="Model\ILevelModel.h" />
     <ClInclude Include="Model\LevelModel.h" />
+    <ClInclude Include="Model\PlayerBoardObject.h" />
     <ClInclude Include="Rendering\BoardRenderer.h" />
     <ClInclude Include="Rendering\Core\Camera.h" />
     <ClInclude Include="Rendering\Core\EBO.h" />
@@ -176,7 +178,10 @@
     <ClInclude Include="Rendering\Core\VBO.h" />
     <ClInclude Include="Rendering\GameWindow.h" />
     <ClInclude Include="Rendering\IGameWindow.h" />
+    <ClInclude Include="Rendering\IModel.h" />
     <ClInclude Include="Rendering\IRenderer.h" />
+    <ClInclude Include="Rendering\ModelObj.h" />
+    <ClInclude Include="Rendering\ModelPlane.h" />
     <ClInclude Include="Rendering\Skybox.h" />
   </ItemGroup>
   <ItemGroup>
@@ -198,8 +203,10 @@
     <ClCompile Include="Factories\ShaderFlyweightFactory.cpp" />
     <ClCompile Include="Factories\SkyboxFlyweightFactory.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model\BoardObject.cpp" />
     <ClCompile Include="Model\ILevelModel.cpp" />
     <ClCompile Include="Model\LevelModel.cpp" />
+    <ClCompile Include="Model\PlayerBoardObject.cpp" />
     <ClCompile Include="Rendering\BoardRenderer.cpp" />
     <ClCompile Include="Rendering\Core\Camera.cpp" />
     <ClCompile Include="Rendering\Core\EBO.cpp" />
@@ -214,7 +221,10 @@
     <ClCompile Include="Rendering\Core\VBO.cpp" />
     <ClCompile Include="Rendering\GameWindow.cpp" />
     <ClCompile Include="Rendering\IGameWindow.cpp" />
+    <ClCompile Include="Rendering\IModel.cpp" />
     <ClCompile Include="Rendering\IRenderer.cpp" />
+    <ClCompile Include="Rendering\ModelObj.cpp" />
+    <ClCompile Include="Rendering\ModelPlane.cpp" />
     <ClCompile Include="Rendering\Skybox.cpp" />
   </ItemGroup>
   <ItemGroup>

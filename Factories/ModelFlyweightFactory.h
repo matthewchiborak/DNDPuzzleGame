@@ -8,10 +8,10 @@ class ModelFlyweightFactory: public IModelFlyweightFactory
 public:
 	ModelFlyweightFactory();
 
-	Model* getFlyweight(std::string key) throw() override;
+	IModel* getFlyweight(std::string key) throw() override;
 
 protected:
-	Model* createFlyweight(std::string key) throw();
+	IModel* createFlyweight(std::string key) throw();
 };
 
 #endif

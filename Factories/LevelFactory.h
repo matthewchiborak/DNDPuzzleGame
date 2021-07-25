@@ -8,7 +8,7 @@ class LevelFactory: public ILevelFactory
 public:
 	LevelFactory();
 
-	ILevelModel* createLevel(int levelNo) throw() override;
+	ILevelModel* createLevel(std::string key) throw() override;
 };
 
 #endif
