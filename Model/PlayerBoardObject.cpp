@@ -15,6 +15,10 @@ PlayerBoardObject::~PlayerBoardObject()
 
 bool PlayerBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
-	std::cout << "Do action " << posX << " " << posY << " " << otherObj->getPosX() << " " << otherObj->getPosY();
 	return interactCommand->execute(this, otherObj, model);
+}
+
+bool PlayerBoardObject::push(BoardObjectAction* pushAction)
+{
+	return false;
 }

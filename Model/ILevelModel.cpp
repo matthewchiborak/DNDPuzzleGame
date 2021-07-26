@@ -1,5 +1,7 @@
 #include "ILevelModel.h"
 
+#include <iostream>
+
 ILevelModel::ILevelModel()
 {
 }
@@ -21,11 +23,20 @@ void ILevelModel::playerStop()
 {
 }
 
+void ILevelModel::rockStop()
+{
+}
+
 void ILevelModel::playerChange(bool next)
 {
 }
 
 bool ILevelModel::interact()
+{
+    return false;
+}
+
+bool ILevelModel::doesSpaceExist(int x, int y)
 {
     return false;
 }

@@ -12,6 +12,7 @@ public:
 	~PlayerBoardObject();
 
 	bool interact(BoardObject* otherObj, ILevelModel* model) override;
+	bool push(BoardObjectAction* pushAction) override;
 
 private:
 	InteractCommand* interactCommand;

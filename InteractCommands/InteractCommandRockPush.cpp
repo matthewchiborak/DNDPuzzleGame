@@ -17,7 +17,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 	std::vector<BoardObject*>::iterator it = model->getBoardObjects();
 	std::vector<BoardObject*>::iterator end = model->getBoardObjectsEnd();
 
-	int closestValue;
+	int closestValue = 0;
 	bool closestSet = false;
 
 	while (it != end)
@@ -32,65 +32,65 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 		{
 			if (xDir > 0)
 			{
-				if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() < reciever->getPosX())
+				if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() > reciever->getPosX())
 				{
 					if (!closestSet)
 					{
-						closestValue = reciever->getPosX() - 1;
+						closestValue = (*it)->getPosX() - 1;
 						closestSet = true;
 					}
 					else
 					{
-						if((reciever->getPosX() - 1) < closestValue)
-							closestValue = reciever->getPosX() - 1;
+						if(((*it)->getPosX() - 1) < closestValue)
+							closestValue = (*it)->getPosX() - 1;
 					}
 				}
 			}
 			else if (xDir < 0)
 			{
-				if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() > reciever->getPosX())
+				if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() < reciever->getPosX())
 				{
 					if (!closestSet)
 					{
-						closestValue = reciever->getPosX() + 1;
+						closestValue = (*it)->getPosX() + 1;
 						closestSet = true;
 					}
 					else
 					{
-						if ((reciever->getPosX() + 1) < closestValue)
-							closestValue = reciever->getPosX() + 1;
+						if (((*it)->getPosX() + 1) > closestValue)
+							closestValue = (*it)->getPosX() + 1;
 					}
 				}
 			}
 			else if (yDir > 0)
 			{
-				if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() < reciever->getPosY())
+				if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() > reciever->getPosY())
 				{
 					if (!closestSet)
 					{
-						closestValue = reciever->getPosY() - 1;
+						closestValue = (*it)->getPosY() - 1;
 						closestSet = true;
 					}
 					else
 					{
-						if ((reciever->getPosY() - 1) < closestValue)
-							closestValue = reciever->getPosY() - 1;
+						if (((*it)->getPosY() - 1) < closestValue)
+							closestValue = (*it)->getPosY() - 1;
 					}
 				}
 			}
 			else if (yDir < 0)
 			{
-				if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() > reciever->getPosY())
+				if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() < reciever->getPosY())
 				{
 					if (!closestSet)
 					{
-						closestValue = reciever->getPosY() + 1;
+						closestValue = (*it)->getPosY() + 1;
 						closestSet = true;
 					}
 					else
 					{
-						if ((reciever->getPosY() + 1) < closestValue)
-							closestValue = reciever->getPosY() + 1;
+						if (((*it)->getPosY() + 1) > closestValue)
+							closestValue = (*it)->getPosY() + 1;
 					}
 				}
 			}
@@ -98,10 +98,70 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 		it++;
 	}
 
-	if (xDir > 0 || xDir < 0)
-		reciever->setCurrentAction(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY()));
-	else
-		reciever->setCurrentAction(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue));
+	//Might be hitting the edge of the map. Find the next space that doesnt exist
+	if (!closestSet)
+	{
+		if (xDir > 0)
+		{
+			closestValue = reciever->getPosX() + 1;
+			if (!(model->doesSpaceExist(closestValue, reciever->getPosY())))
+				return false;
+			do
+			{
+				closestValue++;
+			} while (model->doesSpaceExist(closestValue, reciever->getPosY()));
+			closestValue--;
+		}
+		else if (xDir < 0)
+		{
+			closestValue = reciever->getPosX() - 1;
+			if (!(model->doesSpaceExist(closestValue, reciever->getPosY())))
+				return false;
+			do
+			{
+				closestValue--;
+			} while (model->doesSpaceExist(closestValue, reciever->getPosY()));
+			closestValue++;
+		}
+		else if (yDir > 0)
+		{
+			closestValue = reciever->getPosY() + 1;
+			if (!(model->doesSpaceExist(reciever->getPosX(), closestValue)))
+				return false;
+			do
+			{
+				closestValue++;
+			} while (model->doesSpaceExist(reciever->getPosX(), closestValue));
+			closestValue--;
+		}
+		else if (yDir < 0)
+		{
+			closestValue = reciever->getPosY() - 1;
+			if (!(model->doesSpaceExist(reciever->getPosX(), closestValue)))
+				return false;
+			do
+			{
+				closestValue--;
+			} while (model->doesSpaceExist(reciever->getPosX(), closestValue));
+			closestValue++;
+		}
+	}
 
-	return true;
+	//If Not moving, shoudl return false so a turn isn't used up
+	if (xDir > 0 || xDir < 0)
+	{
+		if (reciever->getPosX() == closestValue)
+			return false;
+	}
+	else if (yDir > 0 || yDir < 0)
+	{
+		if (reciever->getPosY() == closestValue)
+			return false;
+	}
+
+	if (xDir > 0 || xDir < 0)
+		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY()));
+	else
+		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue));
+
 }

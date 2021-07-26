@@ -198,6 +198,12 @@
     <ClInclude Include="InteractCommands\InteractCommandNone.h">
       <Filter>Header Files\InteractCommands</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\ModelCube.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\WallBoardObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -346,6 +352,12 @@
     </ClCompile>
     <ClCompile Include="InteractCommands\InteractCommandNone.cpp">
       <Filter>Source Files\InteractCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ModelCube.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\WallBoardObject.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -13,8 +13,11 @@ public:
 
 	virtual bool playerMove(int x, int y);
 	virtual void playerStop();
+	virtual void rockStop();
 	virtual void playerChange(bool next);
 	virtual bool interact();
+
+	virtual bool doesSpaceExist(int x, int y);
 
 	void addBoardObject(BoardObject* obj);
 	std::vector<BoardObject*>::iterator getBoardObjects();

@@ -30,6 +30,7 @@ void GameStateMove::advanceEvents()
 	if (t >= 1)
 	{
 		model->playerStop();
+		model->rockStop();
 		controller->setState("Stop");
 	}
 }

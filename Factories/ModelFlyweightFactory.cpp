@@ -2,6 +2,7 @@
 
 #include "../Rendering/Core/Model.h"
 #include "../Rendering/ModelPlane.h"
+#include "../Rendering/ModelCube.h"
 
 ModelFlyweightFactory::ModelFlyweightFactory()
 	: IModelFlyweightFactory()
@@ -29,6 +30,12 @@ IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 	else if (key == "Tile")
 	{
 		IModel* model = new ModelPlane(1, 1, "Textures/Tile.png");
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (key == "Wall")
+	{
+		IModel* model = new ModelCube(1, 1, "Textures/Wall.png");
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}

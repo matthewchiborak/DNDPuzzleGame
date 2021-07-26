@@ -41,6 +41,11 @@ bool BoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 	return false;
 }
 
+bool BoardObject::push(BoardObjectAction* pushAction)
+{
+	return false;
+}
+
 void BoardObject::setPos(int x, int y)
 {
 	this->posX = x;

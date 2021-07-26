@@ -36,5 +36,12 @@
 		"PosX": 13,
 		"PosY": 2
 	}
+	],
+	"Walls": [
+	{
+		"Model": "Wall",
+		"PosX": 6,
+		"PosY": 6
+	}
 	]
 }

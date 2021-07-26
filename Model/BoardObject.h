@@ -17,6 +17,8 @@ public:
 	void move(int x, int y);
 	virtual bool interact(BoardObject* otherObj, ILevelModel* model);
 
+	virtual bool push(BoardObjectAction* pushAction);
+
 	void setPos(int x, int y);
 	void setVis(float x, float y);
 	void setLastDirMoved(int x, int y);

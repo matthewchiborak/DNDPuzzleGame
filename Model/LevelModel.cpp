@@ -17,6 +17,9 @@ bool LevelModel::playerMove(int x, int y)
 
 	BoardObject* occupiedRef;
 
+	if (!doesSpaceExist(currentPlayer->getPosX() + x, currentPlayer->getPosY() + y))
+		return false;
+
 	if (isSpaceOccupied(currentPlayer->getPosX() + x, currentPlayer->getPosY() + y, &occupiedRef))
 		return false;
 
@@ -34,6 +37,14 @@ bool LevelModel::playerMove(int x, int y)
 void LevelModel::playerStop()
 {
 	currentPlayer->setCurrentAction(new BoardObjectActionNone());
+}
+
+void LevelModel::rockStop()
+{
+	for (int i = 0; i < obstacles.size(); i++)
+	{
+		obstacles.at(i)->setCurrentAction(new BoardObjectActionNone());
+	}
 }
 
 void LevelModel::playerChange(bool next)
@@ -67,6 +78,12 @@ bool LevelModel::interact()
 	return false;
 }
 
+void LevelModel::addTile(BoardObject* tile)
+{
+	boardObjects.push_back(tile);
+	tiles.push_back(tile);
+}
+
 void LevelModel::addPlayer(BoardObject* player)
 {
 	currentPlayerIndex = 0;
@@ -81,6 +98,12 @@ void LevelModel::addObstacle(BoardObject* obs)
 {
 	boardObjects.push_back(obs);
 	obstacles.push_back(obs);
+}
+
+void LevelModel::addWall(BoardObject* wall)
+{
+	boardObjects.push_back(wall);
+	walls.push_back(wall);
 }
 
 bool LevelModel::isSpaceOccupied(int x, int y, BoardObject** occupyingRef)
@@ -99,6 +122,28 @@ bool LevelModel::isSpaceOccupied(int x, int y, BoardObject** occupyingRef)
 		if (obstacles.at(i)->getPosX() == x && obstacles.at(i)->getPosY() == y)
 		{
 			(*occupyingRef) = obstacles.at(i);
+			return true;
+		}
+	}
+
+	for (int i = 0; i < walls.size(); i++)
+	{
+		if (walls.at(i)->getPosX() == x && walls.at(i)->getPosY() == y)
+		{
+			(*occupyingRef) = walls.at(i);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool LevelModel::doesSpaceExist(int x, int y)
+{
+	for (int i = 0; i < tiles.size(); i++)
+	{
+		if (tiles.at(i)->getPosX() == x && tiles.at(i)->getPosY() == y)
+		{
 			return true;
 		}
 	}

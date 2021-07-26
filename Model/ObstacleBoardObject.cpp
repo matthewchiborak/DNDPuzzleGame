@@ -9,3 +9,10 @@ bool ObstacleBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
 	return false;
 }
+
+bool ObstacleBoardObject::push(BoardObjectAction* pushAction)
+{
+	this->setCurrentAction(pushAction);
+
+	return true;
+}

@@ -9,3 +9,8 @@ bool TileBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
 	return false;
 }
+
+bool TileBoardObject::push(BoardObjectAction* pushAction)
+{
+	return false;
+}
