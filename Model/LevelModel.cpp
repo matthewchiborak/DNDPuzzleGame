@@ -199,6 +199,19 @@ void LevelModel::addPit(BoardObject* pit)
 	pits.push_back(pit);
 }
 
+bool LevelModel::isAPit(int x, int y)
+{
+	for (int i = 0; i < pits.size(); i++)
+	{
+		if (pits.at(i)->getPosX() == x && pits.at(i)->getPosY() == y)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool LevelModel::isSpaceOccupied(int x, int y, BoardObject** occupyingRef)
 {
 	for (int i = 0; i < players.size(); i++)

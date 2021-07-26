@@ -10,6 +10,7 @@ public:
 
 	bool interact(BoardObject* otherObj, ILevelModel* model) override;
 	bool push(BoardObjectAction* pushAction) override;
+	bool levitateMe() override;
 
 	BoardObject* copy() override;
 

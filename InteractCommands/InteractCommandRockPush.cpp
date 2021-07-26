@@ -19,83 +19,85 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 
 	int closestValue = 0;
 	bool closestSet = false;
-
-	while (it != end)
+	//if(!reciever->isLevitating())
 	{
-		if ((*it) == reciever)
+		while (it != end)
 		{
-			it++;
-			continue;
-		}
+			if ((*it) == reciever)
+			{
+				it++;
+				continue;
+			}
 
-		if ((*it)->isSolid())
-		{
-			if (xDir > 0)
+			if ((*it)->isSolid() && (!model->isAPit((*it)->getPosX(), (*it)->getPosY()) || (model->isAPit((*it)->getPosX(), (*it)->getPosY() && !reciever->isLevitating()))))
 			{
-				if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() > reciever->getPosX())
+				if (xDir > 0)
 				{
-					if (!closestSet)
+					if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() > reciever->getPosX())
 					{
-						closestValue = (*it)->getPosX() - (((*it)->isSquishy()) ? 0 : 1);
-						closestSet = true;
-					}
-					else
-					{
-						if(((*it)->getPosX() - 1) < closestValue)
-							closestValue = (*it)->getPosX() - (((*it)->isSquishy()) ? 0 : 1);;
+						if (!closestSet)
+						{
+							closestValue = (*it)->getPosX() - (((*it)->isSquishy()) ? 0 : 1);
+							closestSet = true;
+						}
+						else
+						{
+							if (((*it)->getPosX() - 1) < closestValue)
+								closestValue = (*it)->getPosX() - (((*it)->isSquishy()) ? 0 : 1);;
+						}
 					}
 				}
-			}
-			else if (xDir < 0)
-			{
-				if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() < reciever->getPosX())
+				else if (xDir < 0)
 				{
-					if (!closestSet)
+					if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() < reciever->getPosX())
 					{
-						closestValue = (*it)->getPosX() + (((*it)->isSquishy()) ? 0 : 1);;
-						closestSet = true;
-					}
-					else
-					{
-						if (((*it)->getPosX() + 1) > closestValue)
+						if (!closestSet)
+						{
 							closestValue = (*it)->getPosX() + (((*it)->isSquishy()) ? 0 : 1);;
+							closestSet = true;
+						}
+						else
+						{
+							if (((*it)->getPosX() + 1) > closestValue)
+								closestValue = (*it)->getPosX() + (((*it)->isSquishy()) ? 0 : 1);;
+						}
 					}
 				}
-			}
-			else if (yDir > 0)
-			{
-				if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() > reciever->getPosY())
+				else if (yDir > 0)
 				{
-					if (!closestSet)
+					if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() > reciever->getPosY())
 					{
-						closestValue = (*it)->getPosY() - (((*it)->isSquishy()) ? 0 : 1);;
-						closestSet = true;
-					}
-					else
-					{
-						if (((*it)->getPosY() - 1) < closestValue)
+						if (!closestSet)
+						{
 							closestValue = (*it)->getPosY() - (((*it)->isSquishy()) ? 0 : 1);;
+							closestSet = true;
+						}
+						else
+						{
+							if (((*it)->getPosY() - 1) < closestValue)
+								closestValue = (*it)->getPosY() - (((*it)->isSquishy()) ? 0 : 1);;
+						}
 					}
 				}
-			}
-			else if (yDir < 0)
-			{
-				if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() < reciever->getPosY())
+				else if (yDir < 0)
 				{
-					if (!closestSet)
+					if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() < reciever->getPosY())
 					{
-						closestValue = (*it)->getPosY() + (((*it)->isSquishy()) ? 0 : 1);;
-						closestSet = true;
-					}
-					else
-					{
-						if (((*it)->getPosY() + 1) > closestValue)
+						if (!closestSet)
+						{
 							closestValue = (*it)->getPosY() + (((*it)->isSquishy()) ? 0 : 1);;
+							closestSet = true;
+						}
+						else
+						{
+							if (((*it)->getPosY() + 1) > closestValue)
+								closestValue = (*it)->getPosY() + (((*it)->isSquishy()) ? 0 : 1);;
+						}
 					}
 				}
 			}
+			it++;
 		}
-		it++;
 	}
 
 	//Might be hitting the edge of the map. Find the next space that doesnt exist
@@ -109,7 +111,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 			do
 			{
 				closestValue++;
-			} while (model->doesSpaceExist(closestValue, reciever->getPosY()));
+			} while (model->doesSpaceExist(closestValue, reciever->getPosY()) || model->isAPit(closestValue, reciever->getPosY()));
 			closestValue--;
 		}
 		else if (xDir < 0)
@@ -120,7 +122,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 			do
 			{
 				closestValue--;
-			} while (model->doesSpaceExist(closestValue, reciever->getPosY()));
+			} while (model->doesSpaceExist(closestValue, reciever->getPosY()) || model->isAPit(closestValue, reciever->getPosY()));
 			closestValue++;
 		}
 		else if (yDir > 0)
@@ -131,7 +133,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 			do
 			{
 				closestValue++;
-			} while (model->doesSpaceExist(reciever->getPosX(), closestValue));
+			} while (model->doesSpaceExist(reciever->getPosX(), closestValue) || model->isAPit(reciever->getPosX(), closestValue));
 			closestValue--;
 		}
 		else if (yDir < 0)
@@ -142,7 +144,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 			do
 			{
 				closestValue--;
-			} while (model->doesSpaceExist(reciever->getPosX(), closestValue));
+			} while (model->doesSpaceExist(reciever->getPosX(), closestValue) || model->isAPit(reciever->getPosY(), closestValue));
 			closestValue++;
 		}
 	}

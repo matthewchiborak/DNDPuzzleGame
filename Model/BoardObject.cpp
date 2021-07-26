@@ -3,7 +3,8 @@
 #include "../BoardObjectActions/BoardObjectAction.h"
 
 
-BoardObject::BoardObject(int posX, int posY, int height, bool solid, bool squishy, BoardObjectAction* action, std::string modelKey, std::string shaderKey)
+BoardObject::BoardObject(int posX, int posY, int height, bool solid, bool squishy, 
+	BoardObjectAction* action, std::string modelKey, std::string shaderKey)
 {
 	this->posX = posX;
 	this->posY = posY;
@@ -17,6 +18,7 @@ BoardObject::BoardObject(int posX, int posY, int height, bool solid, bool squish
 	this->lastDirMovedy = 0;
 	this->solid = solid;
 	this->squishy = squishy;
+	this->leviting = false;
 }
 
 BoardObject* BoardObject::copy()
@@ -92,6 +94,9 @@ float BoardObject::getVisY()
 
 int BoardObject::getHeight()
 {
+	if (leviting)
+		return height + 1;
+
 	return height;
 }
 
@@ -123,6 +128,21 @@ bool BoardObject::isSolid()
 bool BoardObject::isSquishy()
 {
 	return squishy;
+}
+
+bool BoardObject::levitateMe()
+{
+	return false;
+}
+
+void BoardObject::stopLevitate()
+{
+	this->leviting = false;
+}
+
+bool BoardObject::isLevitating()
+{
+	return leviting;
 }
 
 

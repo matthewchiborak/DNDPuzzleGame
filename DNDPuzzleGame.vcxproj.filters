@@ -210,6 +210,9 @@
     <ClInclude Include="Rendering\ModelPit.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="InteractCommands\InteractCommandRockFloat.h">
+      <Filter>Header Files\InteractCommands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -370,6 +373,9 @@
     </ClCompile>
     <ClCompile Include="Rendering\ModelPit.cpp">
       <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractCommands\InteractCommandRockFloat.cpp">
+      <Filter>Source Files\InteractCommands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

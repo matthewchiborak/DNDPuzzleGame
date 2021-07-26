@@ -16,6 +16,7 @@
 
 #include "../InteractCommands/InteractCommandNone.h"
 #include "../InteractCommands/InteractCommandRockPush.h"
+#include "../InteractCommands/InteractCommandRockFloat.h"
 
 LevelFactory::LevelFactory()
 	: ILevelFactory()
@@ -95,6 +96,9 @@ InteractCommand* LevelFactory::createInteractCommand(std::string key)
 {
 	if (key == "RockPush")
 		return new InteractCommandRockPush();
+
+	if (key == "RockFloat")
+		return new InteractCommandRockFloat();
 	
 	return new InteractCommandNone();
 }

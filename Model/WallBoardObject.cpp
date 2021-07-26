@@ -17,6 +17,11 @@ bool WallBoardObject::push(BoardObjectAction* pushAction)
 	return false;
 }
 
+bool WallBoardObject::levitateMe()
+{
+	return false;
+}
+
 BoardObject* WallBoardObject::copy()
 {
 	return new WallBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);

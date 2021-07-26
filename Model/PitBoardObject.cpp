@@ -17,6 +17,11 @@ bool PitBoardObject::push(BoardObjectAction* pushAction)
 	return false;
 }
 
+bool PitBoardObject::levitateMe()
+{
+	return false;
+}
+
 BoardObject* PitBoardObject::copy()
 {
 	return new PitBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);

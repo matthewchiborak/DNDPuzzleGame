@@ -45,6 +45,11 @@ bool ILevelModel::doesSpaceExist(int x, int y)
     return false;
 }
 
+bool ILevelModel::isAPit(int x, int y)
+{
+    return false;
+}
+
 void ILevelModel::addBoardObject(BoardObject* obj)
 {
     boardObjects.push_back(obj);

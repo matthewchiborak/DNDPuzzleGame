@@ -17,6 +17,11 @@ bool TileBoardObject::push(BoardObjectAction* pushAction)
 	return false;
 }
 
+bool TileBoardObject::levitateMe()
+{
+	return false;
+}
+
 BoardObject* TileBoardObject::copy()
 {
 	return new TileBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);

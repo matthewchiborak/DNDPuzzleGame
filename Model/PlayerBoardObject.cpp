@@ -23,6 +23,11 @@ bool PlayerBoardObject::push(BoardObjectAction* pushAction)
 	return false;
 }
 
+bool PlayerBoardObject::levitateMe()
+{
+	return false;
+}
+
 BoardObject* PlayerBoardObject::copy()
 {
 	return nullptr;

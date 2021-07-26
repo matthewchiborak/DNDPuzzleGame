@@ -167,6 +167,7 @@
     <ClInclude Include="Factories\SkyboxFlyweightFactory.h" />
     <ClInclude Include="InteractCommands\InteractCommand.h" />
     <ClInclude Include="InteractCommands\InteractCommandNone.h" />
+    <ClInclude Include="InteractCommands\InteractCommandRockFloat.h" />
     <ClInclude Include="InteractCommands\InteractCommandRockPush.h" />
     <ClInclude Include="Model\BoardObject.h" />
     <ClInclude Include="Model\ILevelModel.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Factories\SkyboxFlyweightFactory.cpp" />
     <ClCompile Include="InteractCommands\InteractCommand.cpp" />
     <ClCompile Include="InteractCommands\InteractCommandNone.cpp" />
+    <ClCompile Include="InteractCommands\InteractCommandRockFloat.cpp" />
     <ClCompile Include="InteractCommands\InteractCommandRockPush.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\BoardObject.cpp" />

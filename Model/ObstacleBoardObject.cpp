@@ -23,3 +23,10 @@ bool ObstacleBoardObject::push(BoardObjectAction* pushAction)
 
 	return true;
 }
+
+bool ObstacleBoardObject::levitateMe()
+{
+	this->leviting = true;
+
+	return true;
+}

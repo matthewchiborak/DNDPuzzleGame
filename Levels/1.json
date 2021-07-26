@@ -9,9 +9,9 @@
 	],
 	"Players": [{
 		"Model": "Duke",
-		"PosX": 0,
+		"PosX": 12,
 		"PosY": 0,
-		"Interact": "None"
+		"Interact": "RockFloat"
 	},
 	{
 		"Model": "Bullent",

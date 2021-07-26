@@ -21,6 +21,8 @@ public:
 	void addWall(BoardObject* wall);
 	void addPit(BoardObject* pit);
 
+	bool isAPit(int x, int y);
+
 private:
 	int currentPlayerIndex;
 	BoardObject* currentPlayer;
