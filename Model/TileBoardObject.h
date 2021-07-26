@@ -8,7 +8,7 @@ class TileBoardObject: public BoardObject
 public:
 	TileBoardObject(int posX, int posY, int height, BoardObjectAction* action, std::string modelKey, std::string shaderKey = "Default");
 
-	void interact(BoardObject* otherObj) override;
+	bool interact(BoardObject* otherObj, ILevelModel* model) override;
 
 };
 

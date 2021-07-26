@@ -26,9 +26,33 @@ IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}
-	if (key == "Tile")
+	else if (key == "Tile")
 	{
 		IModel* model = new ModelPlane(1, 1, "Textures/Tile.png");
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (key == "Duke")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Duke.png", true);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (key == "Bullent")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Bullent.png", true);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (key == "Chad")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Chad.png", true);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (key == "Rock")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Rock.png", true);
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}

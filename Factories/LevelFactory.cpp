@@ -11,6 +11,9 @@
 
 #include "../BoardObjectActions/BoardObjectActionNone.h"
 
+#include "../InteractCommands/InteractCommandNone.h"
+#include "../InteractCommands/InteractCommandRockPush.h"
+
 LevelFactory::LevelFactory()
 	: ILevelFactory()
 {
@@ -45,12 +48,31 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 		//Players
 		for (int i = 0; i < JSON["Players"].size(); i++)
 		{
-			newLevel->addPlayer(new PlayerBoardObject(JSON["Players"][i]["PosX"], JSON["Players"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Players"][i]["Model"]));
+			newLevel->addPlayer(new PlayerBoardObject(
+				JSON["Players"][i]["PosX"], 
+				JSON["Players"][i]["PosY"],
+				1, 
+				createInteractCommand(JSON["Players"][i]["Interact"]),
+				new BoardObjectActionNone(), 
+				JSON["Players"][i]["Model"]));
 		}
 
+		//Rocks
+		for (int i = 0; i < JSON["Rocks"].size(); i++)
+		{
+			newLevel->addPlayer(new PlayerBoardObject(JSON["Rocks"][i]["PosX"], JSON["Rocks"][i]["PosY"], 1, createInteractCommand("None"), new BoardObjectActionNone(), JSON["Rocks"][i]["Model"]));
+		}
 		
 		return newLevel;
 	}
 
 	throw(key);
+}
+
+InteractCommand* LevelFactory::createInteractCommand(std::string key)
+{
+	if (key == "RockPush")
+		return new InteractCommandRockPush();
+	
+	return new InteractCommandNone();
 }

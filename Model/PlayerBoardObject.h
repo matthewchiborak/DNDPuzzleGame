@@ -3,13 +3,18 @@
 
 #include "BoardObject.h"
 
+#include "../InteractCommands/InteractCommand.h"
+
 class PlayerBoardObject: public BoardObject
 {
 public:
-	PlayerBoardObject(int posX, int posY, int height, BoardObjectAction* action, std::string modelKey, std::string shaderKey = "Default");
+	PlayerBoardObject(int posX, int posY, int height, InteractCommand* iCommand, BoardObjectAction* action, std::string modelKey, std::string shaderKey = "Cutout");
+	~PlayerBoardObject();
 
-	void interact(BoardObject* otherObj) override;
+	bool interact(BoardObject* otherObj, ILevelModel* model) override;
 
+private:
+	InteractCommand* interactCommand;
 };
 
 #endif

@@ -2,7 +2,8 @@
 
 #include "../BoardObjectActions/BoardObjectAction.h"
 
-BoardObject::BoardObject(int posX, int posY, int height, BoardObjectAction* action, std::string modelKey, std::string shaderKey)
+
+BoardObject::BoardObject(int posX, int posY, int height, bool solid, BoardObjectAction* action, std::string modelKey, std::string shaderKey)
 {
 	this->posX = posX;
 	this->posY = posY;
@@ -12,6 +13,9 @@ BoardObject::BoardObject(int posX, int posY, int height, BoardObjectAction* acti
 	this->modelKey = modelKey;
 	this->shaderKey = shaderKey;
 	this->currentAction = action;
+	this->lastDirMovedx = 1;
+	this->lastDirMovedy = 0;
+	this->solid = solid;
 }
 
 void BoardObject::setCurrentAction(BoardObjectAction* action)
@@ -32,8 +36,9 @@ void BoardObject::move(int x, int y)
 	this->posY += y;
 }
 
-void BoardObject::interact(BoardObject* otherObj)
+bool BoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
+	return false;
 }
 
 void BoardObject::setPos(int x, int y)
@@ -46,6 +51,12 @@ void BoardObject::setVis(float x, float y)
 {
 	this->visX = x;
 	this->visY = y;
+}
+
+void BoardObject::setLastDirMoved(int x, int y)
+{
+	this->lastDirMovedx = x;
+	this->lastDirMovedy = y;
 }
 
 int BoardObject::getPosX()
@@ -73,6 +84,16 @@ int BoardObject::getHeight()
 	return height;
 }
 
+int BoardObject::getLastDirMovedX()
+{
+	return lastDirMovedx;
+}
+
+int BoardObject::getLastDirMovedY()
+{
+	return lastDirMovedy;
+}
+
 std::string BoardObject::getModelKey()
 {
 	return modelKey;
@@ -81,4 +102,9 @@ std::string BoardObject::getModelKey()
 std::string BoardObject::getShaderKey()
 {
 	return shaderKey;
+}
+
+bool BoardObject::isSolid()
+{
+	return solid;
 }

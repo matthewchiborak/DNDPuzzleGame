@@ -2,8 +2,39 @@
 	"Width": 16,
 	"Height": 15,
 	"Players": [{
-		"Model": "Test",
+		"Model": "Duke",
 		"PosX": 0,
-		"PosY": 0
-	}]
+		"PosY": 0,
+		"Interact": "None"
+	},
+	{
+		"Model": "Bullent",
+		"PosX": 5,
+		"PosY": 5,
+		"Interact": "None"
+	},
+	{
+		"Model": "Chad",
+		"PosX": 2,
+		"PosY": 2,
+		"Interact": "RockPush"
+	}
+	],
+	"Rocks": [
+	{
+		"Model": "Rock",
+		"PosX": 6,
+		"PosY": 2
+	},
+	{
+		"Model": "Rock",
+		"PosX": 10,
+		"PosY": 2
+	},
+		{
+		"Model": "Rock",
+		"PosX": 13,
+		"PosY": 2
+	}
+	]
 }

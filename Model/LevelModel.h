@@ -8,15 +8,22 @@ class LevelModel: public ILevelModel
 public:
 	LevelModel();
 
-	void playerMove(int x, int y);
+	bool playerMove(int x, int y);
 	void playerStop();
-	void interact() override;
+	void playerChange(bool next);
+	bool interact() override;
 
 	void addPlayer(BoardObject* player);
+	void addObstacle(BoardObject* obs);
 
 private:
+	int currentPlayerIndex;
 	BoardObject* currentPlayer;
 	std::vector<BoardObject*> players; //This will only contain PlayerBoardObjects though.... TODO consider
+	std::vector<BoardObject*> obstacles;
+
+	bool isSpaceOccupied(int x, int y, BoardObject** occupyingRef);
+
 };
 
 #endif

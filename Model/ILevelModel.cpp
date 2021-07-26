@@ -12,16 +12,22 @@ ILevelModel::~ILevelModel()
     }
 }
 
-void ILevelModel::playerMove(int x, int y)
+bool ILevelModel::playerMove(int x, int y)
 {
+    return false;
 }
 
 void ILevelModel::playerStop()
 {
 }
 
-void ILevelModel::interact()
+void ILevelModel::playerChange(bool next)
 {
+}
+
+bool ILevelModel::interact()
+{
+    return false;
 }
 
 void ILevelModel::addBoardObject(BoardObject* obj)

@@ -11,7 +11,7 @@ class ModelPlane: public IModel
 public:
 	// Loads in a model from a file and stores tha information in 'data', 'JSON', and 'file'
 	ModelPlane();
-	ModelPlane(float width, float height, std::string textureFilePath);
+	ModelPlane(float width, float height, std::string textureFilePath, bool isVert = false);
 
 	void Draw(
 		Shader& shader,
@@ -22,6 +22,9 @@ public:
 	) override;
 
 private:
+	void makeHorzPlane(std::string textureFilePath);
+	void makeVertPlane(std::string textureFilePath);
+
 	float width;
 	float height;
 	Mesh mesh1;

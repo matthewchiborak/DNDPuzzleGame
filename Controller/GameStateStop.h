@@ -10,6 +10,9 @@ public:
 
 	void handleUserInput(GLFWwindow* window);
 	void advanceEvents();
+
+private:
+	bool buttonDown;
 };
 
 #endif

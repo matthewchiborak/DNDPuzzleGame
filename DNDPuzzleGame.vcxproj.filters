@@ -52,6 +52,12 @@
     <Filter Include="Source Files\BoardObjectActions">
       <UniqueIdentifier>{15b28b47-0a89-4592-b7aa-c10a2103ac53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\InteractCommands">
+      <UniqueIdentifier>{2d467372-bedf-4d97-baac-008f23598ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InteractCommands">
+      <UniqueIdentifier>{3fde29fb-ea76-41e4-8f2a-096044063f27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\Core\Camera.h">
@@ -179,6 +185,18 @@
     </ClInclude>
     <ClInclude Include="BoardObjectActions\BoardObjectActionMove.h">
       <Filter>Header Files\BoardObjectActions</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\ObstacleBoardObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractCommands\InteractCommand.h">
+      <Filter>Header Files\InteractCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractCommands\InteractCommandRockPush.h">
+      <Filter>Header Files\InteractCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractCommands\InteractCommandNone.h">
+      <Filter>Header Files\InteractCommands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +334,18 @@
     </ClCompile>
     <ClCompile Include="BoardObjectActions\BoardObjectActionMove.cpp">
       <Filter>Source Files\BoardObjectActions</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\ObstacleBoardObject.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractCommands\InteractCommand.cpp">
+      <Filter>Source Files\InteractCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractCommands\InteractCommandRockPush.cpp">
+      <Filter>Source Files\InteractCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractCommands\InteractCommandNone.cpp">
+      <Filter>Source Files\InteractCommands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

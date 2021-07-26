@@ -11,9 +11,10 @@ public:
 	ILevelModel();
 	~ILevelModel();
 
-	virtual void playerMove(int x, int y);
+	virtual bool playerMove(int x, int y);
 	virtual void playerStop();
-	virtual void interact();
+	virtual void playerChange(bool next);
+	virtual bool interact();
 
 	void addBoardObject(BoardObject* obj);
 	std::vector<BoardObject*>::iterator getBoardObjects();
