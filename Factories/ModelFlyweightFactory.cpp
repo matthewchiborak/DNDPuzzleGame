@@ -3,6 +3,7 @@
 #include "../Rendering/Core/Model.h"
 #include "../Rendering/ModelPlane.h"
 #include "../Rendering/ModelCube.h"
+#include "../Rendering/ModelPit.h"
 
 ModelFlyweightFactory::ModelFlyweightFactory()
 	: IModelFlyweightFactory()
@@ -63,9 +64,9 @@ IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}
-	else if (key == "Grass")
+	else if (key == "Pit")
 	{
-		IModel* model = new Model("models/grass/scene.gltf");
+		IModel* model = new ModelPit(1, 1, "Textures/Wall.png");
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}

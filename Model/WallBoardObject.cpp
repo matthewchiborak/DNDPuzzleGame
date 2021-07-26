@@ -1,7 +1,9 @@
 #include "WallBoardObject.h"
 
+#include "../BoardObjectActions/BoardObjectAction.h"
+
 WallBoardObject::WallBoardObject(int posX, int posY, int height, BoardObjectAction* action, std::string modelKey, std::string shaderKey)
-	: BoardObject(posX, posY, height, true, action, modelKey, shaderKey)
+	: BoardObject(posX, posY, height, true, false, action, modelKey, shaderKey)
 {
 }
 
@@ -13,4 +15,9 @@ bool WallBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 bool WallBoardObject::push(BoardObjectAction* pushAction)
 {
 	return false;
+}
+
+BoardObject* WallBoardObject::copy()
+{
+	return new WallBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);
 }

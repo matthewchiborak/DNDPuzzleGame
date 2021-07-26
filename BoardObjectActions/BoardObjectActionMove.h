@@ -9,6 +9,7 @@ public:
 	BoardObjectActionMove(BoardObject* object, int startx, int starty, int endx, int endy);
 
 	void advance(float t);
+	BoardObjectAction* copy();
 
 private:
 	int startx, starty, endx, endy;

@@ -1,6 +1,12 @@
 {
 	"Width": 16,
 	"Height": 15,
+	"NoTiles": [
+	{
+		"PosX": 13,
+		"PosY": 8
+	}
+	],
 	"Players": [{
 		"Model": "Duke",
 		"PosX": 0,
@@ -15,8 +21,8 @@
 	},
 	{
 		"Model": "Chad",
-		"PosX": 2,
-		"PosY": 2,
+		"PosX": 13,
+		"PosY": 0,
 		"Interact": "RockPush"
 	}
 	],
@@ -31,7 +37,7 @@
 		"PosX": 10,
 		"PosY": 2
 	},
-		{
+	{
 		"Model": "Rock",
 		"PosX": 13,
 		"PosY": 2
@@ -42,6 +48,13 @@
 		"Model": "Wall",
 		"PosX": 6,
 		"PosY": 6
+	}
+	],
+	"Pits": [
+	{
+		"Model": "Pit",
+		"PosX": 13,
+		"PosY": 8
 	}
 	]
 }

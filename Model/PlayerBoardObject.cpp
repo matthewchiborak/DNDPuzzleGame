@@ -3,7 +3,7 @@
 #include <iostream>
 
 PlayerBoardObject::PlayerBoardObject(int posX, int posY, int height, InteractCommand* iCommand, BoardObjectAction* action, std::string modelKey, std::string shaderKey)
-	: BoardObject(posX, posY, height, true, action, modelKey, shaderKey)
+	: BoardObject(posX, posY, height, true, true, action, modelKey, shaderKey)
 {
 	this->interactCommand = iCommand;
 }
@@ -21,4 +21,9 @@ bool PlayerBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 bool PlayerBoardObject::push(BoardObjectAction* pushAction)
 {
 	return false;
+}
+
+BoardObject* PlayerBoardObject::copy()
+{
+	return nullptr;
 }

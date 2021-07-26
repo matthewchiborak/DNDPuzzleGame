@@ -16,6 +16,7 @@ public:
 	virtual void rockStop();
 	virtual void playerChange(bool next);
 	virtual bool interact();
+	virtual void handleOverlaps();
 
 	virtual bool doesSpaceExist(int x, int y);
 

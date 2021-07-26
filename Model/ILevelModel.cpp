@@ -36,6 +36,10 @@ bool ILevelModel::interact()
     return false;
 }
 
+void ILevelModel::handleOverlaps()
+{
+}
+
 bool ILevelModel::doesSpaceExist(int x, int y)
 {
     return false;

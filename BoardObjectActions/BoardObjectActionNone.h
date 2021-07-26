@@ -9,6 +9,7 @@ public:
 	BoardObjectActionNone();
 
 	void advance(float t);
+	BoardObjectAction* copy();
 
 };
 

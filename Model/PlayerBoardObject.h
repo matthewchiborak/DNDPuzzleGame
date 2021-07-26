@@ -14,6 +14,8 @@ public:
 	bool interact(BoardObject* otherObj, ILevelModel* model) override;
 	bool push(BoardObjectAction* pushAction) override;
 
+	BoardObject* copy() override;
+
 private:
 	InteractCommand* interactCommand;
 };

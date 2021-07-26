@@ -172,6 +172,7 @@
     <ClInclude Include="Model\ILevelModel.h" />
     <ClInclude Include="Model\LevelModel.h" />
     <ClInclude Include="Model\ObstacleBoardObject.h" />
+    <ClInclude Include="Model\PitBoardObject.h" />
     <ClInclude Include="Model\PlayerBoardObject.h" />
     <ClInclude Include="Model\TileBoardObject.h" />
     <ClInclude Include="Model\WallBoardObject.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Rendering\IRenderer.h" />
     <ClInclude Include="Rendering\ModelCube.h" />
     <ClInclude Include="Rendering\ModelObj.h" />
+    <ClInclude Include="Rendering\ModelPit.h" />
     <ClInclude Include="Rendering\ModelPlane.h" />
     <ClInclude Include="Rendering\Skybox.h" />
   </ItemGroup>
@@ -223,6 +225,7 @@
     <ClCompile Include="Model\ILevelModel.cpp" />
     <ClCompile Include="Model\LevelModel.cpp" />
     <ClCompile Include="Model\ObstacleBoardObject.cpp" />
+    <ClCompile Include="Model\PitBoardObject.cpp" />
     <ClCompile Include="Model\PlayerBoardObject.cpp" />
     <ClCompile Include="Model\TileBoardObject.cpp" />
     <ClCompile Include="Model\WallBoardObject.cpp" />
@@ -244,6 +247,7 @@
     <ClCompile Include="Rendering\IRenderer.cpp" />
     <ClCompile Include="Rendering\ModelCube.cpp" />
     <ClCompile Include="Rendering\ModelObj.cpp" />
+    <ClCompile Include="Rendering\ModelPit.cpp" />
     <ClCompile Include="Rendering\ModelPlane.cpp" />
     <ClCompile Include="Rendering\Skybox.cpp" />
   </ItemGroup>

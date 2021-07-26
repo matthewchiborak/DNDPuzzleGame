@@ -31,6 +31,7 @@ void GameStateMove::advanceEvents()
 	{
 		model->playerStop();
 		model->rockStop();
+		model->handleOverlaps();
 		controller->setState("Stop");
 	}
 }

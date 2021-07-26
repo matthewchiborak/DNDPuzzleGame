@@ -8,6 +8,8 @@ class BoardObjectAction
 public:
 	BoardObjectAction(BoardObject* object);
 
+	virtual BoardObjectAction* copy();
+
 	//Will advance the action over time from 0-1
 	virtual void advance(float t);
 

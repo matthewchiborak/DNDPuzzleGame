@@ -8,6 +8,8 @@ class ObstacleBoardObject: public BoardObject
 public:
 	ObstacleBoardObject(int posX, int posY, int height, BoardObjectAction* action, std::string modelKey, std::string shaderKey = "Cutout");
 
+	BoardObject* copy() override;
+
 	bool interact(BoardObject* otherObj, ILevelModel* model) override;
 
 	bool push(BoardObjectAction* pushAction) override;

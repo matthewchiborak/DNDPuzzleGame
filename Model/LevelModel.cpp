@@ -78,6 +78,93 @@ bool LevelModel::interact()
 	return false;
 }
 
+void LevelModel::handleOverlaps()
+{
+	//Rocks
+	//If rock and hole, create a new tile
+	std::vector<BoardObject*>::iterator iterRock = obstacles.begin();
+	std::vector<BoardObject*>::iterator endRock = obstacles.end();
+	while(iterRock != endRock)
+	{
+		std::vector<BoardObject*>::iterator iter = players.begin();
+		std::vector<BoardObject*>::iterator end = players.end();
+		while(iter != end)
+		{
+			if ((*iterRock)->getPosX() == (*iter)->getPosX() && (*iterRock)->getPosY() == (*iter)->getPosY())
+			{
+				std::vector<BoardObject*>::iterator iterO = boardObjects.begin();
+				std::vector<BoardObject*>::iterator endO = boardObjects.end();
+				while (iterO != endO)
+				{
+					if ((*iterO) == (*iter))
+					{
+						boardObjects.erase(iterO);
+						break;
+					}
+					iterO++;
+				}
+
+				delete (*iter);
+				players.erase(iter);
+				return;
+			}
+
+			iter++;
+		}
+
+
+		std::vector<BoardObject*>::iterator iterPit = pits.begin();
+		std::vector<BoardObject*>::iterator endPit = pits.end();
+		while (iterPit != endPit)
+		{
+			if ((*iterRock)->getPosX() == (*iterPit)->getPosX() && (*iterRock)->getPosY() == (*iterPit)->getPosY())
+			{
+				std::vector<BoardObject*>::iterator iterO = boardObjects.begin();
+				std::vector<BoardObject*>::iterator endO = boardObjects.end();
+				while (iterO != endO)
+				{
+					if ((*iterO) == (*iterPit))
+					{
+						boardObjects.erase(iterO);
+						break;
+					}
+					iterO++;
+				}
+				iterO = boardObjects.begin();
+				endO = boardObjects.end();
+				while (iterO != endO)
+				{
+					if ((*iterO) == (*iterRock))
+					{
+						boardObjects.erase(iterO);
+						break;
+					}
+					iterO++;
+				}
+
+				int rockPosX = (*iterRock)->getPosX();
+				int rockPosY = (*iterRock)->getPosY();
+
+				delete (*iterPit);
+				pits.erase(iterPit);
+				delete (*iterRock);
+				obstacles.erase(iterRock);
+
+				BoardObject* newTile = tiles.at(0)->copy();
+				newTile->setPos(rockPosX, rockPosY);
+				newTile->setVis(rockPosX / 10.0f, rockPosY / 10.0f);
+				this->addTile(newTile);
+
+				return;
+			}
+
+			iterPit++;
+		}
+
+		iterRock++;
+	}
+}
+
 void LevelModel::addTile(BoardObject* tile)
 {
 	boardObjects.push_back(tile);
@@ -104,6 +191,12 @@ void LevelModel::addWall(BoardObject* wall)
 {
 	boardObjects.push_back(wall);
 	walls.push_back(wall);
+}
+
+void LevelModel::addPit(BoardObject* pit)
+{
+	boardObjects.push_back(pit);
+	pits.push_back(pit);
 }
 
 bool LevelModel::isSpaceOccupied(int x, int y, BoardObject** occupyingRef)

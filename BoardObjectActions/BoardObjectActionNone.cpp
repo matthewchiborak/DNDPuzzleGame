@@ -8,3 +8,8 @@ BoardObjectActionNone::BoardObjectActionNone()
 void BoardObjectActionNone::advance(float t)
 {
 }
+
+BoardObjectAction* BoardObjectActionNone::copy()
+{
+	return new BoardObjectActionNone();
+}

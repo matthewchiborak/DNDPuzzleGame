@@ -3,7 +3,7 @@
 #include "../BoardObjectActions/BoardObjectAction.h"
 
 
-BoardObject::BoardObject(int posX, int posY, int height, bool solid, BoardObjectAction* action, std::string modelKey, std::string shaderKey)
+BoardObject::BoardObject(int posX, int posY, int height, bool solid, bool squishy, BoardObjectAction* action, std::string modelKey, std::string shaderKey)
 {
 	this->posX = posX;
 	this->posY = posY;
@@ -16,6 +16,12 @@ BoardObject::BoardObject(int posX, int posY, int height, bool solid, BoardObject
 	this->lastDirMovedx = 1;
 	this->lastDirMovedy = 0;
 	this->solid = solid;
+	this->squishy = squishy;
+}
+
+BoardObject* BoardObject::copy()
+{
+	return nullptr;
 }
 
 void BoardObject::setCurrentAction(BoardObjectAction* action)
@@ -113,3 +119,10 @@ bool BoardObject::isSolid()
 {
 	return solid;
 }
+
+bool BoardObject::isSquishy()
+{
+	return squishy;
+}
+
+

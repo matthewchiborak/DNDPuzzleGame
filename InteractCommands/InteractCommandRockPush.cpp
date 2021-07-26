@@ -36,13 +36,13 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 				{
 					if (!closestSet)
 					{
-						closestValue = (*it)->getPosX() - 1;
+						closestValue = (*it)->getPosX() - (((*it)->isSquishy()) ? 0 : 1);
 						closestSet = true;
 					}
 					else
 					{
 						if(((*it)->getPosX() - 1) < closestValue)
-							closestValue = (*it)->getPosX() - 1;
+							closestValue = (*it)->getPosX() - (((*it)->isSquishy()) ? 0 : 1);;
 					}
 				}
 			}
@@ -52,13 +52,13 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 				{
 					if (!closestSet)
 					{
-						closestValue = (*it)->getPosX() + 1;
+						closestValue = (*it)->getPosX() + (((*it)->isSquishy()) ? 0 : 1);;
 						closestSet = true;
 					}
 					else
 					{
 						if (((*it)->getPosX() + 1) > closestValue)
-							closestValue = (*it)->getPosX() + 1;
+							closestValue = (*it)->getPosX() + (((*it)->isSquishy()) ? 0 : 1);;
 					}
 				}
 			}
@@ -68,13 +68,13 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 				{
 					if (!closestSet)
 					{
-						closestValue = (*it)->getPosY() - 1;
+						closestValue = (*it)->getPosY() - (((*it)->isSquishy()) ? 0 : 1);;
 						closestSet = true;
 					}
 					else
 					{
 						if (((*it)->getPosY() - 1) < closestValue)
-							closestValue = (*it)->getPosY() - 1;
+							closestValue = (*it)->getPosY() - (((*it)->isSquishy()) ? 0 : 1);;
 					}
 				}
 			}
@@ -84,13 +84,13 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 				{
 					if (!closestSet)
 					{
-						closestValue = (*it)->getPosY() + 1;
+						closestValue = (*it)->getPosY() + (((*it)->isSquishy()) ? 0 : 1);;
 						closestSet = true;
 					}
 					else
 					{
 						if (((*it)->getPosY() + 1) > closestValue)
-							closestValue = (*it)->getPosY() + 1;
+							closestValue = (*it)->getPosY() + (((*it)->isSquishy()) ? 0 : 1);;
 					}
 				}
 			}

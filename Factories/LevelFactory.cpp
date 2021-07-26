@@ -10,6 +10,7 @@
 #include "../Model/TileBoardObject.h"
 #include "../Model/ObstacleBoardObject.h"
 #include "../Model/WallBoardObject.h"
+#include "../Model/PitBoardObject.h"
 
 #include "../BoardObjectActions/BoardObjectActionNone.h"
 
@@ -36,14 +37,21 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 		//Create the level
 		LevelModel* newLevel = new LevelModel();
 
-		//Titles
+		//Tiles
 		newLevel->setWidth(JSON["Width"]);
 		newLevel->setHeight(JSON["Height"]);
 		for (int i = 0; i < newLevel->getWidth(); i++)
 		{
 			for (int j = 0; j < newLevel->getHeight(); j++)
 			{
-				newLevel->addTile(new TileBoardObject(i, j, 0, new BoardObjectActionNone(), "Tile"));
+				bool okayToAdd = true;
+				for (int k = 0; k < JSON["NoTiles"].size(); k++)
+				{
+					if (JSON["NoTiles"][k]["PosX"] == i && JSON["NoTiles"][k]["PosY"] == j)
+						okayToAdd = false;
+				}
+				if(okayToAdd)
+					newLevel->addTile(new TileBoardObject(i, j, 0, new BoardObjectActionNone(), "Tile"));
 			}
 		}
 
@@ -69,6 +77,12 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 		for (int i = 0; i < JSON["Rocks"].size(); i++)
 		{
 			newLevel->addObstacle(new ObstacleBoardObject(JSON["Rocks"][i]["PosX"], JSON["Rocks"][i]["PosY"], 1, new BoardObjectActionNone(), JSON["Rocks"][i]["Model"]));
+		}
+
+		//Pits
+		for (int i = 0; i < JSON["Pits"].size(); i++)
+		{
+			newLevel->addPit(new PitBoardObject(JSON["Pits"][i]["PosX"], JSON["Pits"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Pits"][i]["Model"]));
 		}
 		
 		return newLevel;

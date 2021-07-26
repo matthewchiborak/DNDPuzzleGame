@@ -24,3 +24,8 @@ void BoardObjectActionMove::advance(float t)
 		object->setVis((float)endx / 10.0f, (float)endy / 10.0f);
 	}
 }
+
+BoardObjectAction* BoardObjectActionMove::copy()
+{
+	return new BoardObjectActionMove(this->object, this->startx, this->starty, this->endx, this->endy);
+}

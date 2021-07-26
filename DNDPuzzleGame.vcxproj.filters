@@ -204,6 +204,12 @@
     <ClInclude Include="Model\WallBoardObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="Model\PitBoardObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ModelPit.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -358,6 +364,12 @@
     </ClCompile>
     <ClCompile Include="Model\WallBoardObject.cpp">
       <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\PitBoardObject.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ModelPit.cpp">
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
