@@ -153,6 +153,8 @@
     <ClInclude Include="Controller\GameStateStop.h" />
     <ClInclude Include="Controller\IGameController.h" />
     <ClInclude Include="Controller\IGameState.h" />
+    <ClInclude Include="Controller\IModelModifier.h" />
+    <ClInclude Include="Controller\ModelModifier.h" />
     <ClInclude Include="Factories\GameStateFactory.h" />
     <ClInclude Include="Factories\IGameStateFactory.h" />
     <ClInclude Include="Factories\ILevelFactory.h" />
@@ -210,6 +212,8 @@
     <ClCompile Include="Controller\GameStateStop.cpp" />
     <ClCompile Include="Controller\IGameController.cpp" />
     <ClCompile Include="Controller\IGameState.cpp" />
+    <ClCompile Include="Controller\IModelModifier.cpp" />
+    <ClCompile Include="Controller\ModelModifier.cpp" />
     <ClCompile Include="Factories\GameStateFactory.cpp" />
     <ClCompile Include="Factories\IGameStateFactory.cpp" />
     <ClCompile Include="Factories\ILevelFactory.cpp" />

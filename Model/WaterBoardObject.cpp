@@ -14,17 +14,7 @@ bool WaterBoardObject::needsInteractReciever()
 	return true;
 }
 
-bool WaterBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
-{
-	return false;
-}
-
-bool WaterBoardObject::push(BoardObjectAction* pushAction)
-{
-	return false;
-}
-
-bool WaterBoardObject::levitateMe()
+bool WaterBoardObject::interact(BoardObject* otherObj)
 {
 	return false;
 }
@@ -57,7 +47,3 @@ void WaterBoardObject::correctWaterVisual()
 	}
 }
 
-BoardObject* WaterBoardObject::copy()
-{
-	return new WaterBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);
-}

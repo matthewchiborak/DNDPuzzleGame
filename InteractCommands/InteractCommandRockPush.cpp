@@ -3,151 +3,73 @@
 #include <iostream>
 
 #include "../BoardObjectActions/BoardObjectActionMove.h"
+#include "../Model/LevelModel.h"
 
-InteractCommandRockPush::InteractCommandRockPush()
+InteractCommandRockPush::InteractCommandRockPush(LevelModel* model)
+	: InteractCommand(model)
 {
 }
 
-bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model)
+void InteractCommandRockPush::setReciever(ObstacleBoardObject* reciever)
 {
-	//Find where the rock will stop
+	this->reciever = reciever;
+}
+
+bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* otherObj)
+{
+	for (int i = 0; i < this->model->getObstacles()->size(); i++)
+	{
+		if ((*this->model->getObstacles())[i] == otherObj)
+			setReciever((*this->model->getObstacles())[i]);
+	}
+
+	return (reciever->isLevitating()) ? executeForReceiverIsFloating(initer) : executeForReceiverIsOnTheGround(initer);
+}
+
+bool InteractCommandRockPush::needsReciever()
+{
+	return true;
+}
+
+bool InteractCommandRockPush::isAPitOrWater(ILevelModel* model, int x, int y)
+{
+	return (model->isAPit(x, y) || model->isAWater(x, y));
+}
+
+bool InteractCommandRockPush::executeForReceiverIsFloating(BoardObject* initer)
+{
 	int xDir = initer->getLastDirMovedX();
 	int yDir = initer->getLastDirMovedY();
 
-	std::vector<BoardObject*>::iterator it = model->getBoardObjects();
-	std::vector<BoardObject*>::iterator end = model->getBoardObjectsEnd();
-
 	int closestValue = 0;
 	bool closestSet = false;
-	//if(!reciever->isLevitating())
-	{
-		while (it != end)
-		{
-			if ((*it) == reciever)
-			{
-				it++;
-				continue;
-			}
 
-			if ((*it)->isSolid() && (!isAPitOrWater(model, (*it)->getPosX(), (*it)->getPosY()) || (isAPitOrWater(model, (*it)->getPosX(), (*it)->getPosY()) && !reciever->isLevitating())))
-			{
-				if (xDir > 0)
-				{
-					if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() > reciever->getPosX())
-					{
-						if (!closestSet)
-						{
-							closestValue = (*it)->getPosX() - (((*it)->isSquishy()) ? 0 : 1);
-							closestSet = true;
-						}
-						else
-						{
-							if (((*it)->getPosX() - 1) < closestValue)
-								closestValue = (*it)->getPosX() - (((*it)->isSquishy()) ? 0 : 1);;
-						}
-					}
-				}
-				else if (xDir < 0)
-				{
-					if ((*it)->getPosY() == reciever->getPosY() && (*it)->getPosX() < reciever->getPosX())
-					{
-						if (!closestSet)
-						{
-							closestValue = (*it)->getPosX() + (((*it)->isSquishy()) ? 0 : 1);;
-							closestSet = true;
-						}
-						else
-						{
-							if (((*it)->getPosX() + 1) > closestValue)
-								closestValue = (*it)->getPosX() + (((*it)->isSquishy()) ? 0 : 1);;
-						}
-					}
-				}
-				else if (yDir > 0)
-				{
-					if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() > reciever->getPosY())
-					{
-						if (!closestSet)
-						{
-							closestValue = (*it)->getPosY() - (((*it)->isSquishy()) ? 0 : 1);;
-							closestSet = true;
-						}
-						else
-						{
-							if (((*it)->getPosY() - 1) < closestValue)
-								closestValue = (*it)->getPosY() - (((*it)->isSquishy()) ? 0 : 1);;
-						}
-					}
-				}
-				else if (yDir < 0)
-				{
-					if ((*it)->getPosX() == reciever->getPosX() && (*it)->getPosY() < reciever->getPosY())
-					{
-						if (!closestSet)
-						{
-							closestValue = (*it)->getPosY() + (((*it)->isSquishy()) ? 0 : 1);;
-							closestSet = true;
-						}
-						else
-						{
-							if (((*it)->getPosY() + 1) > closestValue)
-								closestValue = (*it)->getPosY() + (((*it)->isSquishy()) ? 0 : 1);;
-						}
-					}
-				}
-			}
-			it++;
-		}
+	for (int i = 0; i < this->model->getObstacles()->size(); i++)
+	{
+		//Don't compare to itself
+		if (this->reciever == (*model->getObstacles())[i])
+			continue;
+		findClosestValue(xDir, yDir, (*model->getObstacles())[i]->getPosX(), (*model->getObstacles())[i]->getPosY(), 1, &closestSet, &closestValue);
 	}
 
-	//Might be hitting the edge of the map. Find the next space that doesnt exist
-	if (!closestSet)
+	for (int i = 0; i < this->model->getArrows()->size(); i++)
 	{
-		if (xDir > 0)
-		{
-			closestValue = reciever->getPosX() + 1;
-			if (!(model->doesSpaceExist(closestValue, reciever->getPosY())))
-				return false;
-			do
-			{
-				closestValue++;
-			} while (model->doesSpaceExist(closestValue, reciever->getPosY()) || isAPitOrWater(model, closestValue, reciever->getPosY()));
-			closestValue--;
-		}
-		else if (xDir < 0)
-		{
-			closestValue = reciever->getPosX() - 1;
-			if (!(model->doesSpaceExist(closestValue, reciever->getPosY())))
-				return false;
-			do
-			{
-				closestValue--;
-			} while (model->doesSpaceExist(closestValue, reciever->getPosY()) || isAPitOrWater(model, closestValue, reciever->getPosY()));
-			closestValue++;
-		}
-		else if (yDir > 0)
-		{
-			closestValue = reciever->getPosY() + 1;
-			if (!(model->doesSpaceExist(reciever->getPosX(), closestValue)))
-				return false;
-			do
-			{
-				closestValue++;
-			} while (model->doesSpaceExist(reciever->getPosX(), closestValue) || isAPitOrWater(model, reciever->getPosX(), closestValue));
-			closestValue--;
-		}
-		else if (yDir < 0)
-		{
-			closestValue = reciever->getPosY() - 1;
-			if (!(model->doesSpaceExist(reciever->getPosX(), closestValue)))
-				return false;
-			do
-			{
-				closestValue--;
-			} while (model->doesSpaceExist(reciever->getPosX(), closestValue) || isAPitOrWater(model, reciever->getPosY(), closestValue));
-			closestValue++;
-		}
+		findClosestValue(xDir, yDir, (*model->getArrows())[i]->getPosX(), (*model->getArrows())[i]->getPosY(), 1, &closestSet, &closestValue);
 	}
+
+	for (int i = 0; i < this->model->getPlayers()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getPlayers())[i]->getPosX(), (*model->getPlayers())[i]->getPosY(), 0, &closestSet, &closestValue);
+	}
+
+	for (int i = 0; i < this->model->getWalls()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getWalls())[i]->getPosX(), (*model->getWalls())[i]->getPosY(), 1, &closestSet, &closestValue);
+	}
+
+	//Check if space doesnt exist
+	if (!findClosestValueNotExist(xDir, yDir, &closestSet, &closestValue))
+		return false;
 
 	//If Not moving, shoudl return false so a turn isn't used up
 	if (xDir > 0 || xDir < 0)
@@ -163,26 +85,203 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 
 	if (xDir > 0 || xDir < 0)
 	{
-		if (!reciever->isLevitating())
-			model->checkForMelt(reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY());
 		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY()));
 	}
 	else
 	{
-		if (!reciever->isLevitating())
-			model->checkForMelt(reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue);
 		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue));
 	}
-
-
 }
 
-bool InteractCommandRockPush::needsReciever()
+bool InteractCommandRockPush::executeForReceiverIsOnTheGround(BoardObject* initer)
 {
+	int xDir = initer->getLastDirMovedX();
+	int yDir = initer->getLastDirMovedY();
+
+	int closestValue = 0;
+	bool closestSet = false;
+
+	for (int i = 0; i < this->model->getObstacles()->size(); i++)
+	{
+		//Don't compare to itself
+		if (this->reciever == (*model->getObstacles())[i])
+			continue;
+		findClosestValue(xDir, yDir, (*model->getObstacles())[i]->getPosX(), (*model->getObstacles())[i]->getPosY(), 1, &closestSet, &closestValue);
+	}
+
+	for (int i = 0; i < this->model->getPits()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getPits())[i]->getPosX(), (*model->getPits())[i]->getPosY(), 0, &closestSet, &closestValue);
+	}
+
+	for (int i = 0; i < this->model->getWater()->size(); i++)
+	{
+		if((*model->getWater())[i]->isSolid())
+			findClosestValue(xDir, yDir, (*model->getWater())[i]->getPosX(), (*model->getWater())[i]->getPosY(), 0, &closestSet, &closestValue);
+	}
+
+	for (int i = 0; i < this->model->getArrows()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getArrows())[i]->getPosX(), (*model->getArrows())[i]->getPosY(), 1, &closestSet, &closestValue);
+	}
+
+	for (int i = 0; i < this->model->getPlayers()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getPlayers())[i]->getPosX(), (*model->getPlayers())[i]->getPosY(), 0, &closestSet, &closestValue);
+	}
+
+	for (int i = 0; i < this->model->getWalls()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getWalls())[i]->getPosX(), (*model->getWalls())[i]->getPosY(), 1, &closestSet, &closestValue);
+	}
+
+	//Check if space doesnt exist
+	if (!findClosestValueNotExist(xDir, yDir, &closestSet, &closestValue))
+		return false;
+
+	//If Not moving, shoudl return false so a turn isn't used up
+	if (xDir > 0 || xDir < 0)
+	{
+		if (reciever->getPosX() == closestValue)
+			return false;
+	}
+	else if (yDir > 0 || yDir < 0)
+	{
+		if (reciever->getPosY() == closestValue)
+			return false;
+	}
+
+	if (xDir > 0 || xDir < 0)
+	{
+		model->checkForMelt(reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY());
+		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY()));
+	}
+	else
+	{
+		model->checkForMelt(reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue);
+		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue));
+	}
+}
+
+void InteractCommandRockPush::findClosestValue(int xDir, int yDir, int objectX, int objectY, int distanceOffset, bool* closestSet, int* closestValue)
+{
+	if (xDir > 0)
+	{
+		if (objectY == reciever->getPosY() && objectX > reciever->getPosX())
+		{
+			if (!(*closestSet))
+			{
+				(*closestValue) = objectX - distanceOffset;
+				(*closestSet) = true;
+			}
+			else
+			{
+				if ((objectX - 1) < (*closestValue))
+					(*closestValue) = objectX - distanceOffset;
+			}
+		}
+	}
+	else if (xDir < 0)
+	{
+		if (objectY == reciever->getPosY() && objectX < reciever->getPosX())
+		{
+			if (!(*closestSet))
+			{
+				(*closestValue) = objectX + distanceOffset;
+				(*closestSet) = true;
+			}
+			else
+			{
+				if ((objectX + 1) > (*closestValue))
+					(*closestValue) = objectX + distanceOffset;
+			}
+		}
+	}
+	else if (yDir > 0)
+	{
+		if (objectX == reciever->getPosX() && objectY > reciever->getPosY())
+		{
+			if (!(*closestSet))
+			{
+				(*closestValue) = objectY - distanceOffset;
+				(*closestSet) = true;
+			}
+			else
+			{
+				if ((objectY - 1) < (*closestValue))
+					(*closestValue) = objectY - distanceOffset;
+			}
+		}
+	}
+	else if (yDir < 0)
+	{
+		if (objectX == reciever->getPosX() && objectY < reciever->getPosY())
+		{
+			if (!(*closestSet))
+			{
+				(*closestValue) = objectY + distanceOffset;
+				(*closestSet) = true;
+			}
+			else
+			{
+				if ((objectY + 1) > (*closestValue))
+					(*closestValue) = objectY + distanceOffset;
+			}
+		}
+	}
+}
+
+bool InteractCommandRockPush::findClosestValueNotExist(int xDir, int yDir, bool* closestSet, int* closestValue)
+{
+	//Might be hitting the edge of the map. Find the next space that doesnt exist
+	if (!(*closestSet))
+	{
+		if (xDir > 0)
+		{
+			(*closestValue) = reciever->getPosX() + 1;
+			if (!(model->doesSpaceExist((*closestValue), reciever->getPosY())))
+				return false;
+			do
+			{
+				(*closestValue)++;
+			} while (model->doesSpaceExist((*closestValue), reciever->getPosY()) || isAPitOrWater(model, (*closestValue), reciever->getPosY()));
+			(*closestValue)--;
+		}
+		else if (xDir < 0)
+		{
+			(*closestValue) = reciever->getPosX() - 1;
+			if (!(model->doesSpaceExist((*closestValue), reciever->getPosY())))
+				return false;
+			do
+			{
+				(*closestValue)--;
+			} while (model->doesSpaceExist((*closestValue), reciever->getPosY()) || isAPitOrWater(model, (*closestValue), reciever->getPosY()));
+			(*closestValue)++;
+		}
+		else if (yDir > 0)
+		{
+			(*closestValue) = reciever->getPosY() + 1;
+			if (!(model->doesSpaceExist(reciever->getPosX(), (*closestValue))))
+				return false;
+			do
+			{
+				(*closestValue)++;
+			} while (model->doesSpaceExist(reciever->getPosX(), (*closestValue)) || isAPitOrWater(model, reciever->getPosX(), (*closestValue)));
+			(*closestValue)--;
+		}
+		else if (yDir < 0)
+		{
+			(*closestValue) = reciever->getPosY() - 1;
+			if (!(model->doesSpaceExist(reciever->getPosX(), (*closestValue))))
+				return false;
+			do
+			{
+				(*closestValue)--;
+			} while (model->doesSpaceExist(reciever->getPosX(), (*closestValue)) || isAPitOrWater(model, reciever->getPosY(), (*closestValue)));
+			(*closestValue)++;
+		}
+	}
+
 	return true;
 }
 
-bool InteractCommandRockPush::isAPitOrWater(ILevelModel* model, int x, int y)
-{
-	return (model->isAPit(x, y) || model->isAWater(x, y));
-}

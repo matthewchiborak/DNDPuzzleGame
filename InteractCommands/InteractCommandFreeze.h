@@ -3,15 +3,21 @@
 
 #include "InteractCommand.h"
 
+#include "../Model/WaterBoardObject.h"
+
 class InteractCommandFreeze: public InteractCommand
 {
 public:
-	InteractCommandFreeze();
+	InteractCommandFreeze(LevelModel* model);
 
-	bool execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model) override;
+	void setReciever(WaterBoardObject* reciever);
+
+	bool execute(BoardObject* initer, BoardObject* otherObj) override;
 
 	bool needsReciever() override;
 
+private:
+	WaterBoardObject* reciever;
 };
 
 #endif

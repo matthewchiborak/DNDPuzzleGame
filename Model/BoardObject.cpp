@@ -18,12 +18,7 @@ BoardObject::BoardObject(int posX, int posY, float height, bool solid, bool squi
 	this->lastDirMovedy = 0;
 	this->solid = solid;
 	this->squishy = squishy;
-	this->leviting = false;
-}
-
-BoardObject* BoardObject::copy()
-{
-	return nullptr;
+	this->levitating = false;
 }
 
 void BoardObject::setCurrentAction(BoardObjectAction* action)
@@ -49,29 +44,11 @@ bool BoardObject::needsInteractReciever()
 	return false;
 }
 
-bool BoardObject::interact(BoardObject* otherObj, ILevelModel* model)
+bool BoardObject::interact(BoardObject* otherObj)
 {
 	return false;
 }
 
-bool BoardObject::push(BoardObjectAction* pushAction)
-{
-	return false;
-}
-
-bool BoardObject::freeze()
-{
-	return false;
-}
-
-bool BoardObject::melt()
-{
-	return false;
-}
-
-void BoardObject::correctWaterVisual()
-{
-}
 
 void BoardObject::setPos(int x, int y)
 {
@@ -113,7 +90,7 @@ float BoardObject::getVisY()
 
 float BoardObject::getHeight()
 {
-	if (leviting)
+	if (this->levitating)
 		return height + 0.5f;
 
 	return height;
@@ -149,19 +126,14 @@ bool BoardObject::isSquishy()
 	return squishy;
 }
 
-bool BoardObject::levitateMe()
-{
-	return false;
-}
-
 void BoardObject::stopLevitate()
 {
-	this->leviting = false;
+	this->levitating = false;
 }
 
 bool BoardObject::isLevitating()
 {
-	return leviting;
+	return this->levitating;
 }
 
 

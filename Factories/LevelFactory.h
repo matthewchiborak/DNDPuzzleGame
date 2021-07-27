@@ -15,7 +15,7 @@ public:
 	ILevelModel* createLevel(std::string key) throw() override;
 
 private:
-	InteractCommand* createInteractCommand(std::string key, nlohmann::json JSON);
+	InteractCommand* createInteractCommand(std::string key, LevelModel* level, nlohmann::json JSON);
 };
 
 #endif

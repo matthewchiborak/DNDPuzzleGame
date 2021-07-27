@@ -18,36 +18,12 @@ bool PlayerBoardObject::needsInteractReciever()
 	return interactCommand->needsReciever();
 }
 
-bool PlayerBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
+InteractCommand* PlayerBoardObject::getInteractCommand()
 {
-	return interactCommand->execute(this, otherObj, model);
+	return interactCommand;
 }
 
-bool PlayerBoardObject::push(BoardObjectAction* pushAction)
+bool PlayerBoardObject::interact(BoardObject* otherObj)
 {
-	return false;
-}
-
-bool PlayerBoardObject::levitateMe()
-{
-	return false;
-}
-
-bool PlayerBoardObject::freeze()
-{
-	return false;
-}
-
-bool PlayerBoardObject::melt()
-{
-	return false;
-}
-
-void PlayerBoardObject::correctWaterVisual()
-{
-}
-
-BoardObject* PlayerBoardObject::copy()
-{
-	return nullptr;
+	return interactCommand->execute(this, otherObj);
 }

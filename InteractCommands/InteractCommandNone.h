@@ -8,7 +8,7 @@ class InteractCommandNone: public InteractCommand
 public:
 	InteractCommandNone();
 
-	bool execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model) override;
+	bool execute(BoardObject* initer, BoardObject* otherObj) override;
 
 	bool needsReciever() override;
 

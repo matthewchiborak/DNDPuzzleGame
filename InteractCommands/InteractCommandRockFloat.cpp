@@ -1,11 +1,25 @@
 #include "InteractCommandRockFloat.h"
 
-InteractCommandRockFloat::InteractCommandRockFloat()
+#include "../Model/LevelModel.h"
+
+InteractCommandRockFloat::InteractCommandRockFloat(LevelModel* model)
+	: InteractCommand(model)
 {
 }
 
-bool InteractCommandRockFloat::execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model)
+void InteractCommandRockFloat::setReciever(ObstacleBoardObject* reciever)
 {
+	this->reciever = reciever;
+}
+
+bool InteractCommandRockFloat::execute(BoardObject* initer, BoardObject* otherObj)
+{
+	for (int i = 0; i < this->model->getObstacles()->size(); i++)
+	{
+		if ((*this->model->getObstacles())[i] == otherObj)
+			setReciever((*this->model->getObstacles())[i]);
+	}
+
 	//Float the reciever if not floating already
 	if (reciever->isLevitating())
 		return false;
@@ -17,8 +31,8 @@ bool InteractCommandRockFloat::execute(BoardObject* initer, BoardObject* recieve
 	}
 
 	//Is leviating. Make all other object touch the ground
-	std::vector<BoardObject*>::iterator it = model->getBoardObjects();
-	std::vector<BoardObject*>::iterator end = model->getBoardObjectsEnd();
+	std::vector<ObstacleBoardObject*>::iterator it = model->getObstacles()->begin();
+	std::vector<ObstacleBoardObject*>::iterator end = model->getObstacles()->end();
 
 	while (it != end)
 	{

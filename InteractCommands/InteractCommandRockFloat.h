@@ -3,14 +3,21 @@
 
 #include "InteractCommand.h"
 
+#include "../Model/ObstacleBoardObject.h"
+
 class InteractCommandRockFloat: public InteractCommand
 {
 public:
-	InteractCommandRockFloat();
+	InteractCommandRockFloat(LevelModel* model);
 
-	bool execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model) override;
+	void setReciever(ObstacleBoardObject* reciever);
+
+	bool execute(BoardObject* initer, BoardObject* otherObj) override;
 
 	bool needsReciever() override;
+
+private:
+	ObstacleBoardObject* reciever;
 };
 
 #endif

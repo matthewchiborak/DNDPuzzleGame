@@ -11,6 +11,8 @@ public:
 	ILevelModel();
 	~ILevelModel();
 
+	virtual bool modifyModel(std::string key);
+
 	virtual bool playerMove(int x, int y);
 	virtual void playerStop();
 	virtual void rockStop();
@@ -24,7 +26,6 @@ public:
 	virtual void checkForMelt(int sx, int sy, int ex, int ey);
 
 	void addBoardObject(BoardObject* obj);
-	virtual void addArrow(BoardObject* obj);
 	std::vector<BoardObject*>::iterator getBoardObjects();
 	std::vector<BoardObject*>::iterator getBoardObjectsEnd();
 

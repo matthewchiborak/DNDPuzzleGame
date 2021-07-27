@@ -1,7 +1,10 @@
 #include "InteractCommand.h"
 
-InteractCommand::InteractCommand()
+#include "../Model/LevelModel.h"
+
+InteractCommand::InteractCommand(LevelModel* model)
 {
+	this->model = model;
 }
 
 bool InteractCommand::needsReciever()
@@ -9,7 +12,7 @@ bool InteractCommand::needsReciever()
 	return false;
 }
 
-bool InteractCommand::execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model)
+bool InteractCommand::execute(BoardObject* initer, BoardObject* otherObj)
 {
 	return false;
 }

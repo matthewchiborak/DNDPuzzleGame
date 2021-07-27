@@ -2,13 +2,25 @@
 
 #include "../BoardObjectActions/BoardObjectActionMove.h"
 #include "../BoardObjectActions/BoardObjectActionNone.h"
+#include "../Controller/IModelModifier.h"
 
 #include <iostream>
 
-LevelModel::LevelModel()
+LevelModel::LevelModel(IModelModifier* modifier)
 	: ILevelModel()
 {
 	currentPlayer = nullptr;
+	this->modelModifier = modifier;
+}
+
+LevelModel::~LevelModel()
+{
+	delete modelModifier;
+}
+
+bool LevelModel::modifyModel(std::string key)
+{
+	return modelModifier->modify(key);
 }
 
 bool LevelModel::playerMove(int x, int y)
@@ -88,10 +100,12 @@ bool LevelModel::interact()
 		BoardObject* occupiedRef;
 
 		if(!currentPlayer->needsInteractReciever())
-			return currentPlayer->interact(nullptr, this);
+			return currentPlayer->interact(nullptr);
 
-		if(isSpaceOccupied(currentPlayer->getPosX() + currentPlayer->getLastDirMovedX(), currentPlayer->getPosY() + currentPlayer->getLastDirMovedY(), &occupiedRef))
-			return currentPlayer->interact(occupiedRef, this);
+		if (isSpaceOccupied(currentPlayer->getPosX() + currentPlayer->getLastDirMovedX(), currentPlayer->getPosY() + currentPlayer->getLastDirMovedY(), &occupiedRef))
+		{
+			return currentPlayer->interact(occupiedRef);
+		}
 	}
 
 	return false;
@@ -107,13 +121,13 @@ void LevelModel::handleOverlaps()
 void LevelModel::handleOverlapsArrows()
 {
 	//Arrows
-	std::vector<BoardObject*>::iterator iterArrow = arrows.begin();
-	std::vector<BoardObject*>::iterator endArrow = arrows.end();
+	std::vector<ArrowBoardObject*>::iterator iterArrow = arrows.begin();
+	std::vector<ArrowBoardObject*>::iterator endArrow = arrows.end();
 	while (iterArrow != endArrow)
 	{
 		//Players
-		std::vector<BoardObject*>::iterator iter = players.begin();
-		std::vector<BoardObject*>::iterator end = players.end();
+		std::vector<PlayerBoardObject*>::iterator iter = players.begin();
+		std::vector<PlayerBoardObject*>::iterator end = players.end();
 		while (iter != end)
 		{
 			if ((*iterArrow)->getPosX() == (*iter)->getPosX() && (*iterArrow)->getPosY() == (*iter)->getPosY())
@@ -146,13 +160,13 @@ void LevelModel::handleOverlapsRocks()
 {
 	//Rocks
 	//If rock and hole, create a new tile
-	std::vector<BoardObject*>::iterator iterRock = obstacles.begin();
-	std::vector<BoardObject*>::iterator endRock = obstacles.end();
+	std::vector<ObstacleBoardObject*>::iterator iterRock = obstacles.begin();
+	std::vector<ObstacleBoardObject*>::iterator endRock = obstacles.end();
 	while(iterRock != endRock)
 	{
 		//Players
-		std::vector<BoardObject*>::iterator iter = players.begin();
-		std::vector<BoardObject*>::iterator end = players.end();
+		std::vector<PlayerBoardObject*>::iterator iter = players.begin();
+		std::vector<PlayerBoardObject*>::iterator end = players.end();
 		while(iter != end)
 		{
 			if ((*iterRock)->getPosX() == (*iter)->getPosX() && (*iterRock)->getPosY() == (*iter)->getPosY())
@@ -178,8 +192,8 @@ void LevelModel::handleOverlapsRocks()
 		}
 
 		//Water
-		std::vector<BoardObject*>::iterator iterWater = water.begin();
-		std::vector<BoardObject*>::iterator endWater = water.end();
+		std::vector<WaterBoardObject*>::iterator iterWater = water.begin();
+		std::vector<WaterBoardObject*>::iterator endWater = water.end();
 		while (iterWater != endWater)
 		{
 			if ((*iterRock)->getPosX() == (*iterWater)->getPosX() && (*iterRock)->getPosY() == (*iterWater)->getPosY())
@@ -205,8 +219,8 @@ void LevelModel::handleOverlapsRocks()
 		}
 
 		//Pits
-		std::vector<BoardObject*>::iterator iterPit = pits.begin();
-		std::vector<BoardObject*>::iterator endPit = pits.end();
+		std::vector<PitBoardObject*>::iterator iterPit = pits.begin();
+		std::vector<PitBoardObject*>::iterator endPit = pits.end();
 		while (iterPit != endPit)
 		{
 			if ((*iterRock)->getPosX() == (*iterPit)->getPosX() && (*iterRock)->getPosY() == (*iterPit)->getPosY())
@@ -242,7 +256,7 @@ void LevelModel::handleOverlapsRocks()
 				delete (*iterRock);
 				obstacles.erase(iterRock);
 
-				BoardObject* newTile = tiles.at(0)->copy();
+				TileBoardObject* newTile = tiles.at(0)->copy();
 				newTile->setPos(rockPosX, rockPosY);
 				newTile->setVis(rockPosX / 10.0f, rockPosY / 10.0f);
 				this->addTile(newTile);
@@ -257,19 +271,19 @@ void LevelModel::handleOverlapsRocks()
 	}
 }
 
-void LevelModel::addArrow(BoardObject* obj)
+void LevelModel::addArrow(ArrowBoardObject* obj)
 {
 	boardObjects.push_back(obj);
 	arrows.push_back(obj);
 }
 
-void LevelModel::addTile(BoardObject* tile)
+void LevelModel::addTile(TileBoardObject* tile)
 {
 	boardObjects.push_back(tile);
 	tiles.push_back(tile);
 }
 
-void LevelModel::addPlayer(BoardObject* player)
+void LevelModel::addPlayer(PlayerBoardObject* player)
 {
 	currentPlayerIndex = 0;
 	boardObjects.push_back(player);
@@ -279,28 +293,63 @@ void LevelModel::addPlayer(BoardObject* player)
 		currentPlayer = player;
 }
 
-void LevelModel::addObstacle(BoardObject* obs)
+void LevelModel::addObstacle(ObstacleBoardObject* obs)
 {
 	boardObjects.push_back(obs);
 	obstacles.push_back(obs);
 }
 
-void LevelModel::addWall(BoardObject* wall)
+void LevelModel::addWall(WallBoardObject* wall)
 {
 	boardObjects.push_back(wall);
 	walls.push_back(wall);
 }
 
-void LevelModel::addPit(BoardObject* pit)
+void LevelModel::addPit(PitBoardObject* pit)
 {
 	boardObjects.push_back(pit);
 	pits.push_back(pit);
 }
 
-void LevelModel::addWater(BoardObject* water)
+void LevelModel::addWater(WaterBoardObject* water)
 {
 	boardObjects.push_back(water);
 	this->water.push_back(water);
+}
+
+std::vector<TileBoardObject*>* LevelModel::getTiles()
+{
+	return &tiles;
+}
+
+std::vector<PlayerBoardObject*>* LevelModel::getPlayers()
+{
+	return &players;
+}
+
+std::vector<ObstacleBoardObject*>* LevelModel::getObstacles()
+{
+	return &obstacles;
+}
+
+std::vector<WallBoardObject*>* LevelModel::getWalls()
+{
+	return &walls;
+}
+
+std::vector<PitBoardObject*>* LevelModel::getPits()
+{
+	return &pits;
+}
+
+std::vector<WaterBoardObject*>* LevelModel::getWater()
+{
+	return &water;
+}
+
+std::vector<ArrowBoardObject*>* LevelModel::getArrows()
+{
+	return &arrows;
 }
 
 bool LevelModel::isAPit(int x, int y)

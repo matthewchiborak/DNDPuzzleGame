@@ -225,6 +225,12 @@
     <ClInclude Include="Model\ArrowBoardObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="Controller\IModelModifier.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\ModelModifier.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -400,6 +406,12 @@
     </ClCompile>
     <ClCompile Include="Model\ArrowBoardObject.cpp">
       <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller\IModelModifier.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller\ModelModifier.cpp">
+      <Filter>Source Files\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

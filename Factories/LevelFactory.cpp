@@ -21,6 +21,8 @@
 #include "../InteractCommands/InteractCommandFreeze.h"
 #include "../InteractCommands/InteractCommandShoot.h"
 
+#include "../Controller/ModelModifier.h"
+
 LevelFactory::LevelFactory()
 	: ILevelFactory()
 {
@@ -30,7 +32,11 @@ LevelFactory::LevelFactory()
 ILevelModel* LevelFactory::createLevel(std::string key) throw()
 {
 	if (key == "-1") //Empty model
-		return new LevelModel();
+	{
+		ModelModifier* mod = new ModelModifier();
+		LevelModel* newLevel = new LevelModel(mod);
+		return newLevel;
+	}
 	else
 	{
 		// Make a JSON object
@@ -39,7 +45,8 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 		nlohmann::json JSON = nlohmann::json::parse(text);
 
 		//Create the level
-		LevelModel* newLevel = new LevelModel();
+		ModelModifier* mod = new ModelModifier();
+		LevelModel* newLevel = new LevelModel(mod);
 
 		//Tiles
 		newLevel->setWidth(JSON["Width"]);
@@ -72,7 +79,7 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 				JSON["Players"][i]["PosX"], 
 				JSON["Players"][i]["PosY"],
 				1, 
-				createInteractCommand(JSON["Players"][i]["Interact"], JSON),
+				createInteractCommand(JSON["Players"][i]["Interact"], newLevel, JSON),
 				new BoardObjectActionNone(), 
 				JSON["Players"][i]["Model"]));
 		}
@@ -101,19 +108,19 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 	throw(key);
 }
 
-InteractCommand* LevelFactory::createInteractCommand(std::string key, nlohmann::json JSON)
+InteractCommand* LevelFactory::createInteractCommand(std::string key, LevelModel* level, nlohmann::json JSON)
 {
 	if (key == "RockPush")
-		return new InteractCommandRockPush();
+		return new InteractCommandRockPush(level);
 
 	if (key == "RockFloat")
-		return new InteractCommandRockFloat();
+		return new InteractCommandRockFloat(level);
 
 	if (key == "Freeze")
-		return new InteractCommandFreeze();
+		return new InteractCommandFreeze(level);
 
 	if (key == "Shoot")
-		return new InteractCommandShoot(JSON["ArrowKey"]);
+		return new InteractCommandShoot(JSON["ArrowKey"], level);
 
 	return new InteractCommandNone();
 }

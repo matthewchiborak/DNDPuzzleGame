@@ -7,12 +7,7 @@ ObstacleBoardObject::ObstacleBoardObject(int posX, int posY, int height, BoardOb
 {
 }
 
-BoardObject* ObstacleBoardObject::copy()
-{
-	return new ObstacleBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);
-}
-
-bool ObstacleBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
+bool ObstacleBoardObject::interact(BoardObject* otherObj)
 {
 	return false;
 }
@@ -36,16 +31,11 @@ bool ObstacleBoardObject::levitateMe()
 	return true;
 }
 
-bool ObstacleBoardObject::freeze()
+bool ObstacleBoardObject::isLevitating()
 {
-	return false;
+	return leviting;
 }
 
-bool ObstacleBoardObject::melt()
-{
-	return false;
-}
-
-void ObstacleBoardObject::correctWaterVisual()
+void ObstacleBoardObject::stopLevitate()
 {
 }

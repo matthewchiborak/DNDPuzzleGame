@@ -12,36 +12,13 @@ bool TileBoardObject::needsInteractReciever()
 	return true;
 }
 
-bool TileBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
+bool TileBoardObject::interact(BoardObject* otherObj)
 {
 	return false;
 }
 
-bool TileBoardObject::push(BoardObjectAction* pushAction)
-{
-	return false;
-}
 
-bool TileBoardObject::levitateMe()
-{
-	return false;
-}
-
-bool TileBoardObject::freeze()
-{
-	return false;
-}
-
-bool TileBoardObject::melt()
-{
-	return false;
-}
-
-void TileBoardObject::correctWaterVisual()
-{
-}
-
-BoardObject* TileBoardObject::copy()
+TileBoardObject* TileBoardObject::copy()
 {
 	return new TileBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);
 }

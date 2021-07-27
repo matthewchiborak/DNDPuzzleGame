@@ -7,7 +7,7 @@ PitBoardObject::PitBoardObject(int posX, int posY, int height, BoardObjectAction
 {
 }
 
-bool PitBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
+bool PitBoardObject::interact(BoardObject* otherObj)
 {
 	return false;
 }
@@ -15,33 +15,4 @@ bool PitBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 bool PitBoardObject::needsInteractReciever()
 {
 	return true;
-}
-
-bool PitBoardObject::push(BoardObjectAction* pushAction)
-{
-	return false;
-}
-
-bool PitBoardObject::levitateMe()
-{
-	return false;
-}
-
-bool PitBoardObject::freeze()
-{
-	return false;
-}
-
-bool PitBoardObject::melt()
-{
-	return false;
-}
-
-void PitBoardObject::correctWaterVisual()
-{
-}
-
-BoardObject* PitBoardObject::copy()
-{
-	return new PitBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);
 }

@@ -12,14 +12,8 @@ public:
 	~PlayerBoardObject();
 
 	bool needsInteractReciever() override;
-	bool interact(BoardObject* otherObj, ILevelModel* model) override;
-	bool push(BoardObjectAction* pushAction) override;
-	bool levitateMe() override;
-	bool freeze() override;
-	bool melt() override;
-	void correctWaterVisual() override;
-
-	BoardObject* copy() override;
+	InteractCommand* getInteractCommand();
+	bool interact(BoardObject* otherObj) override;
 
 private:
 	InteractCommand* interactCommand;

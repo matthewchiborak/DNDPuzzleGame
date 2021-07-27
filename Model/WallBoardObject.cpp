@@ -12,36 +12,7 @@ bool WallBoardObject::needsInteractReciever()
 	return true;
 }
 
-bool WallBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
+bool WallBoardObject::interact(BoardObject* otherObj)
 {
 	return false;
-}
-
-bool WallBoardObject::push(BoardObjectAction* pushAction)
-{
-	return false;
-}
-
-bool WallBoardObject::levitateMe()
-{
-	return false;
-}
-
-bool WallBoardObject::freeze()
-{
-	return false;
-}
-
-bool WallBoardObject::melt()
-{
-	return false;
-}
-
-void WallBoardObject::correctWaterVisual()
-{
-}
-
-BoardObject* WallBoardObject::copy()
-{
-	return new WallBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);
 }

@@ -12,19 +12,19 @@ public:
 	BoardObject(int posX, int posY, float height, bool solid, bool squishy, 
 		BoardObjectAction* action, std::string modelKey, std::string shaderKey);
 
-	virtual BoardObject* copy();
+	//virtual BoardObject* copy();
 
 	void setCurrentAction(BoardObjectAction* action);
 	void doBoardObjectAction(float t);
 
 	void move(int x, int y);
 	virtual bool needsInteractReciever();
-	virtual bool interact(BoardObject* otherObj, ILevelModel* model);
+	virtual bool interact(BoardObject* otherObj);
 
-	virtual bool push(BoardObjectAction* pushAction);
-	virtual bool freeze();
-	virtual bool melt();
-	virtual void correctWaterVisual();
+	//virtual bool push(BoardObjectAction* pushAction);
+	//virtual bool freeze();
+	//virtual bool melt();
+	//virtual void correctWaterVisual();
 
 	void setPos(int x, int y);
 	void setVis(float x, float y);
@@ -42,7 +42,7 @@ public:
 
 	bool isSolid();
 	bool isSquishy();
-	virtual bool levitateMe();
+	//virtual bool levitateMe();
 	void stopLevitate();
 	bool isLevitating();
 
@@ -51,7 +51,7 @@ protected:
 	float height;
 	bool solid;
 	bool squishy;
-	bool leviting;
+	bool levitating;
 	float visX, visY; //Position in the game world for drawing
 	std::string modelKey;
 	std::string shaderKey;
