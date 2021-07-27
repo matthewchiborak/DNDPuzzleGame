@@ -10,3 +10,8 @@ bool InteractCommandFreeze::execute(BoardObject* initer, BoardObject* reciever, 
 {
 	return reciever->freeze();
 }
+
+bool InteractCommandFreeze::needsReciever()
+{
+	return true;
+}

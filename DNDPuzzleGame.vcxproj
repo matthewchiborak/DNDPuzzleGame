@@ -170,6 +170,8 @@
     <ClInclude Include="InteractCommands\InteractCommandNone.h" />
     <ClInclude Include="InteractCommands\InteractCommandRockFloat.h" />
     <ClInclude Include="InteractCommands\InteractCommandRockPush.h" />
+    <ClInclude Include="InteractCommands\InteractCommandShoot.h" />
+    <ClInclude Include="Model\ArrowBoardObject.h" />
     <ClInclude Include="Model\BoardObject.h" />
     <ClInclude Include="Model\ILevelModel.h" />
     <ClInclude Include="Model\LevelModel.h" />
@@ -225,7 +227,9 @@
     <ClCompile Include="InteractCommands\InteractCommandNone.cpp" />
     <ClCompile Include="InteractCommands\InteractCommandRockFloat.cpp" />
     <ClCompile Include="InteractCommands\InteractCommandRockPush.cpp" />
+    <ClCompile Include="InteractCommands\InteractCommandShoot.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model\ArrowBoardObject.cpp" />
     <ClCompile Include="Model\BoardObject.cpp" />
     <ClCompile Include="Model\ILevelModel.cpp" />
     <ClCompile Include="Model\LevelModel.cpp" />

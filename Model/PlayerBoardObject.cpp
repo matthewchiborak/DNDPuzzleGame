@@ -13,6 +13,11 @@ PlayerBoardObject::~PlayerBoardObject()
 	delete interactCommand;
 }
 
+bool PlayerBoardObject::needsInteractReciever()
+{
+	return interactCommand->needsReciever();
+}
+
 bool PlayerBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
 	return interactCommand->execute(this, otherObj, model);

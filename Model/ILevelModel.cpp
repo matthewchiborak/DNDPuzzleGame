@@ -66,6 +66,10 @@ void ILevelModel::addBoardObject(BoardObject* obj)
     boardObjects.push_back(obj);
 }
 
+void ILevelModel::addArrow(BoardObject* obj)
+{
+}
+
 std::vector<BoardObject*>::iterator ILevelModel::getBoardObjects()
 {
     return boardObjects.begin();

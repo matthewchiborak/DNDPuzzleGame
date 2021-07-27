@@ -17,6 +17,11 @@ bool ObstacleBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 	return false;
 }
 
+bool ObstacleBoardObject::needsInteractReciever()
+{
+	return true;
+}
+
 bool ObstacleBoardObject::push(BoardObjectAction* pushAction)
 {
 	this->setCurrentAction(pushAction);

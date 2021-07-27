@@ -3,6 +3,8 @@
 
 #include "ILevelFactory.h"
 
+#include <json/json.h>
+
 #include "../InteractCommands/InteractCommand.h"
 
 class LevelFactory: public ILevelFactory
@@ -13,7 +15,7 @@ public:
 	ILevelModel* createLevel(std::string key) throw() override;
 
 private:
-	InteractCommand* createInteractCommand(std::string key);
+	InteractCommand* createInteractCommand(std::string key, nlohmann::json JSON);
 };
 
 #endif

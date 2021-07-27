@@ -18,6 +18,7 @@ public:
 	void doBoardObjectAction(float t);
 
 	void move(int x, int y);
+	virtual bool needsInteractReciever();
 	virtual bool interact(BoardObject* otherObj, ILevelModel* model);
 
 	virtual bool push(BoardObjectAction* pushAction);

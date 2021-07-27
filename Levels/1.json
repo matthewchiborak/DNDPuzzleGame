@@ -1,6 +1,7 @@
 {
 	"Width": 16,
 	"Height": 15,
+	"ArrowKey": "Arrow",
 	"NoTiles": [
 	{
 		"PosX": 13,
@@ -25,7 +26,7 @@
 		"Model": "Bullent",
 		"PosX": 6,
 		"PosY": 5,
-		"Interact": "None"
+		"Interact": "Shoot"
 	},
 	{
 		"Model": "Chad",

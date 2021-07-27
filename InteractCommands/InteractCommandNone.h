@@ -10,6 +10,8 @@ public:
 
 	bool execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model) override;
 
+	bool needsReciever() override;
+
 };
 
 #endif

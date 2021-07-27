@@ -7,6 +7,11 @@ TileBoardObject::TileBoardObject(int posX, int posY, int height, BoardObjectActi
 {
 }
 
+bool TileBoardObject::needsInteractReciever()
+{
+	return true;
+}
+
 bool TileBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
 	return false;

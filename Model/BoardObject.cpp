@@ -44,6 +44,11 @@ void BoardObject::move(int x, int y)
 	this->posY += y;
 }
 
+bool BoardObject::needsInteractReciever()
+{
+	return false;
+}
+
 bool BoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
 	return false;

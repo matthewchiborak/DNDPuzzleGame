@@ -9,6 +9,8 @@ class InteractCommand
 public:
 	InteractCommand();
 
+	virtual bool needsReciever();
+
 	virtual bool execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model);
 
 };

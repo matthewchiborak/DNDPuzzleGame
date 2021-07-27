@@ -8,6 +8,7 @@ class WallBoardObject: public BoardObject
 public:
 	WallBoardObject(int posX, int posY, int height, BoardObjectAction* action, std::string modelKey, std::string shaderKey = "Default");
 
+	bool needsInteractReciever() override;
 	bool interact(BoardObject* otherObj, ILevelModel* model) override;
 	bool push(BoardObjectAction* pushAction) override;
 	bool levitateMe() override;

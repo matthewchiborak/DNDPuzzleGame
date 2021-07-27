@@ -11,6 +11,7 @@ public:
 	BoardObject* copy() override;
 
 	bool interact(BoardObject* otherObj, ILevelModel* model) override;
+	bool needsInteractReciever() override;
 
 	bool push(BoardObjectAction* pushAction) override;
 

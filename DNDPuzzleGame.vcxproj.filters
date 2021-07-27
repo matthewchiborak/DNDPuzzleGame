@@ -219,6 +219,12 @@
     <ClInclude Include="InteractCommands\InteractCommandFreeze.h">
       <Filter>Header Files\InteractCommands</Filter>
     </ClInclude>
+    <ClInclude Include="InteractCommands\InteractCommandShoot.h">
+      <Filter>Header Files\InteractCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\ArrowBoardObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -388,6 +394,12 @@
     </ClCompile>
     <ClCompile Include="InteractCommands\InteractCommandFreeze.cpp">
       <Filter>Source Files\InteractCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractCommands\InteractCommandShoot.cpp">
+      <Filter>Source Files\InteractCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\ArrowBoardObject.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

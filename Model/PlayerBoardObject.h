@@ -11,6 +11,7 @@ public:
 	PlayerBoardObject(int posX, int posY, int height, InteractCommand* iCommand, BoardObjectAction* action, std::string modelKey, std::string shaderKey = "Cutout");
 	~PlayerBoardObject();
 
+	bool needsInteractReciever() override;
 	bool interact(BoardObject* otherObj, ILevelModel* model) override;
 	bool push(BoardObjectAction* pushAction) override;
 	bool levitateMe() override;

@@ -9,6 +9,11 @@ WaterBoardObject::WaterBoardObject(int posX, int posY, int height, BoardObjectAc
 	this->modelKeyLiquid = modelKey;
 }
 
+bool WaterBoardObject::needsInteractReciever()
+{
+	return true;
+}
+
 bool WaterBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
 	return false;

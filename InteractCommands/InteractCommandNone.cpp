@@ -8,3 +8,8 @@ bool InteractCommandNone::execute(BoardObject* initer, BoardObject* reciever, IL
 {
 	return false;
 }
+
+bool InteractCommandNone::needsReciever()
+{
+	return true;
+}

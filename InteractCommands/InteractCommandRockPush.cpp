@@ -177,6 +177,11 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 
 }
 
+bool InteractCommandRockPush::needsReciever()
+{
+	return true;
+}
+
 bool InteractCommandRockPush::isAPitOrWater(ILevelModel* model, int x, int y)
 {
 	return (model->isAPit(x, y) || model->isAWater(x, y));

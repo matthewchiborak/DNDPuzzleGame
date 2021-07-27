@@ -1,6 +1,6 @@
 #include "LevelFactory.h"
 
-#include <json/json.h>
+
 
 #include <fstream>
 #include <streambuf>
@@ -19,6 +19,7 @@
 #include "../InteractCommands/InteractCommandRockPush.h"
 #include "../InteractCommands/InteractCommandRockFloat.h"
 #include "../InteractCommands/InteractCommandFreeze.h"
+#include "../InteractCommands/InteractCommandShoot.h"
 
 LevelFactory::LevelFactory()
 	: ILevelFactory()
@@ -71,7 +72,7 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 				JSON["Players"][i]["PosX"], 
 				JSON["Players"][i]["PosY"],
 				1, 
-				createInteractCommand(JSON["Players"][i]["Interact"]),
+				createInteractCommand(JSON["Players"][i]["Interact"], JSON),
 				new BoardObjectActionNone(), 
 				JSON["Players"][i]["Model"]));
 		}
@@ -100,7 +101,7 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 	throw(key);
 }
 
-InteractCommand* LevelFactory::createInteractCommand(std::string key)
+InteractCommand* LevelFactory::createInteractCommand(std::string key, nlohmann::json JSON)
 {
 	if (key == "RockPush")
 		return new InteractCommandRockPush();
@@ -110,6 +111,9 @@ InteractCommand* LevelFactory::createInteractCommand(std::string key)
 
 	if (key == "Freeze")
 		return new InteractCommandFreeze();
+
+	if (key == "Shoot")
+		return new InteractCommandShoot(JSON["ArrowKey"]);
 
 	return new InteractCommandNone();
 }

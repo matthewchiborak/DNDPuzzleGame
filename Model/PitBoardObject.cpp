@@ -12,6 +12,11 @@ bool PitBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 	return false;
 }
 
+bool PitBoardObject::needsInteractReciever()
+{
+	return true;
+}
+
 bool PitBoardObject::push(BoardObjectAction* pushAction)
 {
 	return false;

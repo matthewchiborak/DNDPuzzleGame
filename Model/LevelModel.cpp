@@ -56,6 +56,11 @@ void LevelModel::rockStop()
 	{
 		obstacles.at(i)->setCurrentAction(new BoardObjectActionNone());
 	}
+
+	for (int i = 0; i < arrows.size(); i++)
+	{
+		arrows.at(i)->setCurrentAction(new BoardObjectActionNone());
+	}
 }
 
 void LevelModel::playerChange(bool next)
@@ -82,6 +87,9 @@ bool LevelModel::interact()
 	{
 		BoardObject* occupiedRef;
 
+		if(!currentPlayer->needsInteractReciever())
+			return currentPlayer->interact(nullptr, this);
+
 		if(isSpaceOccupied(currentPlayer->getPosX() + currentPlayer->getLastDirMovedX(), currentPlayer->getPosY() + currentPlayer->getLastDirMovedY(), &occupiedRef))
 			return currentPlayer->interact(occupiedRef, this);
 	}
@@ -92,7 +100,50 @@ bool LevelModel::interact()
 void LevelModel::handleOverlaps()
 {
 	correctWaterVisual();
+	handleOverlapsRocks();
+	handleOverlapsArrows();
+}
 
+void LevelModel::handleOverlapsArrows()
+{
+	//Arrows
+	std::vector<BoardObject*>::iterator iterArrow = arrows.begin();
+	std::vector<BoardObject*>::iterator endArrow = arrows.end();
+	while (iterArrow != endArrow)
+	{
+		//Players
+		std::vector<BoardObject*>::iterator iter = players.begin();
+		std::vector<BoardObject*>::iterator end = players.end();
+		while (iter != end)
+		{
+			if ((*iterArrow)->getPosX() == (*iter)->getPosX() && (*iterArrow)->getPosY() == (*iter)->getPosY())
+			{
+				std::vector<BoardObject*>::iterator iterO = boardObjects.begin();
+				std::vector<BoardObject*>::iterator endO = boardObjects.end();
+				while (iterO != endO)
+				{
+					if ((*iterO) == (*iter))
+					{
+						boardObjects.erase(iterO);
+						break;
+					}
+					iterO++;
+				}
+
+				delete (*iter);
+				players.erase(iter);
+				return;
+			}
+
+			iter++;
+		}
+
+		iterArrow++;
+	}
+}
+
+void LevelModel::handleOverlapsRocks()
+{
 	//Rocks
 	//If rock and hole, create a new tile
 	std::vector<BoardObject*>::iterator iterRock = obstacles.begin();
@@ -204,6 +255,12 @@ void LevelModel::handleOverlaps()
 
 		iterRock++;
 	}
+}
+
+void LevelModel::addArrow(BoardObject* obj)
+{
+	boardObjects.push_back(obj);
+	arrows.push_back(obj);
 }
 
 void LevelModel::addTile(BoardObject* tile)
@@ -322,6 +379,15 @@ bool LevelModel::isSpaceOccupied(int x, int y, BoardObject** occupyingRef)
 		if (walls.at(i)->getPosX() == x && walls.at(i)->getPosY() == y)
 		{
 			(*occupyingRef) = walls.at(i);
+			return true;
+		}
+	}
+
+	for (int i = 0; i < arrows.size(); i++)
+	{
+		if (arrows.at(i)->getPosX() == x && arrows.at(i)->getPosY() == y)
+		{
+			(*occupyingRef) = arrows.at(i);
 			return true;
 		}
 	}

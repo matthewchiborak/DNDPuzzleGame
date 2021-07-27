@@ -14,6 +14,9 @@ public:
 	void playerChange(bool next) override;
 	bool interact() override;
 	void handleOverlaps() override;
+	void handleOverlapsArrows();
+	void handleOverlapsRocks();
+	void addArrow(BoardObject* obj) override;
 
 	void addTile(BoardObject* tile);
 	void addPlayer(BoardObject* player);
@@ -36,6 +39,7 @@ private:
 	std::vector<BoardObject*> walls;
 	std::vector<BoardObject*> pits;
 	std::vector<BoardObject*> water;
+	std::vector<BoardObject*> arrows;
 
 	bool isSpaceOccupied(int x, int y, BoardObject** occupyingRef);
 	bool doesSpaceExist(int x, int y) override;

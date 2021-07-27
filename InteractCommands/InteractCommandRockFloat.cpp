@@ -34,3 +34,8 @@ bool InteractCommandRockFloat::execute(BoardObject* initer, BoardObject* recieve
 
 	return true;
 }
+
+bool InteractCommandRockFloat::needsReciever()
+{
+	return true;
+}

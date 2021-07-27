@@ -7,6 +7,11 @@ WallBoardObject::WallBoardObject(int posX, int posY, int height, BoardObjectActi
 {
 }
 
+bool WallBoardObject::needsInteractReciever()
+{
+	return true;
+}
+
 bool WallBoardObject::interact(BoardObject* otherObj, ILevelModel* model)
 {
 	return false;

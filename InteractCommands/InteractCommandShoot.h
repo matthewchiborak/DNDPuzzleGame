@@ -1,18 +1,20 @@
-#ifndef INTERACT_COMMAND_ROCK_PUSH_CLASS_H
-#define INTERACT_COMMAND_ROCK_PUSH_CLASS_H
+#ifndef INTERACT_COMMAND_SHOOT_CLASS_H
+#define INTERACT_COMMAND_SHOOT_CLASS_H
 
 #include "InteractCommand.h"
 
-class InteractCommandRockPush: public InteractCommand
+class InteractCommandShoot: public InteractCommand
 {
 public:
-	InteractCommandRockPush();
+	InteractCommandShoot(std::string arrowModelKey);
 
 	bool execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model) override;
 
 	bool needsReciever() override;
-	
+
 private:
+	std::string arrowModelKey;
+
 	bool isAPitOrWater(ILevelModel* model, int x, int y);
 };
 

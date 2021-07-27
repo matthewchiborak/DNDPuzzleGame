@@ -88,6 +88,12 @@ IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}
+	else if (key == "Arrow")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Arrow.png");
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
 
 	throw (key);
 }
