@@ -177,6 +177,7 @@
     <ClInclude Include="Model\PlayerBoardObject.h" />
     <ClInclude Include="Model\TileBoardObject.h" />
     <ClInclude Include="Model\WallBoardObject.h" />
+    <ClInclude Include="Model\WaterBoardObject.h" />
     <ClInclude Include="Rendering\BoardRenderer.h" />
     <ClInclude Include="Rendering\Core\Camera.h" />
     <ClInclude Include="Rendering\Core\EBO.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="Model\PlayerBoardObject.cpp" />
     <ClCompile Include="Model\TileBoardObject.cpp" />
     <ClCompile Include="Model\WallBoardObject.cpp" />
+    <ClCompile Include="Model\WaterBoardObject.cpp" />
     <ClCompile Include="Rendering\BoardRenderer.cpp" />
     <ClCompile Include="Rendering\Core\Camera.cpp" />
     <ClCompile Include="Rendering\Core\EBO.cpp" />

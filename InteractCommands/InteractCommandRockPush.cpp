@@ -29,7 +29,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 				continue;
 			}
 
-			if ((*it)->isSolid() && (!model->isAPit((*it)->getPosX(), (*it)->getPosY()) || (model->isAPit((*it)->getPosX(), (*it)->getPosY() && !reciever->isLevitating()))))
+			if ((*it)->isSolid() && (!isAPitOrWater(model, (*it)->getPosX(), (*it)->getPosY()) || (isAPitOrWater(model, (*it)->getPosX(), (*it)->getPosY()) && !reciever->isLevitating())))
 			{
 				if (xDir > 0)
 				{
@@ -111,7 +111,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 			do
 			{
 				closestValue++;
-			} while (model->doesSpaceExist(closestValue, reciever->getPosY()) || model->isAPit(closestValue, reciever->getPosY()));
+			} while (model->doesSpaceExist(closestValue, reciever->getPosY()) || isAPitOrWater(model, closestValue, reciever->getPosY()));
 			closestValue--;
 		}
 		else if (xDir < 0)
@@ -122,7 +122,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 			do
 			{
 				closestValue--;
-			} while (model->doesSpaceExist(closestValue, reciever->getPosY()) || model->isAPit(closestValue, reciever->getPosY()));
+			} while (model->doesSpaceExist(closestValue, reciever->getPosY()) || isAPitOrWater(model, closestValue, reciever->getPosY()));
 			closestValue++;
 		}
 		else if (yDir > 0)
@@ -133,7 +133,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 			do
 			{
 				closestValue++;
-			} while (model->doesSpaceExist(reciever->getPosX(), closestValue) || model->isAPit(reciever->getPosX(), closestValue));
+			} while (model->doesSpaceExist(reciever->getPosX(), closestValue) || isAPitOrWater(model, reciever->getPosX(), closestValue));
 			closestValue--;
 		}
 		else if (yDir < 0)
@@ -144,7 +144,7 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 			do
 			{
 				closestValue--;
-			} while (model->doesSpaceExist(reciever->getPosX(), closestValue) || model->isAPit(reciever->getPosY(), closestValue));
+			} while (model->doesSpaceExist(reciever->getPosX(), closestValue) || isAPitOrWater(model, reciever->getPosY(), closestValue));
 			closestValue++;
 		}
 	}
@@ -166,4 +166,9 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 	else
 		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue));
 
+}
+
+bool InteractCommandRockPush::isAPitOrWater(ILevelModel* model, int x, int y)
+{
+	return (model->isAPit(x, y) || model->isAWater(x, y));
 }

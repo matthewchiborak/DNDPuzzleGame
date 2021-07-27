@@ -9,7 +9,7 @@ class ILevelModel;
 class BoardObject
 {
 public:
-	BoardObject(int posX, int posY, int height, bool solid, bool squishy, 
+	BoardObject(int posX, int posY, float height, bool solid, bool squishy, 
 		BoardObjectAction* action, std::string modelKey, std::string shaderKey);
 
 	virtual BoardObject* copy();
@@ -30,7 +30,7 @@ public:
 	int getPosY();
 	float getVisX();
 	float getVisY();
-	int getHeight();
+	float getHeight();
 	int getLastDirMovedX();
 	int getLastDirMovedY();
 	std::string getModelKey();
@@ -43,7 +43,8 @@ public:
 	bool isLevitating();
 
 protected:
-	int posX, posY, height; //Position in the game grid
+	int posX, posY;  //Position in the game grid
+	float height;
 	bool solid;
 	bool squishy;
 	bool leviting;

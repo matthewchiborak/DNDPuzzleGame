@@ -70,6 +70,12 @@ IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}
+	else if (key == "Water")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Water.png");
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
 
 	throw (key);
 }

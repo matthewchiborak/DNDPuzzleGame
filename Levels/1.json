@@ -5,6 +5,10 @@
 	{
 		"PosX": 13,
 		"PosY": 8
+	},
+	{
+		"PosX": 10,
+		"PosY": 8
 	}
 	],
 	"Players": [{
@@ -15,7 +19,7 @@
 	},
 	{
 		"Model": "Bullent",
-		"PosX": 5,
+		"PosX": 6,
 		"PosY": 5,
 		"Interact": "None"
 	},
@@ -53,6 +57,13 @@
 	"Pits": [
 	{
 		"Model": "Pit",
+		"PosX": 10,
+		"PosY": 8
+	}
+	],
+	"Water": [
+	{
+		"Model": "Water",
 		"PosX": 13,
 		"PosY": 8
 	}

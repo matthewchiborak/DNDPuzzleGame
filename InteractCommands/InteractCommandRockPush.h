@@ -9,7 +9,9 @@ public:
 	InteractCommandRockPush();
 
 	bool execute(BoardObject* initer, BoardObject* reciever, ILevelModel* model) override;
-
+	
+private:
+	bool isAPitOrWater(ILevelModel* model, int x, int y);
 };
 
 #endif

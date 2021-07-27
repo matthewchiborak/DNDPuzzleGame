@@ -86,6 +86,7 @@ void LevelModel::handleOverlaps()
 	std::vector<BoardObject*>::iterator endRock = obstacles.end();
 	while(iterRock != endRock)
 	{
+		//Players
 		std::vector<BoardObject*>::iterator iter = players.begin();
 		std::vector<BoardObject*>::iterator end = players.end();
 		while(iter != end)
@@ -112,7 +113,34 @@ void LevelModel::handleOverlaps()
 			iter++;
 		}
 
+		//Water
+		std::vector<BoardObject*>::iterator iterWater = water.begin();
+		std::vector<BoardObject*>::iterator endWater = water.end();
+		while (iterWater != endWater)
+		{
+			if ((*iterRock)->getPosX() == (*iterWater)->getPosX() && (*iterRock)->getPosY() == (*iterWater)->getPosY())
+			{
+				std::vector<BoardObject*>::iterator iterO = boardObjects.begin();
+				std::vector<BoardObject*>::iterator endO = boardObjects.end();
+				while (iterO != endO)
+				{
+					if ((*iterO) == (*iterRock))
+					{
+						boardObjects.erase(iterO);
+						break;
+					}
+					iterO++;
+				}
 
+				delete (*iterRock);
+				obstacles.erase(iterRock);
+				return;
+			}
+
+			iterWater++;
+		}
+
+		//Pits
 		std::vector<BoardObject*>::iterator iterPit = pits.begin();
 		std::vector<BoardObject*>::iterator endPit = pits.end();
 		while (iterPit != endPit)
@@ -199,11 +227,30 @@ void LevelModel::addPit(BoardObject* pit)
 	pits.push_back(pit);
 }
 
+void LevelModel::addWater(BoardObject* water)
+{
+	boardObjects.push_back(water);
+	this->water.push_back(water);
+}
+
 bool LevelModel::isAPit(int x, int y)
 {
 	for (int i = 0; i < pits.size(); i++)
 	{
 		if (pits.at(i)->getPosX() == x && pits.at(i)->getPosY() == y)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool LevelModel::isAWater(int x, int y)
+{
+	for (int i = 0; i < water.size(); i++)
+	{
+		if (water.at(i)->getPosX() == x && water.at(i)->getPosY() == y)
 		{
 			return true;
 		}

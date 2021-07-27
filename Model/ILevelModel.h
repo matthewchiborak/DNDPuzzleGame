@@ -20,6 +20,7 @@ public:
 
 	virtual bool doesSpaceExist(int x, int y);
 	virtual bool isAPit(int x, int y);
+	virtual bool isAWater(int x, int y);
 
 	void addBoardObject(BoardObject* obj);
 	std::vector<BoardObject*>::iterator getBoardObjects();

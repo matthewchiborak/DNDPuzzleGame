@@ -3,7 +3,7 @@
 #include "../BoardObjectActions/BoardObjectAction.h"
 
 
-BoardObject::BoardObject(int posX, int posY, int height, bool solid, bool squishy, 
+BoardObject::BoardObject(int posX, int posY, float height, bool solid, bool squishy, 
 	BoardObjectAction* action, std::string modelKey, std::string shaderKey)
 {
 	this->posX = posX;
@@ -92,10 +92,10 @@ float BoardObject::getVisY()
 	return visY;
 }
 
-int BoardObject::getHeight()
+float BoardObject::getHeight()
 {
 	if (leviting)
-		return height + 1;
+		return height + 0.5f;
 
 	return height;
 }

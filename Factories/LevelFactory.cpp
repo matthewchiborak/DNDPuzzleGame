@@ -11,6 +11,7 @@
 #include "../Model/ObstacleBoardObject.h"
 #include "../Model/WallBoardObject.h"
 #include "../Model/PitBoardObject.h"
+#include "../Model/WaterBoardObject.h"
 
 #include "../BoardObjectActions/BoardObjectActionNone.h"
 
@@ -86,6 +87,12 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 			newLevel->addPit(new PitBoardObject(JSON["Pits"][i]["PosX"], JSON["Pits"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Pits"][i]["Model"]));
 		}
 		
+		//Water
+		for (int i = 0; i < JSON["Water"].size(); i++)
+		{
+			newLevel->addWater(new WaterBoardObject(JSON["Water"][i]["PosX"], JSON["Water"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Water"][i]["Model"]));
+		}
+
 		return newLevel;
 	}
 

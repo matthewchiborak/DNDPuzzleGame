@@ -20,8 +20,10 @@ public:
 	void addObstacle(BoardObject* obs);
 	void addWall(BoardObject* wall);
 	void addPit(BoardObject* pit);
+	void addWater(BoardObject* water);
 
 	bool isAPit(int x, int y);
+	bool isAWater(int x, int y);
 
 private:
 	int currentPlayerIndex;
@@ -31,6 +33,7 @@ private:
 	std::vector<BoardObject*> obstacles;
 	std::vector<BoardObject*> walls;
 	std::vector<BoardObject*> pits;
+	std::vector<BoardObject*> water;
 
 	bool isSpaceOccupied(int x, int y, BoardObject** occupyingRef);
 	bool doesSpaceExist(int x, int y) override;
