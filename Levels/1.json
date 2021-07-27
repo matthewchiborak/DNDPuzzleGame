@@ -9,6 +9,10 @@
 	{
 		"PosX": 10,
 		"PosY": 8
+	},
+	{
+		"PosX": 14,
+		"PosY": 8
 	}
 	],
 	"Players": [{
@@ -28,6 +32,12 @@
 		"PosX": 13,
 		"PosY": 0,
 		"Interact": "RockPush"
+	},
+	{
+		"Model": "Allura",
+		"PosX": 13,
+		"PosY": 10,
+		"Interact": "Freeze"
 	}
 	],
 	"Rocks": [
@@ -64,7 +74,14 @@
 	"Water": [
 	{
 		"Model": "Water",
+		"ModelFreeze": "Ice",
 		"PosX": 13,
+		"PosY": 8
+	},
+	{
+		"Model": "Water",
+		"ModelFreeze": "Ice",
+		"PosX": 14,
 		"PosY": 8
 	}
 	]

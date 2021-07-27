@@ -18,6 +18,7 @@
 #include "../InteractCommands/InteractCommandNone.h"
 #include "../InteractCommands/InteractCommandRockPush.h"
 #include "../InteractCommands/InteractCommandRockFloat.h"
+#include "../InteractCommands/InteractCommandFreeze.h"
 
 LevelFactory::LevelFactory()
 	: ILevelFactory()
@@ -90,7 +91,7 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 		//Water
 		for (int i = 0; i < JSON["Water"].size(); i++)
 		{
-			newLevel->addWater(new WaterBoardObject(JSON["Water"][i]["PosX"], JSON["Water"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Water"][i]["Model"]));
+			newLevel->addWater(new WaterBoardObject(JSON["Water"][i]["PosX"], JSON["Water"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Water"][i]["Model"], JSON["Water"][i]["ModelFreeze"]));
 		}
 
 		return newLevel;
@@ -106,6 +107,9 @@ InteractCommand* LevelFactory::createInteractCommand(std::string key)
 
 	if (key == "RockFloat")
 		return new InteractCommandRockFloat();
-	
+
+	if (key == "Freeze")
+		return new InteractCommandFreeze();
+
 	return new InteractCommandNone();
 }

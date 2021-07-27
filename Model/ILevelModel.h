@@ -21,6 +21,7 @@ public:
 	virtual bool doesSpaceExist(int x, int y);
 	virtual bool isAPit(int x, int y);
 	virtual bool isAWater(int x, int y);
+	virtual void checkForMelt(int sx, int sy, int ex, int ey);
 
 	void addBoardObject(BoardObject* obj);
 	std::vector<BoardObject*>::iterator getBoardObjects();

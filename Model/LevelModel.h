@@ -25,6 +25,8 @@ public:
 	bool isAPit(int x, int y);
 	bool isAWater(int x, int y);
 
+	void checkForMelt(int sx, int sy, int ex, int ey);
+
 private:
 	int currentPlayerIndex;
 	BoardObject* currentPlayer;
@@ -37,6 +39,10 @@ private:
 
 	bool isSpaceOccupied(int x, int y, BoardObject** occupyingRef);
 	bool doesSpaceExist(int x, int y) override;
+
+	bool isFrozenWater(int x, int y);
+
+	void correctWaterVisual();
 
 };
 

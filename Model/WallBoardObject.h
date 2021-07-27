@@ -11,6 +11,9 @@ public:
 	bool interact(BoardObject* otherObj, ILevelModel* model) override;
 	bool push(BoardObjectAction* pushAction) override;
 	bool levitateMe() override;
+	bool freeze() override;
+	bool melt() override;
+	void correctWaterVisual() override;
 
 	BoardObject* copy() override;
 };

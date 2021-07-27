@@ -54,6 +54,20 @@ bool BoardObject::push(BoardObjectAction* pushAction)
 	return false;
 }
 
+bool BoardObject::freeze()
+{
+	return false;
+}
+
+bool BoardObject::melt()
+{
+	return false;
+}
+
+void BoardObject::correctWaterVisual()
+{
+}
+
 void BoardObject::setPos(int x, int y)
 {
 	this->posX = x;

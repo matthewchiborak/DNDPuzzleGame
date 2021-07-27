@@ -22,6 +22,20 @@ bool WallBoardObject::levitateMe()
 	return false;
 }
 
+bool WallBoardObject::freeze()
+{
+	return false;
+}
+
+bool WallBoardObject::melt()
+{
+	return false;
+}
+
+void WallBoardObject::correctWaterVisual()
+{
+}
+
 BoardObject* WallBoardObject::copy()
 {
 	return new WallBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);

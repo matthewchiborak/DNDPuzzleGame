@@ -21,6 +21,9 @@ public:
 	virtual bool interact(BoardObject* otherObj, ILevelModel* model);
 
 	virtual bool push(BoardObjectAction* pushAction);
+	virtual bool freeze();
+	virtual bool melt();
+	virtual void correctWaterVisual();
 
 	void setPos(int x, int y);
 	void setVis(float x, float y);

@@ -1,7 +1,5 @@
 #include "InteractCommandRockFloat.h"
 
-#include <iostream>
-
 InteractCommandRockFloat::InteractCommandRockFloat()
 {
 }

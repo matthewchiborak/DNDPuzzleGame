@@ -28,6 +28,20 @@ bool PlayerBoardObject::levitateMe()
 	return false;
 }
 
+bool PlayerBoardObject::freeze()
+{
+	return false;
+}
+
+bool PlayerBoardObject::melt()
+{
+	return false;
+}
+
+void PlayerBoardObject::correctWaterVisual()
+{
+}
+
 BoardObject* PlayerBoardObject::copy()
 {
 	return nullptr;

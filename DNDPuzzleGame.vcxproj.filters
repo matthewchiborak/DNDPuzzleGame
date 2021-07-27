@@ -216,6 +216,9 @@
     <ClInclude Include="Model\WaterBoardObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="InteractCommands\InteractCommandFreeze.h">
+      <Filter>Header Files\InteractCommands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -382,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="Model\WaterBoardObject.cpp">
       <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractCommands\InteractCommandFreeze.cpp">
+      <Filter>Source Files\InteractCommands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

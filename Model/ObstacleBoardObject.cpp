@@ -30,3 +30,17 @@ bool ObstacleBoardObject::levitateMe()
 
 	return true;
 }
+
+bool ObstacleBoardObject::freeze()
+{
+	return false;
+}
+
+bool ObstacleBoardObject::melt()
+{
+	return false;
+}
+
+void ObstacleBoardObject::correctWaterVisual()
+{
+}

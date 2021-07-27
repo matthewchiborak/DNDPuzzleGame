@@ -15,6 +15,10 @@ public:
 	bool push(BoardObjectAction* pushAction) override;
 
 	bool levitateMe() override;
+
+	bool freeze() override;
+	bool melt() override;
+	void correctWaterVisual() override;
 };
 
 #endif

@@ -162,9 +162,18 @@ bool InteractCommandRockPush::execute(BoardObject* initer, BoardObject* reciever
 	}
 
 	if (xDir > 0 || xDir < 0)
+	{
+		if (!reciever->isLevitating())
+			model->checkForMelt(reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY());
 		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY()));
+	}
 	else
+	{
+		if (!reciever->isLevitating())
+			model->checkForMelt(reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue);
 		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue));
+	}
+
 
 }
 

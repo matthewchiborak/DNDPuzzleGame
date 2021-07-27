@@ -22,6 +22,20 @@ bool TileBoardObject::levitateMe()
 	return false;
 }
 
+bool TileBoardObject::freeze()
+{
+	return false;
+}
+
+bool TileBoardObject::melt()
+{
+	return false;
+}
+
+void TileBoardObject::correctWaterVisual()
+{
+}
+
 BoardObject* TileBoardObject::copy()
 {
 	return new TileBoardObject(posX, posY, height, currentAction->copy(), modelKey, shaderKey);

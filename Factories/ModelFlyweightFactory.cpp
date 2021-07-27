@@ -58,6 +58,12 @@ IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}
+	else if (key == "Allura")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Allura.png", true);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
 	else if (key == "Rock")
 	{
 		IModel* model = new ModelPlane(1, 1, "Textures/Rock.png", true);
@@ -73,6 +79,12 @@ IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 	else if (key == "Water")
 	{
 		IModel* model = new ModelPlane(1, 1, "Textures/Water.png");
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (key == "Ice")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Ice.png");
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}

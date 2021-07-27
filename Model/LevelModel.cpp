@@ -17,9 +17,13 @@ bool LevelModel::playerMove(int x, int y)
 
 	BoardObject* occupiedRef;
 
-	if (!doesSpaceExist(currentPlayer->getPosX() + x, currentPlayer->getPosY() + y))
-		return false;
-
+	bool itIsAWater = false;
+	if ((!doesSpaceExist(currentPlayer->getPosX() + x, currentPlayer->getPosY() + y)))
+	{
+		if (!isAWater(currentPlayer->getPosX() + x, currentPlayer->getPosY() + y))
+			return false;
+	}
+	
 	if (isSpaceOccupied(currentPlayer->getPosX() + x, currentPlayer->getPosY() + y, &occupiedRef))
 		return false;
 
@@ -30,6 +34,13 @@ bool LevelModel::playerMove(int x, int y)
 		currentPlayer->getPosX() + x,
 		currentPlayer->getPosY() + y
 		));
+
+	checkForMelt(
+		currentPlayer->getPosX(),
+		currentPlayer->getPosY(),
+		currentPlayer->getPosX() + x,
+		currentPlayer->getPosY() + y
+	);
 
 	return true;
 }
@@ -80,6 +91,8 @@ bool LevelModel::interact()
 
 void LevelModel::handleOverlaps()
 {
+	correctWaterVisual();
+
 	//Rocks
 	//If rock and hole, create a new tile
 	std::vector<BoardObject*>::iterator iterRock = obstacles.begin();
@@ -259,6 +272,31 @@ bool LevelModel::isAWater(int x, int y)
 	return false;
 }
 
+void LevelModel::checkForMelt(int sx, int sy, int ex, int ey)
+{
+	for (int i = 0; i < water.size(); i++)
+	{
+		if (!water.at(i)->isSolid())
+		{
+			if (sx == ex && sx == water.at(i)->getPosX())
+			{
+				if ((water.at(i)->getPosY() >= sy && water.at(i)->getPosY() < ey) || (water.at(i)->getPosY() <= sy && water.at(i)->getPosY() > ey))
+				{
+					water.at(i)->melt();
+				}
+			}
+			else if(sy == ey && sy == water.at(i)->getPosY())
+			{
+				if ((water.at(i)->getPosX() >= sx && water.at(i)->getPosX() < ex) || (water.at(i)->getPosX() <= sx && water.at(i)->getPosX() > ex))
+				{
+					water.at(i)->melt();
+				}
+			}
+		}
+	}
+}
+
+
 bool LevelModel::isSpaceOccupied(int x, int y, BoardObject** occupyingRef)
 {
 	for (int i = 0; i < players.size(); i++)
@@ -288,6 +326,15 @@ bool LevelModel::isSpaceOccupied(int x, int y, BoardObject** occupyingRef)
 		}
 	}
 
+	for (int i = 0; i < water.size(); i++)
+	{
+		if (water.at(i)->getPosX() == x && water.at(i)->getPosY() == y)
+		{
+			(*occupyingRef) = water.at(i);
+			return water.at(i)->isSolid();
+		}
+	}
+
 	return false;
 }
 
@@ -302,4 +349,23 @@ bool LevelModel::doesSpaceExist(int x, int y)
 	}
 
 	return false;
+}
+
+bool LevelModel::isFrozenWater(int x, int y)
+{
+	for (int i = 0; i < water.size(); i++)
+	{
+		if (water.at(i)->getPosX() == x && water.at(i)->getPosY() == y)
+		{
+			return !water.at(i)->isSolid();
+		}
+	}
+}
+
+void LevelModel::correctWaterVisual()
+{
+	for (int i = 0; i < water.size(); i++)
+	{
+		water.at(i)->correctWaterVisual();
+	}
 }

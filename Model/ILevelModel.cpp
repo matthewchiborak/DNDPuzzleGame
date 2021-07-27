@@ -55,6 +55,12 @@ bool ILevelModel::isAWater(int x, int y)
     return false;
 }
 
+void ILevelModel::checkForMelt(int sx, int sy, int ex, int ey)
+{
+}
+
+
+
 void ILevelModel::addBoardObject(BoardObject* obj)
 {
     boardObjects.push_back(obj);
