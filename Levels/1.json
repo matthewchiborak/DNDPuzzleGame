@@ -85,5 +85,28 @@
 		"PosX": 14,
 		"PosY": 8
 	}
+	],
+	"Enemies": [
+	{
+		"Model": "Skeleton",
+		"PosX": 0,
+		"PosY": 12,
+		"Squishy": true,
+		"Action": "Vertical"
+	},
+	{
+		"Model": "Goblin",
+		"PosX": 0,
+		"PosY": 13,
+		"Squishy": true,
+		"Action": "Horizontal"
+	},
+	{
+		"Model": "Skeleton",
+		"PosX": 1,
+		"PosY": 1,
+		"Squishy": true,
+		"Action": "None"
+	}
 	]
 }

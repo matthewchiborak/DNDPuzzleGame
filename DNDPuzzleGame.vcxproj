@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="BoardObjectActions\BoardObjectAction.h" />
     <ClInclude Include="BoardObjectActions\BoardObjectActionMove.h" />
+    <ClInclude Include="BoardObjectActions\BoardObjectActionMoveContinuous.h" />
     <ClInclude Include="BoardObjectActions\BoardObjectActionNone.h" />
     <ClInclude Include="Controller\GameController.h" />
     <ClInclude Include="Controller\GameStateMove.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="ModelModifierActions\ModelModifierActionSpaceExist.h" />
     <ClInclude Include="Model\ArrowBoardObject.h" />
     <ClInclude Include="Model\BoardObject.h" />
+    <ClInclude Include="Model\EnemyBoardObject.h" />
     <ClInclude Include="Model\ILevelModel.h" />
     <ClInclude Include="Model\LevelModel.h" />
     <ClInclude Include="Model\ObstacleBoardObject.h" />
@@ -214,6 +216,7 @@
   <ItemGroup>
     <ClCompile Include="BoardObjectActions\BoardObjectAction.cpp" />
     <ClCompile Include="BoardObjectActions\BoardObjectActionMove.cpp" />
+    <ClCompile Include="BoardObjectActions\BoardObjectActionMoveContinuous.cpp" />
     <ClCompile Include="BoardObjectActions\BoardObjectActionNone.cpp" />
     <ClCompile Include="Controller\GameController.cpp" />
     <ClCompile Include="Controller\GameStateMove.cpp" />
@@ -251,6 +254,7 @@
     <ClCompile Include="ModelModifierActions\ModelModifierActionSpaceExist.cpp" />
     <ClCompile Include="Model\ArrowBoardObject.cpp" />
     <ClCompile Include="Model\BoardObject.cpp" />
+    <ClCompile Include="Model\EnemyBoardObject.cpp" />
     <ClCompile Include="Model\ILevelModel.cpp" />
     <ClCompile Include="Model\LevelModel.cpp" />
     <ClCompile Include="Model\ObstacleBoardObject.cpp" />

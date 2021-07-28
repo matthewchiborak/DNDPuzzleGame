@@ -71,6 +71,11 @@ bool InteractCommandRockPush::executeForReceiverIsFloating(BoardObject* initer)
 		findClosestValue(xDir, yDir, (*model->getPlayers())[i]->getPosX(), (*model->getPlayers())[i]->getPosY(), 0, &closestSet, &closestValue);
 	}
 
+	for (int i = 0; i < this->model->getEnemies()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getEnemies())[i]->getNextXPos(), (*model->getEnemies())[i]->getNextYPos(), 0, &closestSet, &closestValue);
+	}
+
 	for (int i = 0; i < this->model->getWalls()->size(); i++)
 	{
 		findClosestValue(xDir, yDir, (*model->getWalls())[i]->getPosX(), (*model->getWalls())[i]->getPosY(), 1, &closestSet, &closestValue);
@@ -139,6 +144,11 @@ bool InteractCommandRockPush::executeForReceiverIsOnTheGround(BoardObject* inite
 		findClosestValue(xDir, yDir, (*model->getPlayers())[i]->getPosX(), (*model->getPlayers())[i]->getPosY(), 0, &closestSet, &closestValue);
 	}
 
+	for (int i = 0; i < this->model->getEnemies()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getEnemies())[i]->getNextXPos(), (*model->getEnemies())[i]->getNextYPos(), 0, &closestSet, &closestValue);
+	}
+
 	for (int i = 0; i < this->model->getWalls()->size(); i++)
 	{
 		findClosestValue(xDir, yDir, (*model->getWalls())[i]->getPosX(), (*model->getWalls())[i]->getPosY(), 1, &closestSet, &closestValue);
@@ -177,7 +187,7 @@ bool InteractCommandRockPush::executeForReceiverIsOnTheGround(BoardObject* inite
 		std::string meltText = "{\"Key\": \"CheckMelt\", \"sx\": "
 			+ std::to_string(reciever->getPosX())
 			+ ", \"sy\": " + std::to_string(reciever->getPosY())
-			+ ", \"ex\": " + std::to_string(reciever->getPosY())
+			+ ", \"ex\": " + std::to_string(reciever->getPosX())
 			+ ", \"ey\": " + std::to_string(closestValue)
 			+ "}";
 		this->model->modifyModel(meltText);

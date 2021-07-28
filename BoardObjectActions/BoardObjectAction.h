@@ -12,6 +12,9 @@ public:
 
 	//Will advance the action over time from 0-1
 	virtual void advance(float t);
+	virtual bool nextUnchanged();
+	virtual int nextPositionX();
+	virtual int nextPositionY();
 
 protected:
 	BoardObject* object;

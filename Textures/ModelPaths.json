@@ -1,0 +1,66 @@
+{
+	"Tile": {
+		"Type": "Plane",
+		"IsVert": false,
+		"Path": "Textures/Tile.png"
+	},
+	"Wall": {
+		"Type": "Cube",
+		"Path": "Textures/Wall.png"
+	},
+	"Duke": {
+		"Type": "Plane",
+		"IsVert": true,
+		"Path": "Textures/Duke.png"
+	},
+	"Bullent": {
+		"Type": "Plane",
+		"IsVert": true,
+		"Path": "Textures/Bullent.png"
+	},
+	"Chad": {
+		"Type": "Plane",
+		"IsVert": true,
+		"Path": "Textures/Chad.png"
+	},
+	"Allura": {
+		"Type": "Plane",
+		"IsVert": true,
+		"Path": "Textures/Allura.png"
+	},
+	"Rock": {
+		"Type": "Plane",
+		"IsVert": true,
+		"Path": "Textures/Rock.png"
+	},
+	"Pit": {
+		"Type": "Pit",
+		"Path": "Textures/Wall.png"
+	},
+	"Water": {
+		"Type": "Plane",
+		"IsVert": false,
+		"Path": "Textures/Water.png"
+	},
+	"Ice": {
+		"Type": "Plane",
+		"IsVert": false,
+		"Path": "Textures/Ice.png"
+	},
+	"Arrow": {
+		"Type": "Plane",
+		"IsVert": false,
+		"Path": "Textures/Arrow.png"
+	},
+	"Skeleton": {
+		"Type": "Plane",
+		"IsVert": true,
+		"Path": "Textures/Skeleton.png"
+	},
+	"Goblin": {
+		"Type": "Plane",
+		"IsVert": true,
+		"Path": "Textures/Goblin.png"
+	}
+	
+}

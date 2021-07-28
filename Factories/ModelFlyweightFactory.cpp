@@ -22,6 +22,31 @@ IModel* ModelFlyweightFactory::getFlyweight(std::string key) throw()
 
 IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 {
+	std::ifstream t("Textures/ModelPaths.json");
+	std::string text((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+	nlohmann::json JSON = nlohmann::json::parse(text);
+
+	if (JSON[key]["Type"] == "Plane")
+	{
+		IModel* model = new ModelPlane(1, 1, JSON[key]["Path"], JSON[key]["IsVert"]);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (JSON[key]["Type"] == "Cube")
+	{
+		IModel* model = new ModelCube(1, 1, JSON[key]["Path"]);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (JSON[key]["Type"] == "Pit")
+	{
+		IModel* model = new ModelPit(1, 1, JSON[key]["Path"]);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+
+	///
+	/*
 	if (key == "Test")
 	{
 		IModel* model = new Model("models/bunny/scene.gltf");
@@ -94,6 +119,18 @@ IModel* ModelFlyweightFactory::createFlyweight(std::string key) throw()
 		flyweights.insert(std::pair<std::string, IModel*>(key, model));
 		return model;
 	}
+	else if (key == "Skeleton")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Skeleton.png", true);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}
+	else if (key == "Goblin")
+	{
+		IModel* model = new ModelPlane(1, 1, "Textures/Goblin.png", true);
+		flyweights.insert(std::pair<std::string, IModel*>(key, model));
+		return model;
+	}*/
 
 	throw (key);
 }

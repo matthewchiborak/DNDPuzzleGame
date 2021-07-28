@@ -10,8 +10,10 @@
 #include "../Model/WallBoardObject.h"
 #include "../Model/PitBoardObject.h"
 #include "../Model/WaterBoardObject.h"
+#include "../Model/EnemyBoardObject.h"
 
 #include "../BoardObjectActions/BoardObjectActionNone.h"
+#include "../BoardObjectActions/BoardObjectActionMoveContinuous.h"
 
 #include "../InteractCommands/InteractCommandNone.h"
 #include "../InteractCommands/InteractCommandRockPush.h"
@@ -102,6 +104,21 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 			newLevel->addWater(new WaterBoardObject(JSON["Water"][i]["PosX"], JSON["Water"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Water"][i]["Model"], JSON["Water"][i]["ModelFreeze"]));
 		}
 
+		//Enemies
+		for (int i = 0; i < JSON["Enemies"].size(); ++i)
+		{
+			EnemyBoardObject* enemy = new EnemyBoardObject(
+				JSON["Enemies"][i]["PosX"],
+				JSON["Enemies"][i]["PosY"],
+				1,
+				JSON["Enemies"][i]["Squishy"],
+				new BoardObjectActionNone(),
+				JSON["Enemies"][i]["Model"]
+			);
+			enemy->setCurrentAction(createBoardObjectAction(JSON["Enemies"][i]["Action"], enemy));
+			newLevel->addEnemy(enemy);
+		}
+
 		return newLevel;
 	}
 
@@ -123,4 +140,15 @@ InteractCommand* LevelFactory::createInteractCommand(std::string key, LevelModel
 		return new InteractCommandShoot(JSON["ArrowKey"], level);
 
 	return new InteractCommandNone();
+}
+
+BoardObjectAction* LevelFactory::createBoardObjectAction(std::string key, BoardObject* object)
+{
+	if (key == "Vertical")
+		return new BoardObjectActionMoveContinuous(object, object->getPosX(), object->getPosY(), 0, -1);
+	
+	if(key == "Horizontal")
+		return new BoardObjectActionMoveContinuous(object, object->getPosX(), object->getPosY(), 1, 0);
+
+	return new BoardObjectActionNone();
 }

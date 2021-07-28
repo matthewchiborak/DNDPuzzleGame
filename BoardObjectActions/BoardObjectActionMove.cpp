@@ -29,3 +29,18 @@ BoardObjectAction* BoardObjectActionMove::copy()
 {
 	return new BoardObjectActionMove(this->object, this->startx, this->starty, this->endx, this->endy);
 }
+
+bool BoardObjectActionMove::nextUnchanged()
+{
+	return false;
+}
+
+int BoardObjectActionMove::nextPositionX()
+{
+	return endx;
+}
+
+int BoardObjectActionMove::nextPositionY()
+{
+	return endy;
+}

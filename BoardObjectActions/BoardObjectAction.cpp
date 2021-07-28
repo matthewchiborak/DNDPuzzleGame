@@ -13,3 +13,18 @@ BoardObjectAction* BoardObjectAction::copy()
 void BoardObjectAction::advance(float t)
 {
 }
+
+bool BoardObjectAction::nextUnchanged()
+{
+	return false;
+}
+
+int BoardObjectAction::nextPositionX()
+{
+	return 0;
+}
+
+int BoardObjectAction::nextPositionY()
+{
+	return 0;
+}

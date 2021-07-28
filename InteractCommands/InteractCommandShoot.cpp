@@ -39,6 +39,11 @@ bool InteractCommandShoot::execute(BoardObject* initer, BoardObject* otherObj)
 		findClosestValue(xDir, yDir, (*model->getPlayers())[i]->getPosX(), (*model->getPlayers())[i]->getPosY(), 0, &closestSet, &closestValue);
 	}
 
+	for (int i = 0; i < this->model->getEnemies()->size(); i++)
+	{
+		findClosestValue(xDir, yDir, (*model->getEnemies())[i]->getNextXPos(), (*model->getEnemies())[i]->getNextYPos(), 0, &closestSet, &closestValue);
+	}
+
 	for (int i = 0; i < this->model->getWalls()->size(); i++)
 	{
 		findClosestValue(xDir, yDir, (*model->getWalls())[i]->getPosX(), (*model->getWalls())[i]->getPosY(), 1, &closestSet, &closestValue);

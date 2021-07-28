@@ -46,6 +46,33 @@ void ModelModifierActionHandleOverlaps::handleOverlapsArrows()
 			iter++;
 		}
 
+		//Enemies
+		std::vector<EnemyBoardObject*>::iterator iterE = this->level->getEnemies()->begin();
+		std::vector<EnemyBoardObject*>::iterator endE = this->level->getEnemies()->end();
+		while (iterE != endE)
+		{
+			if ((*iterArrow)->getPosX() == (*iterE)->getPosX() && (*iterArrow)->getPosY() == (*iterE)->getPosY())
+			{
+				std::vector<BoardObject*>::iterator iterO = this->level->getBoardObjects();
+				std::vector<BoardObject*>::iterator endO = this->level->getBoardObjectsEnd();
+				while (iterO != endO)
+				{
+					if ((*iterO) == (*iterE))
+					{
+						this->level->getBoardObjectsVector()->erase(iterO);
+						break;
+					}
+					iterO++;
+				}
+
+				delete (*iterE);
+				this->level->getEnemies()->erase(iterE);
+				return;
+			}
+
+			iterE++;
+		}
+
 		iterArrow++;
 	}
 }
@@ -83,6 +110,33 @@ void ModelModifierActionHandleOverlaps::handleOverlapsRocks()
 			}
 
 			iter++;
+		}
+
+		//Enemies
+		std::vector<EnemyBoardObject*>::iterator iterE = this->level->getEnemies()->begin();
+		std::vector<EnemyBoardObject*>::iterator endE = this->level->getEnemies()->end();
+		while (iterE != endE)
+		{
+			if ((*iterRock)->getPosX() == (*iterE)->getPosX() && (*iterRock)->getPosY() == (*iterE)->getPosY())
+			{
+				std::vector<BoardObject*>::iterator iterO = this->level->getBoardObjects();
+				std::vector<BoardObject*>::iterator endO = this->level->getBoardObjectsEnd();
+				while (iterO != endO)
+				{
+					if ((*iterO) == (*iterE))
+					{
+						this->level->getBoardObjectsVector()->erase(iterO);
+						break;
+					}
+					iterO++;
+				}
+
+				delete (*iterE);
+				this->level->getEnemies()->erase(iterE);
+				return;
+			}
+
+			iterE++;
 		}
 
 		//Water

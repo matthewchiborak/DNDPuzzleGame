@@ -7,6 +7,8 @@
 
 #include "../InteractCommands/InteractCommand.h"
 
+#include "../BoardObjectActions/BoardObjectAction.h"
+
 class LevelFactory: public ILevelFactory
 {
 public:
@@ -16,6 +18,7 @@ public:
 
 private:
 	InteractCommand* createInteractCommand(std::string key, LevelModel* level, nlohmann::json JSON);
+	BoardObjectAction* createBoardObjectAction(std::string key, BoardObject* object);
 };
 
 #endif

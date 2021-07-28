@@ -261,6 +261,12 @@
     <ClInclude Include="ModelModifierActions\ModelModifierActionCorrectWater.h">
       <Filter>Header Files\ModelModifierActions</Filter>
     </ClInclude>
+    <ClInclude Include="Model\EnemyBoardObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardObjectActions\BoardObjectActionMoveContinuous.h">
+      <Filter>Header Files\BoardObjectActions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -466,6 +472,12 @@
     </ClCompile>
     <ClCompile Include="ModelModifierActions\ModelModifierActionCorrectWater.cpp">
       <Filter>Source Files\ModelModifierActions</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\EnemyBoardObject.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardObjectActions\BoardObjectActionMoveContinuous.cpp">
+      <Filter>Source Files\BoardObjectActions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

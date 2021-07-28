@@ -12,6 +12,7 @@
 #include "../Model/TileBoardObject.h"
 #include "../Model/WallBoardObject.h"
 #include "../Model/WaterBoardObject.h"
+#include "../Model/EnemyBoardObject.h"
 
 class IModelModifier;
 
@@ -35,6 +36,7 @@ public:
 	void addWall(WallBoardObject* wall);
 	void addPit(PitBoardObject* pit);
 	void addWater(WaterBoardObject* water);
+	void addEnemy(EnemyBoardObject* enemy);
 
 	std::vector<TileBoardObject*>* getTiles();
 	std::vector<PlayerBoardObject*>* getPlayers();
@@ -43,6 +45,7 @@ public:
 	std::vector<PitBoardObject*>* getPits();
 	std::vector<WaterBoardObject*>* getWater();
 	std::vector<ArrowBoardObject*>* getArrows();
+	std::vector<EnemyBoardObject*>* getEnemies();
 
 private:
 	IModelModifier* modelModifier;
@@ -55,6 +58,7 @@ private:
 	std::vector<PitBoardObject*> pits;
 	std::vector<WaterBoardObject*> water;
 	std::vector<ArrowBoardObject*> arrows;
+	std::vector<EnemyBoardObject*> enemies;
 
 	bool isSpaceOccupied(int x, int y, BoardObject** occupyingRef);
 };

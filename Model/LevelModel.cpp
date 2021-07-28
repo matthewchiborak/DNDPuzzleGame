@@ -153,6 +153,12 @@ void LevelModel::addWater(WaterBoardObject* water)
 	this->water.push_back(water);
 }
 
+void LevelModel::addEnemy(EnemyBoardObject* enemy)
+{
+	boardObjects.push_back(enemy);
+	this->enemies.push_back(enemy);
+}
+
 std::vector<TileBoardObject*>* LevelModel::getTiles()
 {
 	return &tiles;
@@ -186,6 +192,11 @@ std::vector<WaterBoardObject*>* LevelModel::getWater()
 std::vector<ArrowBoardObject*>* LevelModel::getArrows()
 {
 	return &arrows;
+}
+
+std::vector<EnemyBoardObject*>* LevelModel::getEnemies()
+{
+	return &enemies;
 }
 
 bool LevelModel::isSpaceOccupied(int x, int y, BoardObject** occupyingRef)
