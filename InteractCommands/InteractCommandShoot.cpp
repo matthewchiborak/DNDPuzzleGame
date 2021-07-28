@@ -89,7 +89,15 @@ bool InteractCommandShoot::needsReciever()
 
 bool InteractCommandShoot::isAPitOrWater(ILevelModel* model, int x, int y)
 {
-	return (model->isAPit(x, y) || model->isAWater(x, y));
+	std::string pitText = "{\"Key\": \"IsPit\", \"X\": "
+		+ std::to_string(x)
+		+ ", \"Y\": " + std::to_string(y) + "}";
+
+	std::string waterText = "{\"Key\": \"IsPit\", \"X\": "
+		+ std::to_string(x)
+		+ ", \"Y\": " + std::to_string(y) + "}";
+
+	return (model->modifyModel(pitText) || model->modifyModel(waterText));
 }
 
 void InteractCommandShoot::findClosestValue(int xDir, int yDir, int objectX, int objectY, int distanceOffset, bool* closestSet, int* closestValue)
@@ -114,7 +122,7 @@ void InteractCommandShoot::findClosestValue(int xDir, int yDir, int objectX, int
 	{
 		if (objectY == initer->getPosY() && objectX < initer->getPosX())
 		{
-			if (!closestSet)
+			if (!(*closestSet))
 			{
 				(*closestValue) = objectX + distanceOffset;
 				(*closestSet) = true;
@@ -130,7 +138,7 @@ void InteractCommandShoot::findClosestValue(int xDir, int yDir, int objectX, int
 	{
 		if (objectX == initer->getPosX() && objectY > initer->getPosY())
 		{
-			if (!closestSet)
+			if (!(*closestSet))
 			{
 				(*closestValue) = objectY - distanceOffset;
 				(*closestSet) = true;
@@ -146,7 +154,7 @@ void InteractCommandShoot::findClosestValue(int xDir, int yDir, int objectX, int
 	{
 		if (objectX == initer->getPosX() && objectY < initer->getPosY())
 		{
-			if (!closestSet)
+			if (!(*closestSet))
 			{
 				(*closestValue) = objectY + distanceOffset;
 				(*closestSet) = true;
@@ -168,48 +176,55 @@ bool InteractCommandShoot::findClosestValueNotExist(int xDir, int yDir, bool* cl
 		if (xDir > 0)
 		{
 			(*closestValue) = initer->getPosX() + 1;
-			if (!(model->doesSpaceExist((*closestValue), initer->getPosY())))
+			if (!(model->modifyModel((buildSpaceExistMessage((*closestValue), initer->getPosY())))))
 				return false;
 			do
 			{
 				(*closestValue)++;
-			} while (model->doesSpaceExist((*closestValue), initer->getPosY()) || isAPitOrWater(model, (*closestValue), initer->getPosY()));
+			} while (model->modifyModel((buildSpaceExistMessage((*closestValue), initer->getPosY()))) || isAPitOrWater(model, (*closestValue), initer->getPosY()));
 			(*closestValue)--;
 		}
 		else if (xDir < 0)
 		{
 			(*closestValue) = initer->getPosX() - 1;
-			if (!(model->doesSpaceExist((*closestValue), initer->getPosY())))
+			if (!(model->modifyModel((buildSpaceExistMessage((*closestValue), initer->getPosY())))))
 				return false;
 			do
 			{
 				(*closestValue)--;
-			} while (model->doesSpaceExist((*closestValue), initer->getPosY()) || isAPitOrWater(model, (*closestValue), initer->getPosY()));
+			} while (model->modifyModel((buildSpaceExistMessage((*closestValue), initer->getPosY()))) || isAPitOrWater(model, (*closestValue), initer->getPosY()));
 			(*closestValue)++;
 		}
 		else if (yDir > 0)
 		{
 			(*closestValue) = initer->getPosY() + 1;
-			if (!(model->doesSpaceExist(initer->getPosX(), (*closestValue))))
+			if (!(model->modifyModel((buildSpaceExistMessage(initer->getPosX(), (*closestValue))))))
 				return false;
 			do
 			{
 				(*closestValue)++;
-			} while (model->doesSpaceExist(initer->getPosX(), (*closestValue)) || isAPitOrWater(model, initer->getPosX(), (*closestValue)));
+			} while (model->modifyModel((buildSpaceExistMessage(initer->getPosX(), (*closestValue)))) || isAPitOrWater(model, initer->getPosX(), (*closestValue)));
 			(*closestValue)--;
 		}
 		else if (yDir < 0)
 		{
 			(*closestValue) = initer->getPosY() - 1;
-			if (!(model->doesSpaceExist(initer->getPosX(), (*closestValue))))
+			if (!(model->modifyModel((buildSpaceExistMessage(initer->getPosX(), (*closestValue))))))
 				return false;
 			do
 			{
 				(*closestValue)--;
-			} while (model->doesSpaceExist(initer->getPosX(), (*closestValue)) || isAPitOrWater(model, initer->getPosY(), (*closestValue)));
+			} while (model->modifyModel((buildSpaceExistMessage(initer->getPosX(), (*closestValue)))) || isAPitOrWater(model, initer->getPosX(), (*closestValue)));
 			(*closestValue)++;
 		}
 	}
 
 	return true;
+}
+
+std::string InteractCommandShoot::buildSpaceExistMessage(int x, int y)
+{
+	return "{\"Key\": \"SpaceExist\", \"X\": "
+		+ std::to_string(x)
+		+ ", \"Y\": " + std::to_string(y) + "}";
 }

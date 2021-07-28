@@ -183,7 +183,7 @@ void BoardRenderer::drawScene(Camera* camera)
 		modelFactory->getFlyweight((*it)->getModelKey())->Draw(
 			*shaderFactory->getFlyweight((*it)->getShaderKey()),
 			*camera,
-			glm::vec3((float)(*it)->getVisX(), (float)(*it)->getHeight() / 10.0f, (float)(*it)->getVisY() * -1),
+			glm::vec3((float)(*it)->getVisX(), (*it)->getHeight() / 10.0f, (float)(*it)->getVisY() * -1),
 			//glm::vec3((float)(*it)->getHeight() / 10.0f, (float)(*it)->getPosX() / 10.0f, (float)(*it)->getPosY() / 10.0f),
 			glm::quat(0.0f, 0.0f, 0.0f, 1.0f),
 			glm::vec3(1.0f, 1.0f, 1.0f)

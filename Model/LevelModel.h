@@ -21,16 +21,12 @@ public:
 	LevelModel(IModelModifier* modifier);
 	~LevelModel();
 
-	bool modifyModel(std::string key) override;
+	bool modifyModel(std::string message) override;
 
 	bool playerMove(int x, int y);
 	void playerStop() override;
-	void rockStop() override;
 	void playerChange(bool next) override;
 	bool interact() override;
-	void handleOverlaps() override;
-	void handleOverlapsArrows();
-	void handleOverlapsRocks();
 
 	void addArrow(ArrowBoardObject* obj);
 	void addTile(TileBoardObject* tile);
@@ -48,13 +44,6 @@ public:
 	std::vector<WaterBoardObject*>* getWater();
 	std::vector<ArrowBoardObject*>* getArrows();
 
-	bool doesSpaceExist(int x, int y);
-
-	bool isAPit(int x, int y);
-	bool isAWater(int x, int y);
-
-	void checkForMelt(int sx, int sy, int ex, int ey);
-
 private:
 	IModelModifier* modelModifier;
 	int currentPlayerIndex;
@@ -68,12 +57,6 @@ private:
 	std::vector<ArrowBoardObject*> arrows;
 
 	bool isSpaceOccupied(int x, int y, BoardObject** occupyingRef);
-	
-
-	bool isFrozenWater(int x, int y);
-
-	void correctWaterVisual();
-
 };
 
 #endif

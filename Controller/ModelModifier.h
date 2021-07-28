@@ -8,7 +8,7 @@ class ModelModifier: public IModelModifier
 public:
 	ModelModifier();
 
-	bool modify(std::string key) override;
+	bool modify(std::string message) override;
 
 };
 

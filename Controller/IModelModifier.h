@@ -5,6 +5,8 @@
 
 #include "../Model/LevelModel.h"
 
+#include <json/json.h>
+
 class IModelModifier
 {
 public:
@@ -12,7 +14,7 @@ public:
 
 	void setLevel(LevelModel* level);
 
-	virtual bool modify(std::string key);
+	virtual bool modify(std::string message);
 
 protected:
 	LevelModel* level;

@@ -10,7 +10,8 @@ void IModelModifier::setLevel(LevelModel* level)
 	this->level = level;
 }
 
-bool IModelModifier::modify(std::string key)
+bool IModelModifier::modify(std::string message)
 {
 	return false;
 }
+

@@ -30,8 +30,9 @@ void GameStateMove::advanceEvents()
 	if (t >= 1)
 	{
 		model->playerStop();
-		model->rockStop();
-		model->handleOverlaps();
+		model->modifyModel(("{\"Key\": \"RockStop\" }"));
+		model->modifyModel(("{\"Key\": \"CorrectWater\" }"));
+		model->modifyModel(("{\"Key\": \"HandleOverlaps\" }"));
 		controller->setState("Stop");
 	}
 }

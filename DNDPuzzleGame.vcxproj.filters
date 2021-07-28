@@ -58,6 +58,12 @@
     <Filter Include="Source Files\InteractCommands">
       <UniqueIdentifier>{3fde29fb-ea76-41e4-8f2a-096044063f27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ModelModifierActions">
+      <UniqueIdentifier>{b443d898-54f5-4ee1-baf5-dd8057f38a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ModelModifierActions">
+      <UniqueIdentifier>{ec6c96d4-1291-4d79-b2b4-cd4258b26402}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rendering\Core\Camera.h">
@@ -230,6 +236,30 @@
     </ClInclude>
     <ClInclude Include="Controller\ModelModifier.h">
       <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelModifierActions\ModelModifierAction.h">
+      <Filter>Header Files\ModelModifierActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelModifierActions\ModelModifierActionRockStop.h">
+      <Filter>Header Files\ModelModifierActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelModifierActions\ModelModifierActionSpaceExist.h">
+      <Filter>Header Files\ModelModifierActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelModifierActions\ModelModifierActionIsPit.h">
+      <Filter>Header Files\ModelModifierActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelModifierActions\ModelModifierActionIsWater.h">
+      <Filter>Header Files\ModelModifierActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelModifierActions\ModelModifierActionCheckMelt.h">
+      <Filter>Header Files\ModelModifierActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelModifierActions\ModelModifierActionHandleOverlaps.h">
+      <Filter>Header Files\ModelModifierActions</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelModifierActions\ModelModifierActionCorrectWater.h">
+      <Filter>Header Files\ModelModifierActions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -412,6 +442,30 @@
     </ClCompile>
     <ClCompile Include="Controller\ModelModifier.cpp">
       <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelModifierActions\ModelModifierAction.cpp">
+      <Filter>Source Files\ModelModifierActions</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelModifierActions\ModelModifierActionRockStop.cpp">
+      <Filter>Source Files\ModelModifierActions</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelModifierActions\ModelModifierActionSpaceExist.cpp">
+      <Filter>Source Files\ModelModifierActions</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelModifierActions\ModelModifierActionIsPit.cpp">
+      <Filter>Source Files\ModelModifierActions</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelModifierActions\ModelModifierActionIsWater.cpp">
+      <Filter>Source Files\ModelModifierActions</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelModifierActions\ModelModifierActionCheckMelt.cpp">
+      <Filter>Source Files\ModelModifierActions</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelModifierActions\ModelModifierActionHandleOverlaps.cpp">
+      <Filter>Source Files\ModelModifierActions</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelModifierActions\ModelModifierActionCorrectWater.cpp">
+      <Filter>Source Files\ModelModifierActions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

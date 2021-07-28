@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include <json/json.h>
+
 #include "BoardObject.h"
 
 class ILevelModel
@@ -11,21 +13,15 @@ public:
 	ILevelModel();
 	~ILevelModel();
 
-	virtual bool modifyModel(std::string key);
+	virtual bool modifyModel(std::string message);
 
 	virtual bool playerMove(int x, int y);
 	virtual void playerStop();
-	virtual void rockStop();
 	virtual void playerChange(bool next);
 	virtual bool interact();
-	virtual void handleOverlaps();
-
-	virtual bool doesSpaceExist(int x, int y);
-	virtual bool isAPit(int x, int y);
-	virtual bool isAWater(int x, int y);
-	virtual void checkForMelt(int sx, int sy, int ex, int ey);
 
 	void addBoardObject(BoardObject* obj);
+	std::vector<BoardObject*>* getBoardObjectsVector();
 	std::vector<BoardObject*>::iterator getBoardObjects();
 	std::vector<BoardObject*>::iterator getBoardObjectsEnd();
 

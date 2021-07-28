@@ -14,7 +14,7 @@ ILevelModel::~ILevelModel()
     }
 }
 
-bool ILevelModel::modifyModel(std::string key)
+bool ILevelModel::modifyModel(std::string message)
 {
     return false;
 }
@@ -28,10 +28,6 @@ void ILevelModel::playerStop()
 {
 }
 
-void ILevelModel::rockStop()
-{
-}
-
 void ILevelModel::playerChange(bool next)
 {
 }
@@ -41,34 +37,14 @@ bool ILevelModel::interact()
     return false;
 }
 
-void ILevelModel::handleOverlaps()
-{
-}
-
-bool ILevelModel::doesSpaceExist(int x, int y)
-{
-    return false;
-}
-
-bool ILevelModel::isAPit(int x, int y)
-{
-    return false;
-}
-
-bool ILevelModel::isAWater(int x, int y)
-{
-    return false;
-}
-
-void ILevelModel::checkForMelt(int sx, int sy, int ex, int ey)
-{
-}
-
-
-
 void ILevelModel::addBoardObject(BoardObject* obj)
 {
     boardObjects.push_back(obj);
+}
+
+std::vector<BoardObject*>* ILevelModel::getBoardObjectsVector()
+{
+    return &boardObjects;
 }
 
 std::vector<BoardObject*>::iterator ILevelModel::getBoardObjects()

@@ -1,7 +1,5 @@
 #include "LevelFactory.h"
 
-
-
 #include <fstream>
 #include <streambuf>
 
@@ -35,6 +33,7 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 	{
 		ModelModifier* mod = new ModelModifier();
 		LevelModel* newLevel = new LevelModel(mod);
+		mod->setLevel(newLevel);
 		return newLevel;
 	}
 	else
@@ -47,6 +46,7 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 		//Create the level
 		ModelModifier* mod = new ModelModifier();
 		LevelModel* newLevel = new LevelModel(mod);
+		mod->setLevel(newLevel);
 
 		//Tiles
 		newLevel->setWidth(JSON["Width"]);

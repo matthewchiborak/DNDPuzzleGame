@@ -26,16 +26,7 @@ bool ObstacleBoardObject::push(BoardObjectAction* pushAction)
 
 bool ObstacleBoardObject::levitateMe()
 {
-	this->leviting = true;
+	this->levitating = true;
 
 	return true;
-}
-
-bool ObstacleBoardObject::isLevitating()
-{
-	return leviting;
-}
-
-void ObstacleBoardObject::stopLevitate()
-{
 }

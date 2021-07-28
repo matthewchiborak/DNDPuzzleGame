@@ -92,7 +92,7 @@ float BoardObject::getHeight()
 {
 	if (this->levitating)
 		return height + 0.5f;
-
+	
 	return height;
 }
 

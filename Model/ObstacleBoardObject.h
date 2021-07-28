@@ -14,11 +14,9 @@ public:
 	bool push(BoardObjectAction* pushAction);
 
 	bool levitateMe();
-	bool isLevitating();
-	void stopLevitate();
 
-private:
-	bool leviting;
+
+
 };
 
 #endif

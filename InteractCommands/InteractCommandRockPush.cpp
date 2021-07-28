@@ -1,6 +1,7 @@
 #include "InteractCommandRockPush.h"
 
 #include <iostream>
+#include <string>
 
 #include "../BoardObjectActions/BoardObjectActionMove.h"
 #include "../Model/LevelModel.h"
@@ -33,7 +34,15 @@ bool InteractCommandRockPush::needsReciever()
 
 bool InteractCommandRockPush::isAPitOrWater(ILevelModel* model, int x, int y)
 {
-	return (model->isAPit(x, y) || model->isAWater(x, y));
+	std::string pitText = "{\"Key\": \"IsPit\", \"X\": "
+		+ std::to_string(x)
+		+ ", \"Y\": " + std::to_string(y) + "}";
+
+	std::string waterText = "{\"Key\": \"IsWater\", \"X\": "
+		+ std::to_string(x)
+		+ ", \"Y\": " + std::to_string(y) + "}";
+
+	return (model->modifyModel(pitText) || model->modifyModel(waterText));
 }
 
 bool InteractCommandRockPush::executeForReceiverIsFloating(BoardObject* initer)
@@ -153,12 +162,26 @@ bool InteractCommandRockPush::executeForReceiverIsOnTheGround(BoardObject* inite
 
 	if (xDir > 0 || xDir < 0)
 	{
-		model->checkForMelt(reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY());
+		std::string meltText = "{\"Key\": \"CheckMelt\", \"sx\": "
+			+ std::to_string(reciever->getPosX())
+			+ ", \"sy\": " + std::to_string(reciever->getPosY())
+			+ ", \"ex\": " + std::to_string(closestValue)
+			+ ", \"ey\": " + std::to_string(reciever->getPosY())
+			+ "}";
+		this->model->modifyModel(meltText);
+
 		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), closestValue, reciever->getPosY()));
 	}
 	else
 	{
-		model->checkForMelt(reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue);
+		std::string meltText = "{\"Key\": \"CheckMelt\", \"sx\": "
+			+ std::to_string(reciever->getPosX())
+			+ ", \"sy\": " + std::to_string(reciever->getPosY())
+			+ ", \"ex\": " + std::to_string(reciever->getPosY())
+			+ ", \"ey\": " + std::to_string(closestValue)
+			+ "}";
+		this->model->modifyModel(meltText);
+
 		return reciever->push(new BoardObjectActionMove(reciever, reciever->getPosX(), reciever->getPosY(), reciever->getPosX(), closestValue));
 	}
 }
@@ -233,55 +256,63 @@ void InteractCommandRockPush::findClosestValue(int xDir, int yDir, int objectX, 
 
 bool InteractCommandRockPush::findClosestValueNotExist(int xDir, int yDir, bool* closestSet, int* closestValue)
 {
+	//nlohmann::json::parse(existText);
 	//Might be hitting the edge of the map. Find the next space that doesnt exist
 	if (!(*closestSet))
 	{
 		if (xDir > 0)
 		{
 			(*closestValue) = reciever->getPosX() + 1;
-			if (!(model->doesSpaceExist((*closestValue), reciever->getPosY())))
+			if (!(model->modifyModel((buildSpaceExistMessage((*closestValue), reciever->getPosY())))))
 				return false;
 			do
 			{
 				(*closestValue)++;
-			} while (model->doesSpaceExist((*closestValue), reciever->getPosY()) || isAPitOrWater(model, (*closestValue), reciever->getPosY()));
+			} while (model->modifyModel((buildSpaceExistMessage((*closestValue), reciever->getPosY()))) || isAPitOrWater(model, (*closestValue), reciever->getPosY()));
 			(*closestValue)--;
 		}
 		else if (xDir < 0)
 		{
 			(*closestValue) = reciever->getPosX() - 1;
-			if (!(model->doesSpaceExist((*closestValue), reciever->getPosY())))
+			if (!(model->modifyModel((buildSpaceExistMessage((*closestValue), reciever->getPosY())))))
 				return false;
 			do
 			{
 				(*closestValue)--;
-			} while (model->doesSpaceExist((*closestValue), reciever->getPosY()) || isAPitOrWater(model, (*closestValue), reciever->getPosY()));
+			} while (model->modifyModel((buildSpaceExistMessage((*closestValue), reciever->getPosY()))) || isAPitOrWater(model, (*closestValue), reciever->getPosY()));
 			(*closestValue)++;
 		}
 		else if (yDir > 0)
 		{
 			(*closestValue) = reciever->getPosY() + 1;
-			if (!(model->doesSpaceExist(reciever->getPosX(), (*closestValue))))
+			if (!(model->modifyModel((buildSpaceExistMessage(reciever->getPosX(), (*closestValue))))))
 				return false;
 			do
 			{
 				(*closestValue)++;
-			} while (model->doesSpaceExist(reciever->getPosX(), (*closestValue)) || isAPitOrWater(model, reciever->getPosX(), (*closestValue)));
+			} while (model->modifyModel((buildSpaceExistMessage(reciever->getPosX(), (*closestValue)))) || isAPitOrWater(model, reciever->getPosX(), (*closestValue)));
 			(*closestValue)--;
 		}
 		else if (yDir < 0)
 		{
 			(*closestValue) = reciever->getPosY() - 1;
-			if (!(model->doesSpaceExist(reciever->getPosX(), (*closestValue))))
+			if (!(model->modifyModel((buildSpaceExistMessage(reciever->getPosX(), (*closestValue))))))
 				return false;
 			do
 			{
 				(*closestValue)--;
-			} while (model->doesSpaceExist(reciever->getPosX(), (*closestValue)) || isAPitOrWater(model, reciever->getPosY(), (*closestValue)));
+			} while (model->modifyModel((buildSpaceExistMessage(reciever->getPosX(), (*closestValue)))) || isAPitOrWater(model, reciever->getPosX(), (*closestValue)));
 			(*closestValue)++;
 		}
 	}
 
 	return true;
+}
+
+std::string InteractCommandRockPush::buildSpaceExistMessage(int x, int y)
+{
+	return "{\"Key\": \"SpaceExist\", \"X\": "
+		+ std::to_string(x)
+		+ ", \"Y\": " + std::to_string(y) + "}";
 }
 
