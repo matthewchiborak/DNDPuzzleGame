@@ -185,6 +185,7 @@
     <ClInclude Include="Model\ArrowBoardObject.h" />
     <ClInclude Include="Model\BoardObject.h" />
     <ClInclude Include="Model\EnemyBoardObject.h" />
+    <ClInclude Include="Model\GoalBoardObject.h" />
     <ClInclude Include="Model\ILevelModel.h" />
     <ClInclude Include="Model\LevelModel.h" />
     <ClInclude Include="Model\ObstacleBoardObject.h" />
@@ -255,6 +256,7 @@
     <ClCompile Include="Model\ArrowBoardObject.cpp" />
     <ClCompile Include="Model\BoardObject.cpp" />
     <ClCompile Include="Model\EnemyBoardObject.cpp" />
+    <ClCompile Include="Model\GoalBoardObject.cpp" />
     <ClCompile Include="Model\ILevelModel.cpp" />
     <ClCompile Include="Model\LevelModel.cpp" />
     <ClCompile Include="Model\ObstacleBoardObject.cpp" />

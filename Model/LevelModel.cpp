@@ -159,6 +159,12 @@ void LevelModel::addEnemy(EnemyBoardObject* enemy)
 	this->enemies.push_back(enemy);
 }
 
+void LevelModel::addGoal(GoalBoardObject* goal)
+{
+	this->boardObjects.push_back(goal);
+	this->goal = goal;
+}
+
 std::vector<TileBoardObject*>* LevelModel::getTiles()
 {
 	return &tiles;

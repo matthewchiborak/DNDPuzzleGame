@@ -11,6 +11,7 @@
 #include "../Model/PitBoardObject.h"
 #include "../Model/WaterBoardObject.h"
 #include "../Model/EnemyBoardObject.h"
+#include "../Model/GoalBoardObject.h"
 
 #include "../BoardObjectActions/BoardObjectActionNone.h"
 #include "../BoardObjectActions/BoardObjectActionMoveContinuous.h"
@@ -103,6 +104,9 @@ ILevelModel* LevelFactory::createLevel(std::string key) throw()
 		{
 			newLevel->addWater(new WaterBoardObject(JSON["Water"][i]["PosX"], JSON["Water"][i]["PosY"], 0, new BoardObjectActionNone(), JSON["Water"][i]["Model"], JSON["Water"][i]["ModelFreeze"]));
 		}
+
+		//Goal
+		newLevel->addGoal(new GoalBoardObject(JSON["Goal"]["PosX"], JSON["Goal"]["PosY"], 1, new BoardObjectActionNone(), JSON["Goal"]["Model"]));
 
 		//Enemies
 		for (int i = 0; i < JSON["Enemies"].size(); ++i)

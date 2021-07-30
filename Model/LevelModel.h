@@ -13,6 +13,7 @@
 #include "../Model/WallBoardObject.h"
 #include "../Model/WaterBoardObject.h"
 #include "../Model/EnemyBoardObject.h"
+#include "../Model/GoalBoardObject.h"
 
 class IModelModifier;
 
@@ -37,6 +38,7 @@ public:
 	void addPit(PitBoardObject* pit);
 	void addWater(WaterBoardObject* water);
 	void addEnemy(EnemyBoardObject* enemy);
+	void addGoal(GoalBoardObject* goal);
 
 	std::vector<TileBoardObject*>* getTiles();
 	std::vector<PlayerBoardObject*>* getPlayers();
@@ -59,6 +61,7 @@ private:
 	std::vector<WaterBoardObject*> water;
 	std::vector<ArrowBoardObject*> arrows;
 	std::vector<EnemyBoardObject*> enemies;
+	GoalBoardObject* goal;
 
 	bool isSpaceOccupied(int x, int y, BoardObject** occupyingRef);
 };

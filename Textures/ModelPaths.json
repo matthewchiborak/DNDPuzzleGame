@@ -61,6 +61,11 @@
 		"Type": "Plane",
 		"IsVert": true,
 		"Path": "Textures/Goblin.png"
+	},
+	"Goal": {
+		"Type": "Plane",
+		"IsVert": true,
+		"Path": "Textures/Goal.png"
 	}
 	
 }

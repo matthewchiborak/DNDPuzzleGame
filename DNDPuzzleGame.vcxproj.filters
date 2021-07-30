@@ -267,6 +267,9 @@
     <ClInclude Include="BoardObjectActions\BoardObjectActionMoveContinuous.h">
       <Filter>Header Files\BoardObjectActions</Filter>
     </ClInclude>
+    <ClInclude Include="Model\GoalBoardObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rendering\Core\glad.c">
@@ -478,6 +481,9 @@
     </ClCompile>
     <ClCompile Include="BoardObjectActions\BoardObjectActionMoveContinuous.cpp">
       <Filter>Source Files\BoardObjectActions</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\GoalBoardObject.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

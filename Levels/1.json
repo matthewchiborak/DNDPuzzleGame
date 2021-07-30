@@ -108,5 +108,10 @@
 		"Squishy": true,
 		"Action": "None"
 	}
-	]
+	],
+	"Goal" : {
+		"Model": "Goal",
+		"PosX": 0,
+		"PosY": 0
+	}
 }
